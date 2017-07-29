@@ -1,0 +1,73 @@
+<div id='URJP0040' ng-controller='URJP0040Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-date-input cc-label="売上日" cc-partition="3" id="uriDate" name="uriDate" ng-model="cond.uriDate" cc-required="true" cc-focus="getFocusCond()" cc-readonly="disableCond()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd" cc-required="true" cc-delexist=false cc-shortname=false cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-readonly="disableCond()" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd" ng-model="cond.tenCd" cc-required="true" cc-shortname=false cc-delexist=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03="" cc-readonly="disableCond()" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+							<button type="button" ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}" ng-click="doSearch()" ng-disabled="!canSearch()"> 
+           					<div>検索<span>(F10)</span></div>
+						</button>
+							<button type="button" ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}" ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+           					<div>検索してから編集<span>(F9)</span></div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- End Condition -->
+<!-- Start Result -->
+		<div id="result" ng-show="mode != initMode">
+		<!-- <div id="result" ng-show="mode == initMode"> -->
+			<div class="cs-result-bg cs-clearfix">
+			</div>
+			<div class="cs-urjp0040-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="gridStyleURJP0040BmnBaiyoArea" ng-grid="gridOptionsURJP0040BmnBaiyoArea"></div>
+						<div class="gridStyleURJP0040BaiyoSokeiArea" ng-grid="gridOptionsURJP0040BaiyoSokeiArea"></div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="gridStyleURJP0040BmnBetuSokeiArea" ng-grid="gridOptionsURJP0040BmnBetuSokeiArea"></div>
+					</div>
+					<div class="cs-row cs-clearfix margin-left-125">
+						<cc-number-input cc-label="客数" cc-partition="3" id="tenKyakSu" name="tenKyakSu" ng-model="megaQueryResult.tenKyakSu" cc-required="false" cc-min="-99999" cc-max="999999" cc-readonly="disableResult()" cc-error="error"/>
+					</div>
+					<div class="cs-row cs-clearfix margin-left-125">
+						<cc-kbn-combobox cc-label="天気" cc-partition="3" id="weather" name="weather" ng-model="megaQueryResult.weather" cc-required="false" ng-maxlength="5" cc-key1="U0002" cc-shortname=false cc-width="115" cc-readonly="disableResult()" cc-error="error"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+		<!-- End Result -->
+		<!-- Start Footer -->
+		<div id="footer">
+			<div class="cs-footer-button">
+							<button type="button" ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}" ng-click="doSave()" ng-disabled="!canSave()">
+           					<div>保存<span>(F12)</span></div>
+						</button>
+							<button type="button" ng-class="{'cs-btn-delete-dis': !canDelete(), 'cs-btn-delete': canDelete()}" tabindex="-1" ng-click="doDelete()" ng-disabled="!canDelete()">
+          					 <div>削除<span>(Alt+Del)</span></div>
+						</button>
+							<button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+                  					<div>クリア<span>(F3)</span></div>
+						</button>
+			</div>
+		</div>
+		<!-- End Footer -->
+</div>

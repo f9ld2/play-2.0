@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.kk.kkjp0080.dao.Kkjp0080Mapper">
+  <select id="selectK008trhk" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.K008trhk">
+    <!--
+      This element is generated from KKBN0080#execute.
+    -->
+    SELECT
+        t.KAISYA_CD
+        ,t.KAK_TORI_KMK
+        ,t.TORI_NM
+        ,t.KANJO_KBN
+        ,t.KMK_CD
+        ,t.TAX_KBN
+      FROM
+        K008TRHK t
+      WHERE
+        t.KAK_TORI_KMK = #{t.kakToriKmk}
+        AND t.KAISYA_CD = #{t.kaisyaCd}
+  </select>
+  <select id="selectK008trhk" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.K008trhk" resultMap="jp.co.necsoft.web_md.core.cm.mybatis.sqlmap.K008trhkMapper.BaseResultMap">
+    <!--
+      This element is generated from KKBN0080#isK008TRHK.
+    -->
+    SELECT
+        *
+      FROM
+        K008TRHK
+      WHERE
+        KAK_TORI_KMK = #{kakToriKmk}
+        AND KAISYA_CD = #{kaisyaCd}
+  </select>
+  < id="" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.">
+    <!--
+      This element is generated from KKSV0080#doInsertFase3.
+    -->
+  </>
+  < id="" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.">
+    <!--
+      This element is generated from KKSV0080#doInsertFase3.
+    -->
+  </>
+  < id="" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.">
+    <!--
+      This element is generated from KKSV0080#doUpdateFase3.
+    -->
+  </>
+  < id="" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.">
+    <!--
+      This element is generated from KKSV0080#doUpdateFase3.
+    -->
+  </>
+  < id="" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.">
+    <!--
+      This element is generated from KKSV0080#doDeleteFase2.
+    -->
+  </>
+  < id="" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.">
+    <!--
+      This element is generated from KKSV0080#doDeleteFase2.
+    -->
+  </>
+</mapper>

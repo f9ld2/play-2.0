@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.zi.zijp1080.dao.Zijp1080Mapper">
+    <select id="selectZ006shnzMaxTenCd" parameterType="java.util.HashMap"
+        resultType="String">
+        <!-- This element is generated from ZIBN1080#getYmd. -->
+        SELECT
+        COALESCE(MAX(TEN_CD),' ')
+        FROM Z006SHNZ
+        <choose>
+            <when test="tenCd !='999'">
+                WHERE TEN_CD = #{kaisyaCd}||#{jigyobuCd}||#{tenCd}
+                <choose>
+                    <when test="bmnCd !='999'">
+                        AND BMN_CD = #{jigyobuCd}||#{bmnCd}
+                    </when>
+                    <otherwise>
+                        AND SUBSTR(BMN_CD,1,2) = #{jigyobuCd}
+                    </otherwise>
+                </choose>
+            </when>
+
+            <otherwise>
+                WHERE SUBSTR(TEN_CD,1,4) = #{kaisyaCd}||#{jigyobuCd}
+
+                <if test="dammyTenpo !=''">
+                    AND SUBSTR(TEN_CD,5,3) <![CDATA[<]]>
+                    #{dammyTenpo}
+                </if>
+                <choose>
+                    <when test="bmnCd !='999'">
+                        AND BMN_CD = #{jigyobuCd}||#{bmnCd}
+                    </when>
+                    <otherwise>
+                        AND SUBSTR(BMN_CD,1,2) = #{jigyobuCd}
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

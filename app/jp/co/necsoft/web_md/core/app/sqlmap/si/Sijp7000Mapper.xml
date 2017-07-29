@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7000Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7000Dto" >
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TEN_KBN" property="tenKbn" jdbcType="VARCHAR" />
+        <result column="TORIHIKI_CD" property="trihikiCd" jdbcType="VARCHAR" />
+        <result column="TORIHIKI_NM" property="trihikiNm" jdbcType="VARCHAR" />
+        <result column="BMNCD" property="bmnCd" jdbcType="VARCHAR" />
+        <result column="CBNR_CD_01" property="cbnrCd1" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN1" property="hatSruiKbn1" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_01" property="hatBaraSu1" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_01" property="kenBaraSu1" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_01" property="hatGenkKin1" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_01" property="kenGenkKin1" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_01" property="hatBaikKin1" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_01" property="kenBaikKin1" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_02" property="cbnrCd2" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN2" property="hatSruiKbn2" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_02" property="hatBaraSu2" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_02" property="kenBaraSu2" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_02" property="hatGenkKin2" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_02" property="kenGenkKin2" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_02" property="hatBaikKin2" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_02" property="kenBaikKin2" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_03" property="cbnrCd3" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN3" property="hatSruiKbn3" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_03" property="hatBaraSu3" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_03" property="kenBaraSu3" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_03" property="hatGenkKin3" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_03" property="kenGenkKin3" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_03" property="hatBaikKin3" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_03" property="kenBaikKin3" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_04" property="cbnrCd4" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN4" property="hatSruiKbn4" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_04" property="hatBaraSu4" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_04" property="kenBaraSu4" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_04" property="hatGenkKin4" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_04" property="kenGenkKin4" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_04" property="hatBaikKin4" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_04" property="kenBaikKin4" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_05" property="cbnrCd5" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN5" property="hatSruiKbn5" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_05" property="hatBaraSu5" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_05" property="kenBaraSu5" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_05" property="hatGenkKin5" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_05" property="kenGenkKin5" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_05" property="hatBaikKin5" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_05" property="kenBaikKin5" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_06" property="cbnrCd6" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN6" property="hatSruiKbn6" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_06" property="hatBaraSu6" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_06" property="kenBaraSu6" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_06" property="hatGenkKin6" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_06" property="kenGenkKin6" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_06" property="hatBaikKin6" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_06" property="kenBaikKin6" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_07" property="cbnrCd7" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN7" property="hatSruiKbn7" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_07" property="hatBaraSu7" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_07" property="kenBaraSu7" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_07" property="hatGenkKin7" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_07" property="kenGenkKin7" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_07" property="hatBaikKin7" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_07" property="kenBaikKin7" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_08" property="cbnrCd8" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN8" property="hatSruiKbn8" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_08" property="hatBaraSu8" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_08" property="kenBaraSu8" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_08" property="hatGenkKin8" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_08" property="kenGenkKin8" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_08" property="hatBaikKin8" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_08" property="kenBaikKin8" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_09" property="cbnrCd9" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN9" property="hatSruiKbn9" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_09" property="hatBaraSu9" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_09" property="kenBaraSu9" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_09" property="hatGenkKin9" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_09" property="kenGenkKin9" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_09" property="hatBaikKin9" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_09" property="kenBaikKin9" jdbcType="DECIMAL" />
+        <result column="CBNR_CD_10" property="cbnrCd10" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN010" property="hatSruiKbn10" jdbcType="VARCHAR" />
+        <result column="HAT_BARA_SU_10" property="hatBaraSu10" jdbcType="DECIMAL" />
+        <result column="KEN_BARA_SU_10" property="kenBaraSu10" jdbcType="DECIMAL" />
+        <result column="HAT_GENK_KIN_10" property="hatGenkKin10" jdbcType="DECIMAL" />
+        <result column="KEN_GENK_KIN_10" property="kenGenkKin10" jdbcType="DECIMAL" />
+        <result column="HAT_BAIK_KIN_10" property="hatBaikKin10" jdbcType="DECIMAL" />
+        <result column="KEN_BAIK_KIN_10" property="kenBaikKin10" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <select id="selectSijp7000ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7000Param">
+        SELECT
+               S001EOSD.TEN_CD AS TENCD,
+               M006.TEN_NM AS TENNM,
+               S001EOSD.TORIHIKI_CD AS TRIHIKICD,
+               M011.TRI_NM AS TRIHIKINM,
+               S001EOSD.BMN_CD AS BMNCD,
+               
+               S001EOSD.CBNR_CD_01 AS CBNRCD1,
+               S001EOSD.HAT_SRUI_KBN_01 AS HATSRUIKBN1,
+               S001EOSD.HAT_BARA_SU_01 AS HATBARASU1,
+               S001EOSD.KEN_BARA_SU_01 AS KENBARASU1,
+               S001EOSD.HAT_GENK_KIN_01 AS HATGENKKIN1,
+               S001EOSD.KEN_GENK_KIN_01 AS KENGENKKIN1,
+               S001EOSD.HAT_BAIK_KIN_01 AS HATBAIKKIN1,
+               S001EOSD.KEN_BAIK_KIN_01 AS KENBAIKKIN1,
+               
+               S001EOSD.CBNR_CD_02 AS CBNRCD2,
+               S001EOSD.HAT_SRUI_KBN_02 AS HATSRUIKBN2,
+               S001EOSD.HAT_BARA_SU_02 AS HATBARASU2,
+               S001EOSD.KEN_BARA_SU_02 AS KENBARASU2,
+               S001EOSD.HAT_GENK_KIN_02 AS HATGENKKIN2,
+               S001EOSD.KEN_GENK_KIN_02 AS KENGENKKIN2,
+               S001EOSD.HAT_BAIK_KIN_02 AS HATBAIKKIN2,
+               S001EOSD.KEN_BAIK_KIN_02 AS KENBAIKKIN2,
+               
+               S001EOSD.CBNR_CD_03 AS CBNRCD3,
+               S001EOSD.HAT_SRUI_KBN_03 AS HATSRUIKBN3,
+               S001EOSD.HAT_BARA_SU_03 AS HATBARASU3,
+               S001EOSD.KEN_BARA_SU_03 AS KENBARASU3,
+               S001EOSD.HAT_GENK_KIN_03 AS HATGENKKIN3,
+               S001EOSD.KEN_GENK_KIN_03 AS KENGENKKIN3,
+               S001EOSD.HAT_BAIK_KIN_03 AS HATBAIKKIN3,
+               S001EOSD.KEN_BAIK_KIN_03 AS KENBAIKKIN3,
+               
+               S001EOSD.CBNR_CD_04 AS CBNRCD4,
+               S001EOSD.HAT_SRUI_KBN_04 AS HATSRUIKBN4,
+               S001EOSD.HAT_BARA_SU_04 AS HATBARASU4,
+               S001EOSD.KEN_BARA_SU_04 AS KENBARASU4,
+               S001EOSD.HAT_GENK_KIN_04 AS HATGENKKIN4,
+               S001EOSD.KEN_GENK_KIN_04 AS KENGENKKIN4,
+               S001EOSD.HAT_BAIK_KIN_04 AS HATBAIKKIN4,
+               S001EOSD.KEN_BAIK_KIN_04 AS KENBAIKKIN4,
+               
+               S001EOSD.CBNR_CD_05 AS CBNRCD5,
+               S001EOSD.HAT_SRUI_KBN_05 AS HATSRUIKBN5,
+               S001EOSD.HAT_BARA_SU_05 AS HATBARASU5,
+               S001EOSD.KEN_BARA_SU_05 AS KENBARASU5,
+               S001EOSD.HAT_GENK_KIN_05 AS HATGENKKIN5,
+               S001EOSD.KEN_GENK_KIN_05 AS KENGENKKIN5,
+               S001EOSD.HAT_BAIK_KIN_05 AS HATBAIKKIN5,
+               S001EOSD.KEN_BAIK_KIN_05 AS KENBAIKKIN5,
+               
+               S001EOSD.CBNR_CD_06 AS CBNRCD6,
+               S001EOSD.HAT_SRUI_KBN_06 AS HATSRUIKBN6,
+               S001EOSD.HAT_BARA_SU_06 AS HATBARASU6,
+               S001EOSD.KEN_BARA_SU_06 AS KENBARASU6,
+               S001EOSD.HAT_GENK_KIN_06 AS HATGENKKIN6,
+               S001EOSD.KEN_GENK_KIN_06 AS KENGENKKIN6,
+               S001EOSD.HAT_BAIK_KIN_06 AS HATBAIKKIN6,
+               S001EOSD.KEN_BAIK_KIN_06 AS KENBAIKKIN6,
+               
+               S001EOSD.CBNR_CD_07 AS CBNRCD7,
+               S001EOSD.HAT_SRUI_KBN_07 AS HATSRUIKBN7,
+               S001EOSD.HAT_BARA_SU_07 AS HATBARASU7,
+               S001EOSD.KEN_BARA_SU_07 AS KENBARASU7,
+               S001EOSD.HAT_GENK_KIN_07 AS HATGENKKIN7,
+               S001EOSD.KEN_GENK_KIN_07 AS KENGENKKIN7,
+               S001EOSD.HAT_BAIK_KIN_07 AS HATBAIKKIN7,
+               S001EOSD.KEN_BAIK_KIN_07 AS KENBAIKKIN7,
+               
+               S001EOSD.CBNR_CD_08 AS CBNRCD8,
+               S001EOSD.HAT_SRUI_KBN_08 AS HATSRUIKBN8,
+               S001EOSD.HAT_BARA_SU_08 AS HATBARASU8,
+               S001EOSD.KEN_BARA_SU_08 AS KENBARASU8,
+               S001EOSD.HAT_GENK_KIN_08 AS HATGENKKIN8,
+               S001EOSD.KEN_GENK_KIN_08 AS KENGENKKIN8,
+               S001EOSD.HAT_BAIK_KIN_08 AS HATBAIKKIN8,
+               S001EOSD.KEN_BAIK_KIN_08 AS KENBAIKKIN8,
+               
+               S001EOSD.CBNR_CD_09 AS CBNRCD9,
+               S001EOSD.HAT_SRUI_KBN_09 AS HATSRUIKBN9,
+               S001EOSD.HAT_BARA_SU_09 AS HATBARASU9,
+               S001EOSD.KEN_BARA_SU_09 AS KENBARASU9,
+               S001EOSD.HAT_GENK_KIN_09 AS HATGENKKIN9,
+               S001EOSD.KEN_GENK_KIN_09 AS KENGENKKIN9,
+               S001EOSD.HAT_BAIK_KIN_09 AS HATBAIKKIN9,
+               S001EOSD.KEN_BAIK_KIN_09 AS KENBAIKKIN9,
+               
+               S001EOSD.CBNR_CD_10 AS CBNRCD10,
+               S001EOSD.HAT_SRUI_KBN_010 AS HATSRUIKBN10,
+               S001EOSD.HAT_BARA_SU_10 AS HATBARASU10,
+               S001EOSD.KEN_BARA_SU_10 AS KENBARASU10,
+               S001EOSD.HAT_GENK_KIN_10 AS HATGENKKIN10,
+               S001EOSD.KEN_GENK_KIN_10 AS KENGENKKIN10,
+               S001EOSD.HAT_BAIK_KIN_10 AS HATBAIKKIN10,
+               S001EOSD.KEN_BAIK_KIN_10 AS KENBAIKKIN10
+               
+           FROM
+               S001EOSD 
+                   left join ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006
+                      ON (S001EOSD.KAISYA_CD || S001EOSD.JIGYOUBU_CD || S001EOSD.TEN_CD) = M006.TEN_CD
+                   
+                   left join ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M011" /> ) M011
+                               ON S001EOSD.TORIHIKI_CD =  M011.TRI_CD
+           WHERE
+               S001EOSD.NHN_YOTEI_YMD <![CDATA[>=]]> #{nhnYoteiYmdFr}
+               AND  S001EOSD.NHN_YOTEI_YMD <![CDATA[<=]]> #{nhnYoteiYmdTo}
+               AND  S001EOSD.DELETE_FLG = '0'
+               AND  S001EOSD.KAISYA_CD = #{kaisyaCd}
+               <if test="jigyobuCd != ''">
+                   AND S001EOSD.JIGYOUBU_CD = #{jigyobuCd}
+               </if>
+               <if test="tenCd != ''">
+                   AND S001EOSD.TEN_CD = #{tenCd}
+               </if>
+               <if test="torihikiCd != ''">
+                   AND S001EOSD.TORIHIKI_CD = #{torihikiCd}
+               </if>
+           ORDER BY 
+                   S001EOSD.CBNR_CD_01,
+                   S001EOSD.CBNR_CD_02,
+                   S001EOSD.CBNR_CD_03,
+                   S001EOSD.CBNR_CD_04,
+                   S001EOSD.CBNR_CD_05,
+                   S001EOSD.CBNR_CD_06,
+                   S001EOSD.CBNR_CD_07,
+                   S001EOSD.CBNR_CD_08,
+                   S001EOSD.CBNR_CD_09,
+                   S001EOSD.CBNR_CD_10
+    </select>
+</mapper>

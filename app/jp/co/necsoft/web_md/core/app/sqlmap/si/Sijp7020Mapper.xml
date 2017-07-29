@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7020Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7020Dto" >
+        <result column="JIYOUBUCD" property="jiyoubuCd" jdbcType="VARCHAR" />
+        <result column="JIYOUBUNM" property="jiyoubuNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />    
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="NTH_YMD" property="nhnYmd" jdbcType="VARCHAR" />
+        <result column="TAISHO" property="taisho" jdbcType="VARCHAR" />    
+        <result column="TORIHIKI_CD" property="torihikiCd" jdbcType="VARCHAR" />    
+        <result column="TORIHIKI_NM" property="torihikiNm" jdbcType="VARCHAR" /> 
+        <result column="DPY_NO" property="dpyNo" jdbcType="VARCHAR" />    
+        <result column="JAN_CD" property="janCd" jdbcType="VARCHAR" /> 
+        <result column="CBNR_CD" property="cbnrCd" jdbcType="VARCHAR" />
+        <result column="SBRN_CD" property="sbnrCd" jdbcType="VARCHAR" />
+        <result column="JISHAHINBAN" property="jishaHinban" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="MKR_CD" property="mkrCd" jdbcType="VARCHAR" />
+        <result column="SIZECD" property="sizeCd" jdbcType="VARCHAR" />
+        <result column="COLORCD" property="colorCd" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="DECIMAL" />
+        <result column="BAIKKIN" property="baikKin" jdbcType="DECIMAL" />   
+    </resultMap>
+    <select id="selectSijp7020ReportDataS001S002" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7020Param">
+            SELECT
+                 M.JIYOUBUCD,
+                 M.JIYOUBUNM,
+                 M.TENCD,
+                 M.TENNM,
+                 M.NHNYMD,
+                 M.TAISHO,
+                 M.TORIHIKICD,
+                 M.TORIHIKINM,
+                 M.DPYNO,
+                 M.JANCD,
+                 M.CBNRCD,
+                 M.SBNRCD,
+                 M.JISHAHINBAN,
+                 M.SHNNM,
+                 M.MKRCD,
+                 M.SIZECD,
+                 M.COLORCD,
+                 M.SURYO,
+                 M.BAIKKIN
+            FROM
+             (( SELECT 
+                  S001EOSD.JIGYOUBU_CD AS JIYOUBUCD,
+                  M001.JGY_NM AS JIYOUBUNM,
+                  S001EOSD.TEN_CD AS TENCD,
+                  M006.TEN_NM AS TENNM,
+                  S001EOSD.NHN_YOTEI_YMD AS NHNYMD,
+                  #{outTaisyo} AS TAISHO,
+                  S001EOSD.TORIHIKI_CD AS TORIHIKICD,
+                  M011.TRI_NM AS TORIHIKINM,
+                  S001EOSD.DPY_NO AS DPYNO,
+                  S001EOSD.SHN_CD_01 AS JANCD,
+                  S001EOSD.CBNR_CD_01 AS CBNRCD,
+                  S001EOSD.SBNR_CD_01 AS SBNRCD,
+                  M007.JISHA_HINBAN AS JISHAHINBAN,
+                  M007.SHN_NM AS SHNNM,
+                  M007.MKR_CD AS MKRCD,
+                  M007.SIZE_CD AS SIZECD,
+                  M007.COLOR_CD AS COLORCD,
+                  CASE WHEN S001EOSD.SYORI_STS_KBN = 1 THEN S001EOSD.HAT_BARA_SU_01
+                         WHEN S001EOSD.SYORI_STS_KBN = 2 THEN S001EOSD.KEN_BARA_SU_01
+                         ELSE 0
+                       END AS SURYO,
+                  S001EOSD.S_HAT_BAIK_KIN AS BAIKKIN
+              FROM S001EOSD LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" /> ) M001
+                                  ON S001EOSD.JIGYOUBU_CD = M001.JIGYOBU_CD
+                                  AND S001EOSD.KAISYA_CD = M001.KAISYA_CD
+
+                  LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006
+                              ON (S001EOSD.KAISYA_CD || S001EOSD.JIGYOUBU_CD || S001EOSD.TEN_CD) = M006.TEN_CD 
+                              AND S001EOSD.DELETE_FLG = '0'       
+
+                  LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M011" /> ) M011
+                              ON S001EOSD.TORIHIKI_CD =  M011.TRI_CD     
+
+                  LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" /> ) M007
+                              ON S001EOSD.SHN_CD_01 =  M007.JAN_CD   
+                  
+              WHERE
+                  S001EOSD.NHN_YOTEI_YMD <![CDATA[>=]]> #{nhnDayFr}
+                  AND  S001EOSD.NHN_YOTEI_YMD <![CDATA[<=]]> #{nhnDayTo}
+                  AND S001EOSD.DELETE_FLG = '0'
+                  AND S001EOSD.KAISYA_CD = #{kaisyaCd}
+                  <if test="jigyobuCd != ''">
+                      AND S001EOSD.JIGYOUBU_CD = #{jigyobuCd}
+                  </if>
+                  <if test="lsTenCd.size > 0">
+                      AND S001EOSD.TEN_CD IN  <foreach item="itemList" index="index"
+                                                                                 collection="lsTenCd"
+                                                                                open="(" separator=","
+                                                                                close=")">
+                                                                                #{itemList}
+                                                                </foreach>
+                  </if>
+                  <if test="triCd != ''">
+                      AND S001EOSD.TORIHIKI_CD = #{triCd}
+                  </if>
+              )
+              UNION
+              (
+              SELECT 
+                 S002TGKD.JIGYOUBU_CD AS JIYOUBUCD,
+                 M001.JGY_NM AS JIYOUBUNM,
+                 S002TGKD.TEN_CD AS TENCD,
+                 M006.TEN_NM AS TENNM,
+                 S002TGKD.NHN_YMD AS NHNYMD,
+                 #{outTaisyo} AS TAISHO,
+                 S002TGKD.TORIHIKI_CD AS TORIHIKICD,
+                 M011.TRI_NM AS TORIHIKINM,
+                 S002TGKD.DPY_NO AS DPYNO,
+                 S002TGKD.SHN_CD_01 AS JANCD,
+                 S002TGKD.CBNR_CD_01 AS CBNRCD,
+                 S002TGKD.SBNR_CD_01 AS SBNRCD,
+                 M007.JISHA_HINBAN AS JISHAHINBAN,
+                 M007.SHN_NM AS SHNNM,
+                 M007.MKR_CD AS MKRCD,
+                 M007.SIZE_CD AS SIZECD,
+                 M007.COLOR_CD AS COLORCD,
+                 S002TGKD.KEN_BARA_SU_01 AS SURYO,
+                 S002TGKD.S_HAT_BAIK_KIN AS BAIKKIN
+             FROM S002TGKD LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" /> ) M001
+                                 ON S002TGKD.JIGYOUBU_CD = M001.JIGYOBU_CD
+                                 AND S002TGKD.KAISYA_CD = M001.KAISYA_CD
+
+                 LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006
+                             ON (S002TGKD.KAISYA_CD || S002TGKD.JIGYOUBU_CD || S002TGKD.TEN_CD) = M006.TEN_CD
+
+                 LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M011" /> ) M011
+                             ON S002TGKD.TORIHIKI_CD =  M011.TRI_CD     
+
+                 LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" /> ) M007
+                             ON S002TGKD.SHN_CD_01 =  M007.JAN_CD 
+                   
+             WHERE
+                 S002TGKD.NHN_YOTEI_YMD <![CDATA[>=]]> #{nhnDayFr}
+                 AND  S002TGKD.NHN_YOTEI_YMD <![CDATA[<=]]> #{nhnDayTo}
+                 AND S002TGKD.DELETE_FLG = '0'
+                 AND S002TGKD.KAISYA_CD = #{kaisyaCd}
+                 <if test="jigyobuCd != ''">
+                     AND S002TGKD.JIGYOUBU_CD = #{jigyobuCd}
+                 </if>
+                 <if test="lsTenCd.size > 0">
+                     AND S002TGKD.TEN_CD IN  <foreach item="itemList" index="index"
+                                                                                 collection="lsTenCd"
+                                                                                open="(" separator=","
+                                                                                close=")">
+                                                                                #{itemList}
+                                                                </foreach>
+                 </if>
+                 <if test="triCd != ''">
+                     AND S002TGKD.TORIHIKI_CD = #{triCd}
+                 </if>)
+              ) M
+             ORDER BY M.TORIHIKICD, M.DPYNO
+    </select>
+    <select id="selectSijp7020ReportDataS003" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7020Param">
+             SELECT 
+                 SUBSTR(S003FRID.IN_TENPO_CD,3,2) AS JIYOUBUCD,
+                 M001.JGY_NM AS JIYOUBUNM,
+                 SUBSTR(S003FRID.IN_TENPO_CD,5,3) AS TENCD,
+                 M006.TEN_NM AS TENNM,
+                 (S003FRID.SYUKA_YMD) AS NHNYMD,
+                 #{outTaisyo} AS TAISHO,
+                 S003FRID.OUT_TENPO_CD AS TORIHIKICD,
+                 M006_2.TEN_NM AS TORIHIKINM,
+                 S003FRID.DPY_NO AS DPYNO,
+                 S003FRID.SHN_CD_01 AS JANCD,
+                 S003FRID.CBNR_CD_01 AS CBNRCD,
+                 S003FRID.SBNR_CD_01 AS SBNRCD,
+                 M007.JISHA_HINBAN AS JISHAHINBAN,
+                 M007.SHN_NM AS SHNNM,
+                 M007.MKR_CD AS MKRCD,
+                 M007.SIZE_CD AS SIZECD,
+                 M007.COLOR_CD AS COLORCD,
+                 S003FRID.HAT_BARA_SU_01 AS SURYO,
+                 S003FRID.S_HAT_BAIK_KIN AS BAIKKIN
+
+             FROM S003FRID LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" /> ) M001
+                                 ON SUBSTR(S003FRID.IN_TENPO_CD,3,2) = M001.JIGYOBU_CD
+                                 AND SUBSTR(S003FRID.IN_TENPO_CD,0,2) = M001.KAISYA_CD
+
+                 LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006
+                             ON S003FRID.IN_TENPO_CD = M006.TEN_CD   
+
+                 LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006_2
+                             ON S003FRID.OUT_TENPO_CD =  M006_2.TEN_CD 
+
+                 LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" /> ) M007
+                             ON S003FRID.SHN_CD_01 =  M007.JAN_CD      
+             WHERE
+                 S003FRID.NHN_YOTEI_YMD <![CDATA[>=]]> #{nhnDayFr}
+                 AND  S003FRID.NHN_YOTEI_YMD <![CDATA[<=]]> #{nhnDayTo}
+                 AND S003FRID.DELETE_FLG = '0'
+                 AND SUBSTR(S003FRID.IN_TENPO_CD,1,2) = #{kaisyaCd}
+                 <if test="jigyobuCd != ''">
+                     AND SUBSTR(S003FRID.IN_TENPO_CD,3,2) = #{jigyobuCd}
+                 </if>
+                 <if test="lsTenCd.size > 0">
+                     AND SUBSTR(S003FRID.IN_TENPO_CD,5,3) IN  <foreach item="itemList" index="index"
+                                                                                 collection="lsTenCd"
+                                                                                open="(" separator=","
+                                                                                close=")">
+                                                                                #{itemList}
+                                                                </foreach>
+                 </if>
+                 <if test="triCd != ''">
+                     AND S003FRID.HAT_TORIHIKI_CD = #{triCd}
+                 </if>
+             ORDER BY S003FRID.OUT_TENPO_CD, S003FRID.DPY_NO
+    </select>
+</mapper>

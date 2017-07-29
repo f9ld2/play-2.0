@@ -1,0 +1,184 @@
+<div id=SIJP0110 ng-Controller='SIJP0110Ctrl' ng-init="initCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="伝区" cc-partition="3" id="dpyKbn"
+								name="dpyKbn" ng-model="cond.dpyKbn" cc-required="true"
+								ng-maxlength="2" cc-delexist=false cc-shortname=false
+								cc-key1="SIR" cc-key2="DPY_KBN_" cc-parameter01=""
+								cc-combobox-focus="getFocusCond()" cc-error="error">
+						</div>
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3"
+								id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd"
+								cc-required="true" cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.kaisyaCd" cc-parameter02=""
+								cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd"
+								name="tenCd" ng-model="cond.tenCd" cc-required="false"
+								cc-shortname=false cc-delexist=false
+								cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+								cc-parameter03="" cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-code-input cc-label="伝票NO" cc-partition="3" id="dpyNo"
+								name="dpyNo" ng-model="cond.dpyNo" cc-required="false"
+								ng-minlength="9" ng-maxlength="9" cc-chartype="C1"
+								cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-bmn-combobox cc-label="部門" cc-partition="3" id="bmnCd"
+								name="bmnCd" ng-model="cond.bmnCd" cc-required="false"
+								cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.jigyobuCd" cc-parameter02=""
+								cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="(出荷店)事業部" cc-partition="3"
+								id="outJigyobuCd" name="outJigyobuCd"
+								ng-model="cond.outJigyobuCd" cc-required="false"
+								cc-readonly="disable()" cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.outKaisyaCd" cc-parameter02=""
+								cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="(出荷店)店舗" cc-partition="3"
+								id="outTenCd" name="outTenCd" ng-model="cond.outTenCd"
+								cc-required="false" cc-readonly="disable()" cc-shortname=false
+								cc-delexist=false cc-parameter01="cond.outKaisyaCd"
+								cc-parameter02="cond.outJigyobuCd" cc-parameter03=""
+								cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-tricd-input cc-tri-search cc-label="取引先" cc-partition="3"
+								id="mainToriCd" name="mainToriCd" ng-model="cond.mainToriCd"
+								cc-readonly="!disable()" cc-required="false" cc-notexist=false
+								cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.hakkoDay" id2="triNm" name2="triNm"
+								ng-model2="cond.triNm" cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-fromto-date-input cc-label="納品日" cc-partition="3"
+								id="nhnYmdSt" name="nhnYmdSt" ng-model="cond.nhnYmdSt"
+								cc-required="false" id2="nhnYmdEd" name2="nhnYmdEd"
+								ng-model2="cond.nhnYmdEd" cc-required2="false" cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-fromto-date-input cc-label="発注日" cc-partition="3"
+								id="hatYmdSt" name="hatYmdSt" ng-model="cond.hatYmdSt"
+								cc-required="false" id2="hatYmdEd" name2="hatYmdEd"
+								ng-model2="cond.hatYmdEd" cc-required2="false"  cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-fromto-date-input cc-label="納品予定日" cc-partition="3"
+								id="nhnYoteiYmdSt" name="nhnYoteiYmdSt"
+								ng-model="cond.nhnYoteiYmdSt" cc-required="false"
+								id2="nhnYoteiYmdEd" name2="nhnYoteiYmdEd"
+								ng-model2="cond.nhnYoteiYmdEd" cc-required2="false" cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-fromto-date-input cc-label="計上日" cc-partition="3"
+								id="ruiKeijoYmdSt" name="ruiKeijoYmdSt"
+								ng-model="cond.ruiKeijoYmdSt" cc-required="false"
+								id2="ruiKeijoYmdEd" name2="ruiKeijoYmdEd"
+								ng-model2="cond.ruiKeijoYmdEd" cc-required2="false" cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="状態" cc-partition="3" id="syoriStsKbn"
+								name="syoriStsKbn" ng-model="cond.syoriStsKbn"
+								cc-required="false" ng-maxlength="1" cc-delexist=false
+								cc-shortname=false cc-key1="SIR" cc-key2="SYORI_STS_KBN_"
+								cc-parameter01="" cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="確定区分" cc-partition="3" id="entryKbn"
+								name="entryKbn" ng-model="cond.entryKbn" cc-required="false"
+								ng-maxlength="2" cc-delexist=false cc-shortname=false
+								cc-key1="SIR" cc-key2="ENTRY_KBN_" cc-parameter01=""
+								cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-code-input cc-label="確定場所" cc-partition="3" id="entryPlace"
+								name="entryPlace" ng-model="cond.entryPlace" cc-required="false"
+								ng-minlength="1" ng-maxlength="7" cc-chartype="C1"
+								cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-fromto-date-input cc-label="確定日" cc-partition="3"
+								id="lastKakuteiYmdSt" name="lastKakuteiYmdSt"
+								ng-model="cond.lastKakuteiYmdSt" cc-required="false"
+								id2="lastKakuteiYmdEd" name2="lastKakuteiYmdEd"
+								ng-model2="cond.lastKakuteiYmdEd" cc-required2="false" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-tantocd-input cc-label="担当者" cc-partition="3"
+								id="lastTantoCd" name="lastTantoCd" ng-model="cond.lastTantoCd"
+								cc-required="false" cc-notexist=false cc-delexist=true
+								cc-parameter01="" id2="lastTantoNm" name2="lastTantoNm"
+								ng-model2="cond.lastTantoNm" cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}"
+							ng-click="doSearch()" ng-disabled="!canSearch()">
+							<div>
+								検索<span>(F10)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result" ng-if="hasResult">
+			<div class="cs-result-bg cs-clearfix"></div>
+			<div class="cs-sijp0110-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<div class="gridStyleSIJP0110DenInfArea"
+								ng-grid="gridOptionsSIJP0110DenInfArea"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+</div>
+<!-- End Footer -->
+</div>

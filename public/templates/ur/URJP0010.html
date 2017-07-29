@@ -1,0 +1,119 @@
+﻿<div id=URJP0010 ng-Controller='URJP0010Ctrl' ng-init="initCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<div class="cs-f-left">
+								<cc-kbn2-combobox cc-label="対象年" cc-partition="3" id="yyyy" name="yyyy" ng-model="cond.yyyy" cc-required="true"  cc-readonly="disableCond()" ng-maxlength="4" cc-key1="X0001" cc-error="error" cc-combobox-focus="getFocusCond()"/>
+							</div>
+							<div class="cs-f-left" id="urjp0020-month">
+								<cc-kbn2-combobox cc-label="月" cc-partition="3" id="mm" name="mm" ng-model="cond.mm" cc-required="true"  cc-readonly="disableCond()" ng-maxlength="2" cc-key1="X0002" cc-error="error"/>
+							</div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd" cc-required="true" cc-readonly="disableCond()" cc-delexist=false cc-shortname=false cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd" ng-model="cond.tenCd" cc-required="true" cc-readonly="disableCond()" cc-shortname=false cc-delexist=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03="" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar"  ng-if="resultMode == 1">
+						<button type="button" ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}" ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+						<div>検索してから編集<span>(F9)</span></div>
+						</button>
+					</div>
+					<div class="cs-clearfix cs-search-bar"  ng-if="resultMode != 1">
+						<button  class="cs-btn-submit-transit" id="transit1" name="transit1" ng-click=transit()><div>戻る</div></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result"  ng-form="resultForm" novalidate ng-if="mode != initMode">
+			<div class="cs-urjp0010-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix" ng-if="resultMode == 1">
+						<div class="cs-urjp0010-col-1">
+							<div class="cs-row cs-clearfix">
+								<div class="cs-right">
+									(単位：千円、人)
+								</div>
+							</div>
+							<div class="cs-clearfix">
+								<div class="gridStyleURJP0010YsnHibetsuArea" ng-grid="gridOptionsURJP0010YsnHibetsuArea"></div>
+							</div>
+							<div class="cs-clearfix">
+								<div class="gridStyleURJP0010YsnHibetsuSumArea" ng-grid="gridOptionsURJP0010YsnHibetsuSumArea"></div>
+							</div>
+						</div>
+						<div class="cs-urjp0010-col-2">
+							<div class="cs-row cs-clearfix">
+								<div class="cs-col-2">
+									<div class="gridStyleURJP0010GekkanUriakeYsnArea" ng-grid="gridOptionsURJP0010GekkanUriakeYsnArea"></div>
+								</div>
+							</div>
+							<div class="cs-row cs-clearfix">
+								<button class="cs-btn-submit-c" id="btncopy" name="btncopy" ng-click="btncopy()" ng-disabled="isDisable()"><div>昨対反映<span></span></div></button>
+								<button class="cs-btn-submit-s" id="btncalc" name="btncalc" ng-click="btncalc()" ng-disabled="isDisable()"><div>差異計算<span></span></div></button>
+							</div>
+							<div class="cs-row cs-clearfix" ng-if="result.extTenCopy">
+								<div class="cs-f-left" id="urjp0010-wTenCd">
+									<cc-ten-combobox cc-label="参照先店舗" cc-partition="3" id="wTenCd" name="wTenCd" ng-model="result.wTenCd" cc-required="false" cc-readonly="isDisable()"cc-shortname=false cc-delexist=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03="" cc-error="error"/>
+								</div>
+								<div class="cs-col-2">
+									<button  class="cs-btn-submit" id="btnextcopy" name="btnextcopy" ng-click="btnextcopy()" ng-disabled="isDisable()"><div>昨対参照<span></span></div></button>
+								</div>
+							</div>
+							<div class="cs-clearfix">
+								<div class="gridStyleURJP0010BmnUriakeMokuhyouArea" ng-grid="gridOptionsURJP0010BmnUriakeMokuhyouArea"></div>
+								<div class="gridStyleURJP0010BmnMokuhyouGoukeiArea" ng-grid="gridOptionsURJP0010BmnMokuhyouGoukeiArea"></div>
+							</div>
+							<div class="cs-row cs-clearfix" >
+								<div class="cs-f-left-urjp0010">
+									<cc-kbn2-combobox cc-label="自動計算区分" cc-partition="3" id="zidouKeisanKbn" name="zidouKeisanKbn" ng-model="result.zidouKeisanKbn" cc-required="false" cc-key1="U0001" cc-readonly="isDisable()"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="cs-row cs-clearfix"ng-if="resultMode != 1">
+						<div class="cs-right">
+							(単位：千円)
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix" ng-if="resultMode != 1">
+						<div class="gridStyleURJP0010GouKeiYsnBmnArea" ng-grid="gridOptionsURJP0010GouKeiYsnBmnArea"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button" ng-if="resultMode == 1">
+			<button type="button" ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}" ng-click="doSaveFirst()" ng-disabled="!canSave()">
+			<div>保存<span>(F12)</span></div>
+			</button>
+			<button type="button" ng-class="{'cs-btn-delete-dis': !canDelete(), 'cs-btn-delete': canDelete()}" tabindex="-1" ng-click="doDelete()" ng-disabled="!canDelete()">
+			<div>削除<span>(Alt+Del)</span></div>
+			</button>
+			<button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+			<div>クリア<span>(F3)</span></div>
+			</button>
+		</div>
+		<div class="cs-footer-button" ng-if="resultMode != 1">
+			<button type="button" ng-class="{'cs-btn-save-dis': !canSaveFinal(), 'cs-btn-save': canSaveFinal()}" ng-click="doSaveFinal()" ng-disabled="!canSaveFinal()">
+			<div>保存<span>(F12)</span></div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

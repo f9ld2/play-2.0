@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.tk.Tkjp1030Mapper">
+	<select id="selectTkjp1060T000T008T009" parameterType="HashMap"
+		resultType="jp.co.necsoft.web_md.core.app.dto.tk.TKJP1060SelectResult">
+		<!-- This element is generated from TKBN1060#execute. -->
+		SELECT
+		T000.KAISYA_CD AS KAISYACD
+		,T000.JIGYOBU_CD AS JIGYOBUCD
+		,T000.NENDO AS NENDO
+		,T000.KIKAKU_CD AS KIKAKUCD
+		,T000.BMN_CD AS BMNCD
+		,COALESCE(T008S.TEN_CD,' ') AS TENCD
+		,T000.KIKAKU_NM AS KIKAKUNM
+		,T000.KIKAKU_SYU AS KIKAKUSYU
+		,T000.TOKKIJIKO AS TOKKIJIKO
+		,T000.TIRASI_KBN AS TIRASIKBN
+		,T000.KAKUTEI_DAY AS KAKUTEIDAY
+		,T000.HANSOKU_DAY AS HANSOKUDAY
+		,T000.HANBAI_FRDD AS HANBAIFRDD
+		,T000.HANBAI_TODD AS HANBAITODD
+		,T000.SIIRE_FRDD AS SIIREFRDD
+		,T000.SIIRE_TODD AS SIIRETODD
+		,T000.URI_YOSAN AS URIYOSAN01
+		,T000.ARA_YOSAN AS ARAYOSAN01
+		,COALESCE(T008S.URI_YOSAN,0) AS URIYOSAN02
+		,COALESCE(T008S.ARA_YOSAN,0) AS ARAYOSAN02
+		,COALESCE(T008S.URI_BAIK_KIN,0) AS URIBAIKKIN
+		,COALESCE(T008S.URI_HPN_KIN,0) AS URIHPNKIN
+		,COALESCE(T008S.NEAG_KIN,0) AS NEAGKIN
+		,COALESCE(T008S.NESG_KIN,0) AS
+		NESGKIN
+		,COALESCE(T008S.SIR_GENK_KIN,0) AS SIRGENKKIN
+		,COALESCE(T008S.MAE_ZIK_GENK_KIN,0) AS MAEZIKGENKKIN
+		,COALESCE(T008S.MAE_ZIK_BAIK_KIN,0) AS MAEZIKBAIKKIN
+		,COALESCE(T008S.ATO_ZIK_GENK_KIN,0) AS ATOZIKGENKKIN
+		,COALESCE(T008S.ATO_ZIK_BAIK_KIN,0) AS ATOZIKBAIKKIN
+		FROM
+		T000KKKM T000 LEFT JOIN (
+		SELECT
+		T008.KAISYA_CD KAISYA_CD
+		,T008.JIGYOBU_CD JIGYOBU_CD
+		,T008.NENDO NENDO
+		,T008.KIKAKU_CD KIKAKU_CD
+		,T008.BMN_CD BMN_CD
+		,T008.TEN_CD TEN_CD
+		,COALESCE(max(T009.URI_YOSAN),0) URI_YOSAN
+		,COALESCE(max(T009.ARA_YOSAN),0) ARA_YOSAN
+		,sum(T008.URI_BAIK_KIN) URI_BAIK_KIN
+		,sum(T008.URI_HPN_KIN) URI_HPN_KIN
+		,sum(T008.NEAG_KIN) NEAG_KIN
+		,sum(T008.NESG_KIN) NESG_KIN
+		,sum(T008.SIR_GENK_KIN) SIR_GENK_KIN
+		,sum(T008.MAE_ZIK_GENK_KIN) MAE_ZIK_GENK_KIN
+		,sum(T008.MAE_ZIK_BAIK_KIN) MAE_ZIK_BAIK_KIN
+		,sum(T008.ATO_ZIK_GENK_KIN) ATO_ZIK_GENK_KIN
+		,sum(T008.ATO_ZIK_BAIK_KIN) ATO_ZIK_BAIK_KIN
+		from
+		T000KKKM T000, T008KKJI T008
+		LEFT JOIN T009KKMY T009 ON (
+		T008.KAISYA_CD = T009.KAISYA_CD
+		and T008.JIGYOBU_CD = T009.JIGYOBU_CD
+		and T008.NENDO = T009.NENDO
+		and T008.KIKAKU_CD = T009.KIKAKU_CD
+		and T008.BMN_CD = T009.BMN_CD
+		and T008.TEN_CD = T009.TEN_CD
+		and T009.ACT_KBN  <![CDATA[<>]]>
+		'9'
+		)
+		where
+		T008.KAISYA_CD = T000.KAISYA_CD
+		and T008.JIGYOBU_CD = T000.JIGYOBU_CD
+		and T008.NENDO = T000.NENDO
+		and T008.KIKAKU_CD = T000.KIKAKU_CD
+		and T008.BMN_CD = T000.BMN_CD
+		and T008.KAISYA_CD = #{kaisyaCd}
+		and T008.JIGYOBU_CD = #{jigyobuCd}
+		<if test="nendoSt != null and nendoSt != ''">
+			and T008.NENDO <![CDATA[>=]]>
+			#{nendoSt}
+		</if>
+
+		<if test="nendoEd != null and nendoEd != ''">
+			and T008.NENDO <![CDATA[<=]]>
+			#{nendoEd}
+		</if>
+
+		<if test="kikakuCdSt != null and kikakuCdSt != ''">
+			and T008.NENDO||T008.KIKAKU_CD||T008.BMN_CD <![CDATA[>=]]>
+			#{nendoSt_kikakuCdSt_jigyobuCd_bmnCdSt}
+		</if>
+
+		<if test="kikakuCdEd != null and kikakuCdEd != ''">
+			and T008.NENDO||T008.KIKAKU_CD||T008.BMN_CD <![CDATA[<=]]>
+			#{nendoEd_kikakuCdEd_jigyobuCd_bmnCdEd}
+		</if>
+
+		and T000.ACT_KBN     <![CDATA[<>]]>
+		'9'
+		and T008.ACT_KBN     <![CDATA[<>]]>
+		'9'
+		<if test="kakuteiDaySt != null and kakuteiDaySt != ''">
+			and T000.KAKUTEI_DAY  <![CDATA[>=]]>
+			#{kakuteiDaySt}
+		</if>
+
+		<if test="kakuteiDayEd != null and kakuteiDayEd != ''">
+			and T000.KAKUTEI_DAY <![CDATA[<=]]>
+			#{kakuteiDayEd}
+		</if>
+		GROUP BY
+		T008.KAISYA_CD
+		,T008.JIGYOBU_CD
+		,T008.NENDO
+		,T008.KIKAKU_CD
+		,T008.BMN_CD
+		,T008.TEN_CD
+		ORDER BY
+		T008.KAISYA_CD
+		,T008.JIGYOBU_CD
+		,T008.NENDO
+		,T008.KIKAKU_CD
+		,T008.BMN_CD
+		,T008.TEN_CD
+		) T008S ON (
+		T000.KAISYA_CD = T008S.KAISYA_CD
+		and T000.JIGYOBU_CD = T008S.JIGYOBU_CD
+		and T000.NENDO = T008S.NENDO
+		and T000.KIKAKU_CD = T008S.KIKAKU_CD
+		and T000.BMN_CD = T008S.BMN_CD
+		)
+		WHERE
+		T000.ACT_KBN     <![CDATA[<>]]>
+		'9'
+		and T000.KAISYA_CD = #{kaisyaCd}
+		and T000.JIGYOBU_CD = #{jigyobuCd}
+
+		<if test="nendoSt != null and nendoSt != ''">
+			and T000.NENDO <![CDATA[>=]]>
+			#{nendoSt}
+		</if>
+
+		<if test="nendoEd != null and nendoEd != ''">
+			and T000.NENDO <![CDATA[<=]]>
+			#{nendoEd}
+		</if>
+
+		<if test="kikakuCdSt != null and kikakuCdSt != ''">
+			and T000.NENDO||T000.KIKAKU_CD||T000.BMN_CD <![CDATA[>=]]>
+			#{nendoSt_kikakuCdSt_jigyobuCd_bmnCdSt}
+		</if>
+
+		<if test="kikakuCdEd != null and kikakuCdEd != ''">
+			and T000.NENDO||T000.KIKAKU_CD||T000.BMN_CD <![CDATA[<=]]>
+			#{nendoEd_kikakuCdEd_jigyobuCd_bmnCdEd}
+		</if>
+
+		<if test="kakuteiDaySt != null and kakuteiDaySt != ''">
+			and T000.KAKUTEI_DAY  <![CDATA[>=]]>
+			#{kakuteiDaySt}
+		</if>
+
+		<if test="kakuteiDayEd != null and kakuteiDayEd != ''">
+			and T000.KAKUTEI_DAY <![CDATA[<=]]>
+			#{kakuteiDayEd}
+		</if>
+
+		ORDER BY
+		T000.KAISYA_CD
+		,T000.JIGYOBU_CD
+		,T000.NENDO
+		,T000.KIKAKU_CD
+		,T000.BMN_CD
+		,T008S.TEN_CD
+	</select>
+</mapper>

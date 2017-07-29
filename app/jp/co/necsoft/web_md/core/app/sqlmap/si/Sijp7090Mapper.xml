@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7090Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7090Dto" >
+        <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="HAT_DD" property="hatDd" jdbcType="VARCHAR" />
+        <result column="JAN_CD" property="janCd" jdbcType="VARCHAR" />
+        <result column="MKR_CD" property="mkrCd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="HAT_SU" property="hatSu" jdbcType="VARCHAR" />
+        <result column="APP_HIN_SU" property="appHinSu" jdbcType="VARCHAR" />
+        <result column="HIN_KK_KBN" property="hinKkKbn" jdbcType="VARCHAR" />
+        <result column="ERR_MSG" property="errMsg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectSijp7090ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7090Param">
+         SELECT 
+            h701.JIGYOBU_CD AS jigyobuCd,
+            m001.JGY_NM AS jgyNm,
+            h701.TEN_CD AS tenCd,
+            m006.TEN_NM AS tenNm,
+            h701.HAT_DD AS hatDd,
+            h701.JAN_CD AS janCd,
+            m007.MKR_CD AS mkrCd,
+            m007.SHN_NM AS shnNm,
+            h701.HAT_SU AS hatSu,
+            h701.APP_HIN_SU As appHinSu,
+            h701.HIN_KK_KBN AS hinKkKbn,
+            h701.ERR_MSG As errMsg
+        FROM 
+            H701OHAT h701
+            LEFT JOIN ( 
+               <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" />
+            ) m001 ON(h701.JIGYOBU_CD=m001.JIGYOBU_CD)
+            LEFT JOIN (
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" />
+            ) m006 ON(h701.TEN_CD=m006.TEN_CD)
+            LEFT JOIN (
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />
+            ) m007 ON(h701.JAN_CD=m007.JAN_CD)
+            
+        WHERE
+            h701.KAI_CD = #{kaisyaCd} AND
+            h701.DELETE_FLG = '0' AND
+            h701.HAT_DD BETWEEN #{hatDayFr} AND #{hatDayTo} AND
+            h701.JIGYOBU_CD = #{jigyobuCd} AND 
+            h701.HIN_KK_KBN = #{hinKkKbn}
+            <choose>
+                <when test="tenCd != null and tenCd != ''">
+                    AND h701.TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+                </when>
+                <otherwise>
+                    AND h701.TEN_CD LIKE #{kaisyaCd} || #{jigyobuCd} || '%'
+                </otherwise>
+            </choose>
+        ORDER BY 
+            h701.HAT_DD ASC, 
+            h701.JAN_CD ASC
+    </select>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.cm.KkkSearchMapper">
+	<select id="kkkSearch"
+		parameterType="jp.co.necsoft.web_md.core.app.forms.cm.KkkSearchCondForm"
+		resultType="jp.co.necsoft.web_md.core.app.dto.cm.KkkSearchResult">
+		SELECT
+		JIGYOBU_CD AS JIGYOBUCD
+		, NENDO AS NENDO
+		, KIKAKU_CD AS KIKAKUCD
+		, BMN_CD AS BMNCD
+		, KIKAKU_NM AS KIKAKUNM
+		, KIKAKU_SYU AS KIKAKUSYU
+		, KAKUTEI_DAY AS KAKUTEIDAY
+		, HANBAI_FRDD AS HANBAIFRDD
+		, SIIRE_FRDD AS SIIREFRDD
+		, TIRASI_KBN AS TIRASIKBN
+		FROM
+		T000KKKM
+		<where>
+			<if test="jigyobuCd != null and jigyobuCd != '' ">
+				AND JIGYOBU_CD = #{jigyobuCd}
+			</if>
+			<if test="nendo != null and nendo != '' ">
+				AND NENDO = #{nendo}
+			</if>
+			<if test="kikakuCd != null and kikakuCd != '' ">
+				AND KIKAKU_CD LIKE '%' || #{kikakuCd} || '%'
+			</if>
+			<if test="bmnCd != null and bmnCd != '' ">
+				AND BMN_CD LIKE '%' || #{bmnCd}
+			</if>
+			<if test="kikakuNm != null and kikakuNm != '' ">
+				AND KIKAKU_NM LIKE '%' || #{kikakuNm} || '%'
+			</if>
+			<if test="kikakuSyu != null and kikakuSyu != '' ">
+				AND KIKAKU_SYU = #{kikakuSyu}
+			</if>
+			<if test="kakuteiDay != null and kakuteiDay != '' ">
+				AND KAKUTEI_DAY = #{kakuteiDay}
+			</if>
+			<if test="hanbaiFrdd != null and hanbaiFrdd != '' ">
+				AND HANBAI_FRDD = #{hanbaiFrdd}
+			</if>
+			<if test="siireFrdd != null and siireFrdd != '' ">
+				AND SIIRE_FRDD = #{siireFrdd}
+			</if>
+			<if test="tirasiKbn != null and tirasiKbn != '' ">
+				AND TIRASI_KBN = #{tirasiKbn}
+			</if>
+			AND DELETE_FLG = '0'
+		</where>
+	</select>
+
+</mapper>

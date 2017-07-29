@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.kk.Kkjp1180Mapper">
+  <select id="selectKkjp1180K003rshrK008trhk" parameterType="HashMap" resultType="jp.co.necsoft.web_md.core.common.mybatis.dto.K003rshr">
+    <!--
+      This element is generated from KKBN1180#execute.
+    -->
+    SELECT 
+        s.KAISYA_CD AS KAISYACD,
+        s.SHR_SYORI_NO AS SHRSYORINO,
+        s.MAIN_TORI_CD AS MAINTORICD,
+        s.KAK_TORI_KMK AS KAKTORIKMK,
+        s.SHR_DATE AS SHRDATE,
+        s.SIME_DATE AS SIMEDATE,
+        s.FRI_END_DATE AS FRIENDDATE,
+        s.SHR_KIN AS SHRKIN
+    FROM 
+        K003RSHR s, K008TRHK t
+    WHERE 
+            s.KAK_TORI_KMK = t.KAK_TORI_KMK
+        AND t.KMK_CD = '4120'
+        AND s.KAISYA_CD = #{kaisyaCd}
+        AND s.JOTAI_KBN = #{jotaiKbn}
+        AND s.FRI_END_DATE <![CDATA[>=]]> #{friEndDate01}
+        AND s.FRI_END_DATE <![CDATA[<=]]> #{friEndDate02}
+    ORDER BY 
+        s.FRI_END_DATE, s.MAIN_TORI_CD, s.SIME_DATE
+    
+  </select>
+</mapper>

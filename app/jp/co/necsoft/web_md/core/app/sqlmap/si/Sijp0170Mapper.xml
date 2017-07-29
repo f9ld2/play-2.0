@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.si.sijp0170.dao.Sijp0170Mapper">
+  <select id="selectS005eost" parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp0170Execute" resultType="String">
+  <!--
+      This element is generated from SIBN0170#getSeqNo.
+    -->
+    SELECT 
+        max(SEQNO) AS SEQNO
+    FROM
+        S005EOST
+    WHERE
+        DPY_NO = #{dpyNo}
+        AND DPY_KBN = '11'
+    <if test="kaisyaCd != null and kaisyaCd != ''">
+        AND KAISYA_CD = #{kaisyaCd}
+    </if>
+    
+    <if test="jigyobuCd != null and jigyobuCd != ''">
+        AND JIGYOUBU_CD = #{jigyobuCd}
+    </if>
+        
+  </select>
+  
+</mapper>

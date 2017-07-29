@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.kk.kkjp1040.dao.Kkjp1040Mapper">
+	<resultMap id="BaseResultMap"
+		type="jp.co.necsoft.web_md.core.app.dto.kk.K002kruiM011trimResult">
+
+		<result column="MAINTORICD" property="mainToriCd" jdbcType="VARCHAR" />
+		<result column="ZENKURIKIN" property="zenKuriKin" jdbcType="DECIMAL" />
+		<result column="SIRKIN" property="sirKin" jdbcType="DECIMAL" />
+		<result column="HENKIN" property="henKin" jdbcType="DECIMAL" />
+		<result column="NEBIKIKIN" property="nebikiKin" jdbcType="DECIMAL" />
+		<result column="JUNSIRKIN" property="junSirKin" jdbcType="DECIMAL" />
+		<result column="SHRKIN" property="shrKin" jdbcType="DECIMAL" />
+		<result column="KURIKIN" property="kuriKin" jdbcType="DECIMAL" />
+		<result column="GETUJYM" property="getujYm" jdbcType="VARCHAR" />
+		<result column="HAKKODAY" property="hakkoDay" jdbcType="VARCHAR" />
+		<result column="KAISEISANKBN" property="kaiSeisanKbn" jdbcType="VARCHAR" />
+		<result column="SIMEKBN" property="simeKbn" jdbcType="VARCHAR" />
+		<result column="PAYKBN" property="payKbn" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<select id="selectK002kruiM011trim" parameterType="java.util.HashMap"
+		resultMap="BaseResultMap">
+		<!-- This element is generated from KKBN1040#execute. -->
+		SELECT
+		k.MAIN_TORI_CD AS MAINTORICD
+		,k.ZEN_KURI_KIN AS ZENKURIKIN
+		,k.SIR_KIN AS SIRKIN
+		,k.HEN_KIN AS HENKIN
+		,k.NEBIKI_KIN AS NEBIKIKIN
+		,k.JUN_SIR_KIN AS JUNSIRKIN
+		,k.SHR_KIN AS SHRKIN
+		,k.KURI_KIN AS KURIKIN
+		,k.GETUJ_YM AS GETUJYM
+		,k.HAKKO_DAY AS HAKKODAY
+		,m.KAI_SEISAN_KBN AS
+		KAISEISANKBN
+		,m.SIME_KBN AS SIMEKBN
+		,m.PAY_KBN AS PAYKBN
+		FROM
+		(
+		SELECT
+		k.MAIN_TORI_CD
+		,k.ZEN_KURI_KIN
+		,k.SIR_KIN
+		,k.HEN_KIN
+		,k.NEBIKI_KIN
+		,k.JUN_SIR_KIN
+		,k.SHR_KIN
+		,k.KURI_KIN
+		,k.GETUJ_YM
+		, MAX(m.HAKKO_DAY)
+		HAKKO_DAY
+		FROM
+		K002KRUI k LEFT OUTER JOIN 
+		 M011TRIM m ON (k.MAIN_TORI_CD = m.TRI_CD  AND m.HAKKO_DAY <![CDATA[<= ]]>(case
+		k.GETUJ_YM
+		WHEN '' then #{sBaseDate}
+		ELSE (k.GETUJ_YM || '99')
+		END))		
+		GROUP
+		BY
+		k.MAIN_TORI_CD
+		,k.ZEN_KURI_KIN
+		,k.SIR_KIN
+		,k.HEN_KIN
+		,k.NEBIKI_KIN
+		,k.JUN_SIR_KIN
+		,k.SHR_KIN
+		,k.KURI_KIN
+		,k.GETUJ_YM
+		)
+		k
+		LEFT OUTER JOIN M011TRIM m ON (k.MAIN_TORI_CD = m.TRI_CD
+		AND k.HAKKO_DAY = m.HAKKO_DAY) 
+		WHERE
+		 1 = 1
+		<if test=" mainToriCdSt !=''  and  mainToriCdEd != '' ">
+			AND k.MAIN_TORI_CD <![CDATA[>=]]>
+			#{mainToriCdSt} || #{conTorihikisakiCode}
+			AND k.MAIN_TORI_CD <![CDATA[<=]]>
+			#{mainToriCdEd} || #{conTorihikisakiCode}
+		</if>
+		<if test=" mainToriCdSt !=''  and  mainToriCdEd  == '' ">
+			AND k.MAIN_TORI_CD = #{mainToriCdSt} || #{conTorihikisakiCode}
+		</if>
+		<if test=" mainToriCdSt  == ''  and  mainToriCdEd !='' ">
+			AND k.MAIN_TORI_CD = #{mainToriCdEd} || #{conTorihikisakiCode}
+		</if>
+		<if test=" taisyoDateSt  !=''  and  taisyoDateEd !='' ">
+			AND k.GETUJ_YM <![CDATA[>=]]>
+			#{taisyoDateSt}
+			AND k.GETUJ_YM <![CDATA[<=]]>
+			#{taisyoDateEd}
+		</if>
+		<if test="taisyoDateSt !='' and  taisyoDateEd  =='' ">
+			AND k.GETUJ_YM = #{taisyoDateSt}
+		</if>
+		ORDER BY
+		m.KAI_SEISAN_KBN
+		,m.SIME_KBN || m.PAY_KBN
+		,k.MAIN_TORI_CD
+		,k.GETUJ_YM
+
+
+	</select>
+</mapper>

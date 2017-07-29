@@ -1,0 +1,107 @@
+<div id=SIJP0040 ng-Controller='SIJP0040Ctrl' ng-init="initCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="伝区" cc-partition="3" id="dpyKbn" name="dpyKbn" ng-model="cond.dpyKbn" cc-required="true" ng-maxlength="2" cc-delexist=false cc-shortname=false cc-key1="SIR" cc-key2="DPY_KBN_" cc-parameter01="" cc-readonly="changeDisable()" cc-combobox-focus="getFocusCond()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-code-input cc-label="伝票NO" cc-partition="3" id="dpyNo" name="dpyNo" ng-model="cond.dpyNo" cc-required="true" ng-minlength="9" ng-maxlength="9" cc-chartype="C1" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-date-input cc-label="出荷日" cc-partition="3" id="syukaYmd" name="syukaYmd" ng-model="cond.syukaYmd" cc-required="false" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix cs-title">出荷店</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd" cc-required="true" cc-delexist=false cc-shortname=false cc-parameter01="cond.kaisyaCd" cc-parameter02="sysdate" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd" ng-model="cond.tenCd" cc-required="true" cc-shortname=false cc-delexist=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03="hakkoDay" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-bmn-combobox cc-label="部門" cc-partition="3" id="bmnCd" name="bmnCd" ng-model="cond.bmnCd" cc-required="true" cc-delexist=false cc-shortname=false cc-parameter01="cond.jigyobuCd" cc-parameter02="hakkoDay" cc-readonly="changeDisable()" cc-error="error" cc-init="initBmnCd"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix cs-title">入荷店</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="subJigyobuCd" name="subJigyobuCd" ng-model="cond.subJigyobuCd" cc-required="true" cc-delexist=false cc-shortname=false cc-parameter01="cond.subKaisyaCd" cc-parameter02="sysdate" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="subTenCd" name="subTenCd" ng-model="cond.subTenCd" cc-required="true" cc-shortname=false cc-delexist=false cc-parameter01="cond.subKaisyaCd" cc-parameter02="cond.subJigyobuCd" cc-parameter03="hakkoDay" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-bmn-combobox cc-label="部門" cc-partition="3" id="subBmnCd" name="subBmnCd" ng-model="cond.subBmnCd" cc-required="true" cc-delexist=false cc-shortname=false cc-parameter01="cond.subJigyobuCd" cc-parameter02="hakkoDay" cc-readonly="changeDisable()" cc-error="error" cc-init="initSubBmnCd"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button" ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}" ng-click="doSearch()" ng-disabled="!canSearch()"> 
+           					<div>検索<span>(F10)</span></div>
+						</button>
+						<button type="button" ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}" ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+           					<div>検索してから編集<span>(F9)</span></div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- End Condition -->
+<!-- Start Result -->
+		<div id="result" >
+			<div class="cs-result-bg cs-clearfix" ng-show="hasResult || isNewData">
+				<div class="cs-info-status">処理状態: <span>{{result.syoriStsKbnNm}}</span></div>
+			</div>
+			<div class="cs-sijp0040-scroll" ng-show="hasResult || isNewData">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<div class="gridStyleSIJP0040MsaiDenpyoArea" ng-grid="gridOptionsSIJP0040MsaiDenpyoArea"></div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">&nbsp;</div>	
+						<div class="cs-col-2">
+							<cc-number-input cc-label="原価金額合計" cc-partition="3" id="sumKenGenkIn" name="sumKenGenkIn" ng-model="result.sumKenGenkIn" cc-readonly="true" cc-min="-99999999999" cc-max="99999999999" cc-width="145"  cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-number-input cc-label="売価金額合計" cc-partition="3" id="sumKenBaikKin" name="sumKenBaikKin" ng-model="result.sumKenBaikKin" cc-readonly="true" cc-min="-99999999999" cc-max="99999999999" cc-width="145"  cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">&nbsp;</div>	
+						<div class="cs-col-2">
+							<cc-number-input cc-label="(入力)原価金額合計" cc-partition="3" id="inpGenInp" name="inpGenInp" ng-model="result.inpGenInp" cc-min="-99999999999" cc-max="99999999999" cc-width="145" cc-readonly="!changeDisable()" cc-required="true" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-string-input cc-label="摘要" cc-partition="3" id="tekiyo" name="tekiyo" ng-model="result.tekiyo" ng-minlength="0" ng-maxlength="30" cc-chartype="S2" cc-readonly="!changeDisable()" cc-error="error" cc-width="305"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+		<!-- End Result -->
+		<!-- Start Footer -->
+		<div id="footer">
+			<div class="cs-footer-button">
+							<button type="button" ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}" ng-click="doInsertUpdate()" ng-disabled="!canSave()">
+           					<div>保存<span>(F12)</span></div>
+						</button>
+							<button type="button" ng-class="{'cs-btn-delete-dis': !canDelete(), 'cs-btn-delete': canDelete()}" tabindex="-1" ng-click="doDelete()" ng-disabled="!canDelete()">
+          					 <div>削除<span>(Alt+Del)</span></div>
+						</button>
+							<button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+                  					<div>クリア<span>(F3)</span></div>
+						</button>
+			</div>
+		</div>
+		<!-- End Footer -->
+</div>

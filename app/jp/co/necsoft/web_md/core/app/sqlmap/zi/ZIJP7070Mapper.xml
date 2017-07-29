@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.zi.Zijp7070Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7070Dto" >
+        <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TERM_ID" property="termId" jdbcType="VARCHAR" />
+        <result column="TANTO_NM" property="tantoNm" jdbcType="VARCHAR" />
+        <result column="TANA_NO" property="tanaNo" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="SOSIN_NICHIJI" property="sosinNichiji" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="GENK" property="genk" jdbcType="VARCHAR" />
+        <result column="BAIK" property="baik" jdbcType="VARCHAR" />
+        <result column="GENKIN" property="genkin" jdbcType="VARCHAR" />
+        <result column="BAIKIN" property="baikin" jdbcType="VARCHAR" />
+        <result column="MSG" property="msg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectZijp7070ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7070Param">
+        SELECT 
+            z703.JIGYOBU_CD,
+            z703.JGY_NM,
+            z703.TEN_CD,
+            z703.TEN_NM,
+            z703.TERM_ID,
+            z703.TANTO_NM,
+            z703.TANA_NO,
+            z703.SHN_CD,
+            z703.SOSIN_NICHIJI,
+            z703.SHN_NM,
+            z703.GENK,
+            z703.BAIK,
+            z703.MSG
+        FROM 
+            Z703TANA z703
+        WHERE 
+            z703.JIGYOBU_CD = #{jigyobuCd}  AND 
+            z703.TEN_CD = #{tenCd}
+            <if test="sosinNichiji != null and sosinNichiji != ''">
+                AND SUBSTR(z703.SOSIN_NICHIJI,1,8) = #{sosinNichiji}
+            </if>
+            <if test="tantoCd != null and tantoCd != ''">
+                AND z703.TANTO_CD = #{tantoCd}
+            </if>
+            <if test="outTaisyo == 0">
+                AND z703.IMP_ERR_FLG = 1
+            </if>
+            
+    </select>
+</mapper>

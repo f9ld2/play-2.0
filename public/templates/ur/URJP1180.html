@@ -1,0 +1,69 @@
+<div id='URJP1180' ng-controller='URJP1180Ctrl' >
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="false">
+	<form name="form">
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3"
+								id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd"
+								cc-required="true" cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.kaisyaCd" cc-parameter02=""
+								cc-error="error" cc-combobox-focus="reFreshCond()" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<div class="cs-f-left">
+								<cc-kbn2-combobox cc-label="対象年" cc-partition="3" 
+								    id="taisyodateY" name="taisyodateY" ng-model="cond.taisyodateY"
+								    cc-required="true" ng-maxlength="4" cc-key1="X0001" cc-error="error"/>
+							</div>
+							<div class="cs-year-date-small cs-f-left">
+								<cc-kbn2-combobox cc-label="月" id="taisyodateM" name="taisyodateM"
+								ng-model="cond.taisyodateM" cc-required="true" ng-maxlength="2"
+								cc-key1="X0002" cc-error="error"/>
+							</div>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+							ng-click="doExecute()" ng-disabled="!canExecute()">
+							<div>
+								実行<span>(F12)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result" ng-hide="hiddenBar">
+			<div class="cs-result-bg cs-clearfix"></div>
+			<div class="cs-urjp1180-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix" id="loadingBarContainer">
+						<cc-progress-bar></cc-progress-bar>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

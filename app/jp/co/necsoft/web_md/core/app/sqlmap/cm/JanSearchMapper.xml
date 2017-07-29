@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.cm.JanSearchMapper">
+	<select id="janSearch"
+		parameterType="jp.co.necsoft.web_md.core.app.forms.cm.JanSearchCondForm"
+		resultType="jp.co.necsoft.web_md.core.app.dto.cm.JanSearchResult">
+
+
+		SELECT A.JAN_CD  AS JANCD ,
+		  A.HAKKO_DAY    AS HAKKODAY ,
+		  A.HAKKO_DAY_TO AS HAKKODAYTO ,
+		  A.JIGYOBU_CD   AS JIGYOBUCD ,
+		  A.BMN_CD       AS BMNCD ,
+		  A.CHU_BNR_CD   AS CHUBNRCD ,
+		  A.SHO_BNR_CD   AS SHOBNRCD ,
+		  C.MKR_NM       AS MKRNM ,
+		  A.SHN_NM       AS SHNNM ,
+		  A.KIKAKU_NM    AS KIKAKUNM ,
+		  A.SHN_NM_A     AS SHNNMA ,
+		  A.KIKAKU_NM_A  AS KIKAKUNMA ,
+		  A.MKR_CD       AS MKRCD ,
+		  B.TRI_CD       AS TRICD
+		FROM (
+		  (SELECT JAN_CD ,
+		    HAKKO_DAY ,
+		    HAKKO_DAY_TO ,
+		    JIGYOBU_CD ,
+		    BMN_CD ,
+		    CHU_BNR_CD ,
+		    SHO_BNR_CD ,
+		    SHN_NM ,
+		    KIKAKU_NM ,
+		    SHN_NM_A ,
+		    KIKAKU_NM_A ,
+		    MKR_CD
+		  FROM M007KIJM
+   		  <where>
+			<if test="janCd != null and janCd != ''">
+				AND JAN_CD LIKE '%' || #{janCd} || '%'
+			</if>
+			<if test="hakkoDay != null and hakkoDay != ''">
+				AND HAKKO_DAY = #{hakkoDay}
+			</if>
+			<if test="hakkoDayTo != null and hakkoDayTo != ''">
+				AND HAKKO_DAY_TO = #{hakkoDayTo}
+			</if>
+			<if test="jigyobuCd != null and jigyobuCd != ''">
+				AND JIGYOBU_CD = #{jigyobuCd}
+			</if>
+			<if test="bmnCd != null and bmnCd != ''">
+				AND BMN_CD LIKE '%' || #{bmnCd}
+			</if>
+			<if test="chuBnrCd != null and chuBnrCd != ''">
+				AND CHU_BNR_CD = #{chuBnrCd}
+			</if>
+			<if test="shoBnrCd != null and shoBnrCd != ''">
+				AND SHO_BNR_CD = #{shoBnrCd}
+			</if>
+			<if test="shnNm != null and shnNm != ''">
+				AND SHN_NM LIKE '%' || #{shnNm} || '%'
+			</if>
+			<if test="kikakuNm != null and kikakuNm != ''">
+				AND KIKAKU_NM LIKE '%' || #{kikakuNm} || '%'
+			</if>
+			<if test="shnNmA != null and shnNmA != ''">
+				AND SHN_NM_A LIKE '%' || #{shnNmA} || '%'
+			</if>
+			<if test="kikakuNmA != null and kikakuNmA != ''">
+				AND KIKAKU_NM_A LIKE '%' || #{kikakuNmA} || '%'
+			</if>
+			<if test="mkrCd != null and mkrCd != ''">
+				AND MKR_CD = #{mkrCd}
+			</if>
+			AND DELETE_FLG = '0'
+		  </where>
+
+		  ) A
+
+		LEFT JOIN
+		  (
+		  SELECT
+		    T.JAN_CD   AS JAN_CD,
+		    T.HAKKO_DAY      AS HAKKO_DAY,
+		    Z.TRI_CD AS TRI_CD
+		  FROM 
+		    (SELECT Y.JAN_CD   AS JAN_CD,
+		      Y.HAKKO_DAY      AS HAKKO_DAY,
+		      MAX(X.HAKKO_DAY) AS MAX_HAKKO_DAY
+		    FROM (M009MSYM X
+		    INNER JOIN M007KIJM Y
+		    ON X.JAN_CD      = Y.JAN_CD
+		    AND X.HAKKO_DAY <![CDATA[<=]]> Y.HAKKO_DAY 
+			AND X.DELETE_FLG = '0'
+			AND Y.DELETE_FLG = '0')
+		    GROUP BY Y.JAN_CD,
+		      Y.HAKKO_DAY) T
+		    INNER JOIN (SELECT JAN_CD, HAKKO_DAY, TRI_CD FROM M009MSYM GROUP BY JAN_CD, HAKKO_DAY, TRI_CD) Z
+		    ON T.JAN_CD = Z.JAN_CD AND T.MAX_HAKKO_DAY = Z.HAKKO_DAY
+		  ) B
+		ON B.JAN_CD     = A.JAN_CD
+		AND B.HAKKO_DAY = A.HAKKO_DAY
+
+		LEFT JOIN
+		  (
+		    SELECT
+		      T.MKR_CD   AS MKR_CD,
+		      T.HAKKO_DAY      AS HAKKO_DAY,
+		      Z.MKR_NM AS MKR_NM
+		    FROM
+		      (SELECT Y.MKR_CD AS MKR_CD,
+		        Y.HAKKO_DAY    AS HAKKO_DAY,
+		        MAX(X.HAKKO_DAY) AS MAX_HAKKO_DAY
+		      FROM ( M013MAKM X
+		      INNER JOIN M007KIJM Y
+		      ON X.MKR_CD      = Y.MKR_CD
+		      AND X.HAKKO_DAY <![CDATA[<=]]> Y.HAKKO_DAY 
+			AND X.DELETE_FLG = '0'
+			AND Y.DELETE_FLG = '0')
+		      GROUP BY Y.MKR_CD,
+		        Y.HAKKO_DAY) T
+		      INNER JOIN (SELECT MKR_CD, HAKKO_DAY, MKR_NM FROM M013MAKM GROUP BY MKR_CD, HAKKO_DAY, MKR_NM) Z
+		      ON T.MKR_CD = Z.MKR_CD AND T.MAX_HAKKO_DAY = Z.HAKKO_DAY
+		  ) C
+		ON C.MKR_CD     = A.MKR_CD
+		AND C.HAKKO_DAY = A.HAKKO_DAY)
+		<where>
+			<if test="mkrNm != null and mkrNm != ''">
+				AND C.MKR_NM LIKE '%' || #{mkrNm} || '%'
+			</if>
+			<if test="triCd != null and triCd != ''">
+				AND B.TRI_CD LIKE  '%' || #{triCd} || '%'
+			</if>
+		</where>
+
+	</select>
+
+</mapper>

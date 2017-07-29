@@ -1,0 +1,104 @@
+<div id=SIJP0170 ng-Controller='SIJP0170Ctrl' ng-init="initCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-date-input cc-label="納品日" cc-partition="3" id="inpNohinDate"
+								cc-readonly="changeDisable()" name="inpNohinDate"
+								ng-model="cond.inpNohinDate" cc-required="true"
+								cc-focus="getFocusCond()" cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="納品ルート" cc-partition="3" id="ruteCd"
+								name="ruteCd" ng-model="cond.ruteCd"
+								cc-readonly="changeDisable()" cc-required="true"
+								ng-maxlength="1" cc-delexist=false cc-shortname=false
+								cc-key1="SIR" cc-key2="NHN_RUTE_" cc-parameter01="sysdate"
+								cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<!--<div class="cs-col-2">
+							 <cc-kaisya-combobox cc-label="会社" cc-partition="3" id="kaisyaCd"
+								name="kaisyaCd" cc-readonly="changeDisable()"
+								ng-model="cond.kaisyaCd" cc-required="false" cc-delexist=true
+								cc-shortname=false cc-parameter01="sysdate" cc-error="error" />
+						</div> -->
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3"
+								id="jigyobuCd" name="jigyobuCd" cc-readonly="changeDisable()"
+								ng-model="cond.jigyobuCd" cc-required="false" cc-delexist=true
+								cc-shortname=false cc-parameter01="cond.kaisyaCd"
+								cc-parameter02="sysdate" cc-error="error" />
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd"
+								name="tenCd" ng-model="cond.tenCd" cc-readonly="changeDisable()"
+								cc-required="false" cc-shortname=false cc-delexist=true
+								cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+								cc-parameter03="sysdate" cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}"
+							ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+							<div>
+								検索してから編集<span>(F9)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result" ng-if="hasResult">
+			<div class="cs-result-bg cs-clearfix"></div>
+			<div class="cs-sijp0170-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<div class="gridStyleSIJP0170MsaiInfArea1"
+								ng-grid="gridOptionsSIJP0170MsaiInfArea1"></div>
+						</div>
+
+						<div class="cs-col-2">
+							<div class="gridStyleSIJP0170MsaiInfArea2"
+								ng-grid="gridOptionsSIJP0170MsaiInfArea2"></div>
+						</div>
+
+						<div class="cs-col-2">
+							<div class="gridStyleSIJP0170MsaiInfArea3"
+								ng-grid="gridOptionsSIJP0170MsaiInfArea3"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+			<button type="button"
+				ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}"
+				ng-click="doInsertUpdate()" ng-disabled="!canSave()">
+				<div>
+					保存<span>(F12)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

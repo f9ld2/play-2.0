@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.gn.Gnjp7000Mapper">
+
+    <select id="selectGnjp7000" resultType="jp.co.necsoft.web_md.core.app.dto.gn.Gnjp7000Result"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.gn.Gnjp7000Param">
+
+        SELECT
+            M007KIJM01.HAKKO_DAY AS HAKKODAYHEADER,                                    
+            M007KIJM01.HAKKO_DAY_TO AS HAKKODAYTOHEADER,                                    
+            M007KIJM01.JAN_CD AS JANCDHEADER,                            
+            M007KIJM01.SHN_NM AS SHNNMHEADER,                                    
+            M007KIJM01.STD_BAIK AS STDBAIKHEADER,
+            M007KIJM02.HAKKO_DAY AS HAKKODAYDETAIL,                                    
+            M007KIJM02.HAKKO_DAY_TO AS HAKKODAYTODETAIL,                                    
+            M007KIJM02.JAN_CD AS JANCDDETAIL,                            
+            M007KIJM02.SHN_NM AS SHNNMDETAIL,                                    
+            M007KIJM02.STD_BAIK AS STDBAIKDETAIL,
+            M007KIJM02.MAKER_HIN_CD AS MAKERHINCDDETAIL,
+            M011TRIM.TRI_NM AS TRINMDETAIL
+        FROM M700SETH
+        INNER JOIN 
+            (
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />
+            ) M007KIJM01
+            ON M700SETH.SET_HIN_CD = M007KIJM01.JAN_CD
+            
+        INNER JOIN
+        	(
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />
+            ) M007KIJM02
+                         
+            ON M700SETH.JAN_CD = M007KIJM02.JAN_CD
+        LEFT JOIN
+            (
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M011" />
+            ) M011TRIM
+              ON M007KIJM02.MODEL_TRI_CD = M011TRIM.TRI_CD
+              
+        
+        WHERE
+            M007KIJM01.HAKKO_DAY <![CDATA[<=]]>    #{hatYmd}                        
+            AND M007KIJM01.HAKKO_DAY_TO <![CDATA[>=]]>    #{hatYmd}                        
+            AND M007KIJM01.JIGYOBU_CD = #{jigyobuCd}
+            <if test="bmnCd != null and bmnCd != ''">
+                AND M007KIJM01.BMN_CD = #{bmnCd}
+            </if>
+            <if test="chubnrCd != null and chubnrCd != ''">
+                AND M007KIJM01.CHU_BNR_CD = #{chubnrCd}
+            </if>
+            <if test="shobnrCd != null and shobnrCd != ''">
+                AND M007KIJM01.SHO_BNR_CD = #{shobnrCd}
+            </if>
+            <if test="janCd != null and janCd != ''">
+                AND M007KIJM01.JAN_CD = #{janCd}
+                AND M700SETH.SET_HIN_CD = #{janCd}
+            </if>                        
+            AND M007KIJM01.SET_FLG = '1'    
+            AND M007KIJM01.ACT_KBN <![CDATA[<>]]> '3'
+            AND (M007KIJM01.HAKKO_DAY <![CDATA[<=]]> #{unyoDate}
+                OR M007KIJM01.HAKKO_DAY_TO <![CDATA[>=]]> #{unyoDate})
+            
+            AND M007KIJM02.ACT_KBN <![CDATA[<>]]> '3'                        
+            AND (M007KIJM02.HAKKO_DAY <![CDATA[<=]]> #{unyoDate}
+                OR M007KIJM02.HAKKO_DAY_TO <![CDATA[>=]]> #{unyoDate})
+            
+        ORDER BY M007KIJM01.JAN_CD DESC, M007KIJM02.JAN_CD
+    </select>
+</mapper>

@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.zi.Zijp0030Mapper">
+<resultMap id="Zijp0030Z004tbmnResultMap" type="jp.co.necsoft.web_md.core.common.mybatis.dto.Z004tbmn" >
+    <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+    <result column="BMN_CD" property="bmnCd" jdbcType="VARCHAR" />
+    <result column="KAISYA_CD" property="kaisyaCd" jdbcType="VARCHAR" />
+    <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+    <result column="ZERO_ZAI" property="zeroZai" jdbcType="VARCHAR" />
+    <result column="APRIL" property="april" jdbcType="DECIMAL" />
+    <result column="MAY" property="may" jdbcType="DECIMAL" />
+    <result column="JUNE" property="june" jdbcType="DECIMAL" />
+    <result column="JULY" property="july" jdbcType="DECIMAL" />
+    <result column="AUGUST" property="august" jdbcType="DECIMAL" />
+    <result column="SEPTEMBER" property="september" jdbcType="DECIMAL" />
+    <result column="OCTOBER" property="october" jdbcType="DECIMAL" />
+    <result column="NOVEMBER" property="november" jdbcType="DECIMAL" />
+    <result column="DECEMBER" property="december" jdbcType="DECIMAL" />
+    <result column="JANUARY" property="january" jdbcType="DECIMAL" />
+    <result column="FEBRUARY" property="february" jdbcType="DECIMAL" />
+    <result column="MARCH" property="march" jdbcType="DECIMAL" />
+    <result column="CMN_TANTO_CD" property="cmnTantoCd" jdbcType="VARCHAR" />
+    <result column="CMN_TERM_ID" property="cmnTermId" jdbcType="VARCHAR" />
+    <result column="CMN_INSDD" property="cmnInsdd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDDD" property="cmnUpddd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDTIME" property="cmnUpdtime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="Zijp0030Z031tbmnResultMap" type="jp.co.necsoft.web_md.core.common.mybatis.dto.Z031tbmn" >
+     <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+    <result column="BMN_CD" property="bmnCd" jdbcType="VARCHAR" />
+    <result column="KAISYA_CD" property="kaisyaCd" jdbcType="VARCHAR" />
+    <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+    <result column="APRIL" property="april" jdbcType="DECIMAL" />
+    <result column="MAY" property="may" jdbcType="DECIMAL" />
+    <result column="JUNE" property="june" jdbcType="DECIMAL" />
+    <result column="JULY" property="july" jdbcType="DECIMAL" />
+    <result column="AUGUST" property="august" jdbcType="DECIMAL" />
+    <result column="SEPTEMBER" property="september" jdbcType="DECIMAL" />
+    <result column="OCTOBER" property="october" jdbcType="DECIMAL" />
+    <result column="NOVEMBER" property="november" jdbcType="DECIMAL" />
+    <result column="DECEMBER" property="december" jdbcType="DECIMAL" />
+    <result column="JANUARY" property="january" jdbcType="DECIMAL" />
+    <result column="FEBRUARY" property="february" jdbcType="DECIMAL" />
+    <result column="MARCH" property="march" jdbcType="DECIMAL" />
+    <result column="CMN_TANTO_CD" property="cmnTantoCd" jdbcType="VARCHAR" />
+    <result column="CMN_TERM_ID" property="cmnTermId" jdbcType="VARCHAR" />
+    <result column="CMN_INSDD" property="cmnInsdd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDDD" property="cmnUpddd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDTIME" property="cmnUpdtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="Zijp0030M003bmnmBaseResultMap" type="jp.co.necsoft.web_md.core.common.mybatis.dto.M003bmnm" >
+    <result column="BMN_CD" property="bmnCd" jdbcType="VARCHAR" />
+    <result column="HAKKO_DAY" property="hakkoDay" jdbcType="VARCHAR" />
+    <result column="BMN_NM" property="bmnNm" jdbcType="VARCHAR" />
+    <result column="BMN_NM_A" property="bmnNmA" jdbcType="VARCHAR" />
+    <result column="BMN_NM_R" property="bmnNmR" jdbcType="VARCHAR" />
+    <result column="DBU_CD" property="dbuCd" jdbcType="VARCHAR" />
+    <result column="HAT_SIME_KBN" property="hatSimeKbn" jdbcType="VARCHAR" />
+    <result column="HATP_KBN" property="hatpKbn" jdbcType="VARCHAR" />
+    <result column="TAN_CHK_FLG" property="tanChkFlg" jdbcType="VARCHAR" />
+    <result column="AUTO_HAT_STP_KBN" property="autoHatStpKbn" jdbcType="VARCHAR" />
+    <result column="AUTO_AGESAGE_KBN" property="autoAgesageKbn" jdbcType="DECIMAL" />
+    <result column="EXTRACT_FLG" property="extractFlg" jdbcType="VARCHAR" />
+    <result column="TAX_KBN" property="taxKbn" jdbcType="VARCHAR" />
+    <result column="TAX_RITU" property="taxRitu" jdbcType="DECIMAL" />
+    <result column="YODO_KBN" property="yodoKbn" jdbcType="VARCHAR" />
+    <result column="ACT_KBN" property="actKbn" jdbcType="VARCHAR" />
+    <result column="CMN_TANTO_CD" property="cmnTantoCd" jdbcType="VARCHAR" />
+    <result column="CMN_TERM_ID" property="cmnTermId" jdbcType="VARCHAR" />
+    <result column="CMN_INSDD" property="cmnInsdd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDDD" property="cmnUpddd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDTIME" property="cmnUpdtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="Zijp0030M006TenmBaseResultMap" type="jp.co.necsoft.web_md.core.common.mybatis.dto.M006tenm" >
+    <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+    <result column="HAKKO_DAY" property="hakkoDay" jdbcType="VARCHAR" />
+    <result column="TEN_KBN" property="tenKbn" jdbcType="VARCHAR" />
+    <result column="CEN_KBN" property="cenKbn" jdbcType="VARCHAR" />
+    <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+    <result column="TEN_NM_A" property="tenNmA" jdbcType="VARCHAR" />
+    <result column="TEN_NM_R1" property="tenNmR1" jdbcType="VARCHAR" />
+    <result column="TEN_NM_R2" property="tenNmR2" jdbcType="VARCHAR" />
+    <result column="TENL_CD" property="tenlCd" jdbcType="VARCHAR" />
+    <result column="POST_NO" property="postNo" jdbcType="VARCHAR" />
+    <result column="ADRS1" property="adrs1" jdbcType="VARCHAR" />
+    <result column="ADRS2" property="adrs2" jdbcType="VARCHAR" />
+    <result column="TEL_NO" property="telNo" jdbcType="VARCHAR" />
+    <result column="D_TEL_NO" property="dTelNo" jdbcType="VARCHAR" />
+    <result column="FAX_NO" property="faxNo" jdbcType="VARCHAR" />
+    <result column="E_ADRS" property="eAdrs" jdbcType="VARCHAR" />
+    <result column="URIBA_TSUBO" property="uribaTsubo" jdbcType="VARCHAR" />
+    <result column="SIKICHI_TSUBO" property="sikichiTsubo" jdbcType="VARCHAR" />
+    <result column="KIBO_KBN" property="kiboKbn" jdbcType="VARCHAR" />
+    <result column="AREA_CD" property="areaCd" jdbcType="VARCHAR" />
+    <result column="TIKU_CODE" property="tikuCode" jdbcType="VARCHAR" />
+    <result column="BDC_TIKU_CODE" property="bdcTikuCode" jdbcType="VARCHAR" />
+    <result column="BTC_TIKU_CODE" property="btcTikuCode" jdbcType="VARCHAR" />
+    <result column="BST_TIKU_CODE" property="bstTikuCode" jdbcType="VARCHAR" />
+    <result column="BHC_TIKU_CODE" property="bhcTikuCode" jdbcType="VARCHAR" />
+    <result column="POS_TYP_KBN" property="posTypKbn" jdbcType="VARCHAR" />
+    <result column="KYUSI_KBN" property="kyusiKbn" jdbcType="VARCHAR" />
+    <result column="OPEN_DD" property="openDd" jdbcType="VARCHAR" />
+    <result column="CLOSE_DD" property="closeDd" jdbcType="VARCHAR" />
+    <result column="OPEN_ST" property="openSt" jdbcType="VARCHAR" />
+    <result column="OPEN_ED" property="openEd" jdbcType="VARCHAR" />
+    <result column="CLOSE_ST" property="closeSt" jdbcType="VARCHAR" />
+    <result column="CLOSE_ED" property="closeEd" jdbcType="VARCHAR" />
+    <result column="TAN_KAKTDD" property="tanKaktdd" jdbcType="VARCHAR" />
+    <result column="HW_TANA_NO_ST" property="hwTanaNoSt" jdbcType="DECIMAL" />
+    <result column="HW_TANA_NO_ED" property="hwTanaNoEd" jdbcType="DECIMAL" />
+    <result column="OWNERSHIP_CD" property="ownershipCd" jdbcType="VARCHAR" />
+    <result column="TRI_CD" property="triCd" jdbcType="VARCHAR" />
+    <result column="TENPO_JUN" property="tenpoJun" jdbcType="DECIMAL" />
+    <result column="OWN_CD" property="ownCd" jdbcType="VARCHAR" />
+    <result column="OWN_NM" property="ownNm" jdbcType="VARCHAR" />
+    <result column="OWN_TEL_NO" property="ownTelNo" jdbcType="VARCHAR" />
+    <result column="OWN_FAX_NO" property="ownFaxNo" jdbcType="VARCHAR" />
+    <result column="OWN_E_ADRS" property="ownEAdrs" jdbcType="VARCHAR" />
+    <result column="OWN_POST_NO" property="ownPostNo" jdbcType="VARCHAR" />
+    <result column="OWN_ADRS1" property="ownAdrs1" jdbcType="VARCHAR" />
+    <result column="OWN_ADRS2" property="ownAdrs2" jdbcType="VARCHAR" />
+    <result column="DEAL_TSUBO" property="dealTsubo" jdbcType="DECIMAL" />
+    <result column="DEAL_START" property="dealStart" jdbcType="VARCHAR" />
+    <result column="DEAL_END" property="dealEnd" jdbcType="VARCHAR" />
+    <result column="RENT_RATE" property="rentRate" jdbcType="DECIMAL" />
+    <result column="HITBUYER_KBN" property="hitbuyerKbn" jdbcType="VARCHAR" />
+    <result column="EXTRACT_FLG" property="extractFlg" jdbcType="VARCHAR" />
+    <result column="ACT_KBN" property="actKbn" jdbcType="VARCHAR" />
+    <result column="CMN_TANTO_CD" property="cmnTantoCd" jdbcType="VARCHAR" />
+    <result column="CMN_TERM_ID" property="cmnTermId" jdbcType="VARCHAR" />
+    <result column="CMN_INSDD" property="cmnInsdd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDDD" property="cmnUpddd" jdbcType="VARCHAR" />
+    <result column="CMN_UPDTIME" property="cmnUpdtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectz004tbmn01" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030BmnDto">
+    <!--
+      This element is generated from ZIBN0030#execute.
+    -->
+    SELECT
+        M.BMN_CD             AS BMNCD
+        ,MAX(M.BAI_KAN_KBN)  AS BAIKANKBN
+        ,COALESCE(MAX(Z.ZERO_ZAI),'0')     AS ZEROZAI
+        ,COALESCE(MAX(Z.APRIL),0)         AS APRIL
+        ,COALESCE(MAX(Z.MAY) ,0)          AS MAY
+        ,COALESCE(MAX(Z.JUNE),0)          AS JUNE
+        ,COALESCE(MAX(Z.JULY)  ,0)        AS JULY
+        ,COALESCE(MAX(Z.AUGUST) ,0)       AS AUGUST
+        ,COALESCE(MAX(Z.SEPTEMBER),0)    AS SEPTEMBER
+        ,COALESCE(MAX(Z.OCTOBER) ,0)      AS OCTOBER
+        ,COALESCE(MAX(Z.NOVEMBER) ,0)     AS NOVEMBER
+        ,COALESCE(MAX(Z.DECEMBER) ,0)     AS DECEMBER
+        ,COALESCE(MAX(Z.JANUARY) ,0)      AS JANUARY
+        ,COALESCE(MAX(Z.FEBRUARY) ,0)     AS FEBRUARY
+        ,COALESCE(MAX(Z.MARCH) ,0)        AS MARCH
+      FROM
+        (
+        SELECT
+            TEN_CD
+            ,BMN_CD
+            ,ZERO_ZAI
+            ,APRIL
+            ,MAY
+            ,JUNE
+            ,JULY
+            ,AUGUST
+            ,SEPTEMBER
+            ,OCTOBER
+            ,NOVEMBER
+            ,DECEMBER
+            ,JANUARY
+            ,FEBRUARY
+            ,MARCH
+          FROM
+            Z004TBMN 
+            <!-- 2014/02/28 自動生成後の変更NECVN) Trieuhth add start  -->
+    <choose>
+        <when test="tenCd != '999' ">
+            where TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+        </when>
+        <otherwise>
+            where SUBSTR(TEN_CD,1,2) = #{kaisyaCd}
+                  AND SUBSTR(TEN_CD,3,2) = #{jigyobuCd}
+             <if test="dammytenpoCd != ''">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+             </if>
+        </otherwise>
+    </choose>
+            ) Z 
+            RIGHT JOIN 
+            (select TEN_CD,BMN_CD,BAI_KAN_KBN
+                from M004TBUM
+                where (TEN_CD,BMN_CD,HAKKO_DAY) in
+                    (select TEN_CD,BMN_CD,MAX(HAKKO_DAY)
+                        from M004TBUM
+                        where HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+                        group by TEN_CD,BMN_CD)
+                        AND ACT_KBN <![CDATA[ <> ]]> '9'
+                <choose>
+                    <when test="tenCd != '999' ">
+                        AND TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+                    </when>
+                    <otherwise>
+                        AND SUBSTR(TEN_CD,1,2) = #{kaisyaCd}
+                        AND SUBSTR(TEN_CD,3,2) = #{jigyobuCd}
+                         <if test="dammytenpoCd != ''">
+                            AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+                         </if>
+                    </otherwise>
+                </choose>
+             ) M
+          <!-- 2014/02/28 自動生成後の変更NECVN) Trieuhth add end  -->
+          <!-- 2014/02/28 自動生成後の変更NECVN) Trieuhth del start  -->
+    <!--
+      @if(!m_sStore.equals("999"))@
+    -->
+          <!-- 2014/02/28 自動生成後の変更NECVN) Trieuhth del end  -->
+          ON
+            Z.TEN_CD = M.TEN_CD
+            AND Z.BMN_CD = M.BMN_CD
+          GROUP BY
+            M.BMN_CD
+          ORDER BY
+            M.BMN_CD
+  </select>
+  <select id="selectz004tbmn02" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030GaiDto">
+    <!--
+      This element is generated from ZIBN0030#execute.
+    -->
+    SELECT
+        COALESCE(MAX(Z.APRIL)  ,0)         AS APRIL
+        ,COALESCE(MAX(Z.MAY) ,0)           AS MAY
+        ,COALESCE(MAX(Z.JUNE)  ,0)         AS JUNE
+        ,COALESCE(MAX(Z.JULY)  ,0)         AS JULY
+        ,COALESCE(MAX(Z.AUGUST)  ,0)       AS AUGUST
+        ,COALESCE(MAX(Z.SEPTEMBER)  ,0)    AS SEPTEMBER
+        ,COALESCE(MAX(Z.OCTOBER) ,0)       AS OCTOBER
+        ,COALESCE(MAX(Z.NOVEMBER)  ,0)     AS NOVEMBER
+        ,COALESCE(MAX(Z.DECEMBER) ,0)      AS DECEMBER
+        ,COALESCE(MAX(Z.JANUARY)  ,0)      AS JANUARY
+        ,COALESCE(MAX(Z.FEBRUARY) ,0)      AS FEBRUARY
+        ,COALESCE(MAX(Z.MARCH)  ,0)        AS MARCH
+      FROM
+        (
+        SELECT
+            TEN_CD
+            ,APRIL
+            ,MAY
+            ,JUNE
+            ,JULY
+            ,AUGUST
+            ,SEPTEMBER
+            ,OCTOBER
+            ,NOVEMBER
+            ,DECEMBER
+            ,JANUARY
+            ,FEBRUARY
+            ,MARCH
+          FROM
+            Z031TBMN
+          WHERE BMN_CD = '00000'
+    <choose>
+        <when test="tenCd != '999' ">
+            AND TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+        </when>
+        <otherwise>
+            AND SUBSTR(TEN_CD,1,2) = #{kaisyaCd}
+                  AND SUBSTR(TEN_CD,3,2) = #{jigyobuCd}
+             <if test="dammytenpoCd != ''">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+             </if>
+        </otherwise>
+    </choose>
+         ) Z
+         RIGHT JOIN
+           (select TEN_CD
+            from M006TENM
+            where (TEN_CD,HAKKO_DAY) in
+                (select TEN_CD,MAX(HAKKO_DAY)
+                from M006TENM
+                where HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+    <choose>
+        <when test="tenCd != '999' ">
+            AND TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+        </when>
+        <otherwise>
+            AND SUBSTR(TEN_CD,1,2) = #{kaisyaCd}
+                  AND SUBSTR(TEN_CD,3,2) = #{jigyobuCd}
+             <if test="dammytenpoCd != '' ">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+             </if>
+        </otherwise>
+    </choose>
+          group by TEN_CD)
+          and ACT_KBN <![CDATA[ <> ]]> '9'
+          ) M
+          ON Z.TEN_CD = M.TEN_CD
+  </select>
+  <select id="selectz004tbmn03" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030TenDto">
+    <!--
+      This element is generated from ZIBN0030#execute2.
+    -->
+    SELECT
+        M.TEN_CD AS TENCD
+        ,M.BAI_KAN_KBN AS BAIKANKBN
+        ,COALESCE(Z.ZERO_ZAI , '0') AS ZEROZAI
+        ,COALESCE(Z.APRIL,0) AS APRIL
+        ,COALESCE(Z.MAY ,0) AS MAY
+        ,COALESCE(Z.JUNE ,0) AS JUNE
+        ,COALESCE(Z.JULY ,0) AS JULY        
+        ,COALESCE(Z.AUGUST ,0) AS AUGUST
+        ,COALESCE(Z.SEPTEMBER ,0) AS SEPTEMBER
+        ,COALESCE(Z.OCTOBER ,0) AS OCTOBER
+        ,COALESCE(Z.NOVEMBER ,0) AS NOVEMBER
+        ,COALESCE(Z.DECEMBER ,0) AS DECEMBER
+        ,COALESCE(Z.JANUARY ,0) AS JANUARY
+        ,COALESCE(Z.FEBRUARY ,0) AS FEBRUARY
+        ,COALESCE(Z.MARCH ,0) AS MARCH
+      FROM
+        (
+        SELECT
+            TEN_CD
+            ,BMN_CD
+            ,ZERO_ZAI
+            ,APRIL
+            ,MAY
+            ,JUNE
+            ,JULY
+            ,AUGUST
+            ,SEPTEMBER
+            ,OCTOBER
+            ,NOVEMBER
+            ,DECEMBER
+            ,JANUARY
+            ,FEBRUARY
+            ,MARCH
+          FROM
+            Z004TBMN
+          WHERE
+          TEN_CD <![CDATA[ >= ]]>  #{kaisyaCd} || #{jigyobuCd} || '000'
+    <choose>
+        <when test="dammytenpoCd != '' ">
+            AND TEN_CD <![CDATA[ < ]]> #{kaisyaCd} || #{jigyobuCd} || #{dammytenpoCd}
+        </when>
+        <otherwise>
+            AND TEN_CD <![CDATA[ <= ]]> #{kaisyaCd} || #{jigyobuCd} || '999'
+        </otherwise>
+    </choose>
+           and BMN_CD = #{jigyobuCd} || #{bmnCd}
+          ) Z
+          RIGHT JOIN
+          (select TEN_CD,BMN_CD,BAI_KAN_KBN 
+            from M004TBUM 
+            where (TEN_CD,BMN_CD,HAKKO_DAY) in 
+                 (select TEN_CD,BMN_CD,MAX(HAKKO_DAY) 
+                 from M004TBUM  
+                 where HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+                and TEN_CD <![CDATA[ >= ]]> #{kaisyaCd} || #{jigyobuCd} || '000'  
+    <choose>
+        <when test="dammytenpoCd != '' ">
+            AND TEN_CD <![CDATA[ < ]]> #{kaisyaCd} || #{jigyobuCd} || #{dammytenpoCd}
+        </when>
+        <otherwise>
+            AND TEN_CD <![CDATA[ <= ]]> #{kaisyaCd} || #{jigyobuCd} || '999'
+        </otherwise>
+    </choose>
+         and BMN_CD = #{jigyobuCd} || #{bmnCd}
+         group by TEN_CD,BMN_CD) 
+         and ACT_KBN <![CDATA[ <> ]]> '9'
+         ) M
+            ON 
+            Z.TEN_CD = M.TEN_CD
+            AND Z.BMN_CD = M.BMN_CD
+          ORDER BY
+            M.TEN_CD
+  </select>
+  
+  <select id="selectZ004tbmn04" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultMap="Zijp0030Z004tbmnResultMap">
+    <!-- 
+      This element is generated from ZIBN0030#getTBMN.
+    -->
+    SELECT
+        *
+      FROM
+        Z004TBMN 
+      WHERE
+    <choose>
+        <when test="tenCd == '999' ">
+            KAISYA_CD = #{kaisyaCd}
+            AND JIGYOBU_CD = #{jigyobuCd}
+            <if test="dammytenpoCd != '' ">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+            </if>
+        </when>
+        <otherwise>
+            TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+        </otherwise>
+    </choose>
+    <if test="bmnCd != '999' ">
+         AND BMN_CD =   #{jigyobuCd} || #{bmnCd} 
+    </if>
+  </select>
+<select id="selectM004tbum05" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultType="String">
+     <!-- 
+      This element is generated from ZIBN0030#getTENPO.
+   -->
+    SELECT
+        TEN_CD  AS TENCD
+      FROM
+        M004TBUM
+      WHERE
+        (TEN_CD
+        ,BMN_CD
+        ,HAKKO_DAY) in 
+        (
+        SELECT
+            TEN_CD
+            ,BMN_CD
+            ,MAX(HAKKO_DAY)
+          FROM
+            M004TBUM
+          WHERE
+            HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+          GROUP BY
+            TEN_CD
+            ,BMN_CD
+        )
+        AND ACT_KBN <![CDATA[ <> ]]> '9'
+        AND SUBSTR(TEN_CD
+        ,1
+        ,2) = #{kaisyaCd}
+        AND SUBSTR(TEN_CD
+        ,3
+        ,2) = #{jigyobuCd} 
+        <if test="dammytenpoCd != '' ">
+            AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+        </if>  
+        AND BMN_CD = #{bmnCd} 
+  </select>
+
+<select id="selectZ031tbmn06" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultMap="Zijp0030Z031tbmnResultMap">
+    <!--  
+      This element is generated from ZIBN0030#getGAITYU_TBMN.
+   -->
+    SELECT
+        *
+      FROM
+        Z031TBMN 
+      WHERE
+    <choose>
+        <when test="tenCd == '999' ">
+            KAISYA_CD = #{kaisyaCd}
+            AND JIGYOBU_CD = #{jigyobuCd}
+            <if test="dammytenpoCd != '' ">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+            </if>
+        </when>
+        <otherwise>
+            TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+        </otherwise>
+    </choose>
+  </select>
+
+  <select id="selectM006tenm07" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01" resultType="String">
+    <!-- 
+      This element is generated from ZIBN0030#getTEN_CD.
+   -->
+    SELECT
+        TEN_CD AS TENCD
+      FROM
+        M006TENM
+      WHERE
+        (TEN_CD
+        ,HAKKO_DAY) in 
+        (
+        SELECT
+            TEN_CD
+            ,MAX(HAKKO_DAY)
+          FROM
+            M006TENM
+          WHERE
+            HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+          GROUP BY
+            TEN_CD
+        )
+        AND ACT_KBN <![CDATA[ <> ]]> '9'
+        AND SUBSTR(TEN_CD,1,2) = #{kaisyaCd}
+        AND SUBSTR(TEN_CD,3,2) = #{jigyobuCd} 
+        <if test="dammytenpoCd != '' ">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+        </if>
+  </select>
+  <delete id="deleteZ031tbmn08" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01">
+    DELETE
+      FROM
+        Z031TBMN 
+      WHERE
+    <choose>
+        <when test="tenCd == '999' ">
+            KAISYA_CD = #{kaisyaCd}
+            AND JIGYOBU_CD = #{jigyobuCd}
+            <if test="dammytenpoCd != '' ">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+            </if>
+        </when>
+        <otherwise>
+            TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+        </otherwise>
+    </choose>
+  </delete>
+  
+  <select id="selectX001shmg" parameterType="String" resultType="jp.co.necsoft.web_md.core.common.mybatis.dto.X001shmg">
+    <!--
+      This element is generated from ZIBN0030#doCheckX001SHMG.
+    -->
+    SELECT KEY_CD AS KEYCD
+    FROM X001SHMG
+    WHERE
+    GAMEN_ID = 'ZIJP0030' 
+    and TANTO_CD || CLNT_IPADR <![CDATA[ <> ]]> #{tantoIP}
+	</select>
+	
+	<select id="selectM003BmnmBmnNm01" parameterType="java.util.HashMap" resultMap="Zijp0030M003bmnmBaseResultMap">
+    SELECT
+        distinct BMN_CD, BMN_NM
+      FROM
+        M003BMNM 
+      WHERE
+         (BMN_CD, HAKKO_DAY) in 
+                    ( select BMN_CD, MAX(HAKKO_DAY) 
+                      from M003BMNM
+                      <![CDATA[
+                        where HAKKO_DAY <= #{searchDate}
+                      ]]>
+                      group by BMN_CD)
+                AND (1, BMN_CD) IN
+				    <foreach item="item" index="index" collection="bmnCdList" open="(" separator="," close=")">
+				        (1, #{item}) 
+				    </foreach>
+  </select>
+  
+    <select id="selectM006TenmTenNm01" parameterType="java.util.HashMap" resultMap="Zijp0030M006TenmBaseResultMap">
+    SELECT
+        distinct TEN_CD, TEN_NM
+      FROM
+        M006TENM
+      WHERE
+         (TEN_CD,HAKKO_DAY) in
+                (select TEN_CD,MAX(HAKKO_DAY)
+                from M006TENM
+                where HAKKO_DAY <![CDATA[ <= ]]> #{searchDate}
+                group by TEN_CD)
+          AND (1, TEN_CD) IN  
+		    <foreach item="item" index="index" collection="tenCdList" open="(" separator="," close=")">
+		        (1, #{item}) 
+		    </foreach>
+  </select>
+   <insert id="insertM004tbum05" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01">
+     <!-- 
+      This element is generated from ZIBN0030#getTENPO.
+   -->
+   INSERT INTO Z004TBMN (TEN_CD,BMN_CD,KAISYA_CD,JIGYOBU_CD,ZERO_ZAI,APRIL,MAY,JUNE,JULY,AUGUST,SEPTEMBER,OCTOBER,NOVEMBER,DECEMBER,JANUARY,FEBRUARY,MARCH,CMN_TANTO_CD,CMN_TERM_ID,CMN_INSDD,CMN_UPDDD,CMN_UPDTIME)
+
+    SELECT
+        TEN_CD,#{bmnCd},#{kaisyaCd},#{jigyobuCd},#{zeroZai},#{april},#{may},#{june},#{july},#{august},#{september},#{october},#{november},#{december},#{january},#{february},#{march},#{cmnTantoCd},#{cmnTermId},#{cmnInsdd},#{cmnUpddd},#{cmnUpdtime}    
+    FROM
+        M004TBUM
+      WHERE
+        (TEN_CD
+        ,BMN_CD
+        ,HAKKO_DAY) in 
+        (
+        SELECT
+            TEN_CD
+            ,BMN_CD
+            ,MAX(HAKKO_DAY)
+          FROM
+            M004TBUM
+          WHERE
+            HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+          GROUP BY
+            TEN_CD
+            ,BMN_CD
+        )
+        AND ACT_KBN <![CDATA[ <> ]]> '9'
+        AND SUBSTR(TEN_CD
+        ,1
+        ,2) = #{kaisyaCd}
+        AND SUBSTR(TEN_CD
+        ,3
+        ,2) = #{jigyobuCd} 
+        <if test="dammytenpoCd != '' ">
+            AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+        </if>  
+        AND BMN_CD = #{bmnCd} 
+  </insert> 
+  <insert id="insertM006tenm07" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp0030ParamExecute01">
+    <!-- 
+      This element is generated from ZIBN0030#getTEN_CD.
+   -->
+    INSERT INTO Z031TBMN (TEN_CD,BMN_CD,KAISYA_CD,JIGYOBU_CD,APRIL,MAY,JUNE,JULY,AUGUST,SEPTEMBER,OCTOBER,NOVEMBER,DECEMBER,JANUARY,FEBRUARY,MARCH,CMN_TANTO_CD,CMN_TERM_ID,CMN_INSDD,CMN_UPDDD,CMN_UPDTIME)
+
+    SELECT
+        TEN_CD,#{bmnCd},#{kaisyaCd},#{jigyobuCd},#{april},#{may},#{june},#{july},#{august},#{september},#{october},#{november},#{december},#{january},#{february},#{march},#{cmnTantoCd},#{cmnTermId},#{cmnInsdd},#{cmnUpddd},#{cmnUpdtime}    
+      FROM
+        M006TENM
+      WHERE
+        (TEN_CD
+        ,HAKKO_DAY) in 
+        (
+        SELECT
+            TEN_CD
+            ,MAX(HAKKO_DAY)
+          FROM
+            M006TENM
+          WHERE
+            HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+          GROUP BY
+            TEN_CD
+        )
+        AND ACT_KBN <![CDATA[ <> ]]> '9'
+        AND SUBSTR(TEN_CD,1,2) = #{kaisyaCd}
+        AND SUBSTR(TEN_CD,3,2) = #{jigyobuCd} 
+        <if test="dammytenpoCd != '' ">
+                AND SUBSTR(TEN_CD,5,3) <![CDATA[ < ]]> #{dammytenpoCd}
+        </if>
+  </insert>
+</mapper>

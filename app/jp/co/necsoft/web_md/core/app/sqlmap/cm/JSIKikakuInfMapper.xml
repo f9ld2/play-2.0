@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.cm.JSIKikakuInfMapper">
+  <select id="selectT001kksyT002kkms01" parameterType="jp.co.necsoft.web_md.core.app.dto.cm.T001kksyChkTeiTok" resultType="jp.co.necsoft.web_md.core.app.dto.cm.T001kksyChkTeiTokResult">
+    <!--
+      This element is generated from cmJSIKikakuInf#execute.
+    -->
+        SELECT
+            NENDO as nendo,
+            KIKAKU_CD as kikakuCd,
+            BMN_CD as bmnCd,
+            SIIRE_FRDD as siireFrdd,
+            SIIRE_TODD as siireTodd,
+            TOKU_GENK as tokuGenk,
+            TOKU_BAIK as tokuBaik,
+            REPEAT_KBN as repeatKbn,
+            TORIHIKI_CD as torihikiCd
+        FROM (SELECT
+                T2.NENDO NENDO,
+                T2.KIKAKU_CD KIKAKU_CD,
+                T2.BMN_CD BMN_CD,
+                T1.SIIRE_FRDD SIIRE_FRDD,
+                T1.SIIRE_TODD SIIRE_TODD,
+                T2.TOKU_GENK TOKU_GENK,
+                T2.TOKU_BAIK TOKU_BAIK,
+                T1.REPEAT_KBN REPEAT_KBN,
+                T2.TORIHIKI_CD
+                FROM T001KKSY T1, T002KKMS T2
+              WHERE T1.KAISYA_CD = T2.KAISYA_CD
+                AND T1.JIGYOBU_CD = T2.JIGYOBU_CD
+                AND T1.NENDO = T2.NENDO
+                AND T1.KIKAKU_CD = T2.KIKAKU_CD
+                AND T1.BMN_CD = T2.BMN_CD
+                AND T1.JAN_CD = T2.JAN_CD
+                AND T1.SIIRE_FRDD <![CDATA[ <= ]]> #{hatDd}
+                AND T1.SIIRE_TODD <![CDATA[ >= ]]> #{hatDd}
+                AND T1.JAN_CD = #{janCd}
+                AND T2.KAISYA_CD = #{kaisyaCd}
+                AND T2.JIGYOBU_CD = #{jigyobuCd}
+                AND T2.TEN_CD = #{tenCd}
+                AND T1.ACT_KBN <![CDATA[ <> ]]> '9'
+                AND T2.ACT_KBN <![CDATA[ <> ]]> '9'
+              ORDER BY
+                T2.TOKU_GENK,
+                T2.TOKU_BAIK,
+                T2.CMN_UPDDD DESC,
+                T2.KAISYA_CD,
+                T2.JIGYOBU_CD,
+                T2.NENDO,
+                T2.KIKAKU_CD,
+                T2.BMN_CD,
+                T2.JAN_CD,
+                T1.SIIRE_FRDD,
+                T1.SIIRE_TODD
+        )
+        WHERE
+        ROWNUM <![CDATA[ <= ]]> 1
+  </select>
+</mapper>

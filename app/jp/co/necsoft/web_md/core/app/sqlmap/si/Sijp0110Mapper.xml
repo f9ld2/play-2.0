@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis. ORg/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.si.sijp0110.dao.Sijp0110Mapper">
+  <select id="selectS001eosdS002tgkdS003fridS004bhhkS033seid01" parameterType="jp.co.necsoft.web_md.core.app.dto.si.S001eosdExecute" resultType="jp.co.necsoft.web_md.core.app.dto.si.S001eosdExecuteResult">
+    <!--
+      This element is generated from SIBN0110#execute.
+    -->
+<!-- 2014/02/28 自動生成後の変更NECVN) Trieuhth add start  --> 
+    select 
+    <include refid="Example_Select_Clause" />
+    from 
+    <if test="dpyKbn != null and dpyKbn != ''">
+        <if test="dpyKbn == '11'">
+            S001EOSD S
+        </if>
+        <if test="dpyKbn == '14' 
+                     or dpyKbn == '19' 
+                     or dpyKbn == '24' 
+                     or dpyKbn == '29' 
+                     or dpyKbn == '25'">
+            S002TGKD S
+        </if>
+        <if test="dpyKbn == '31'">
+            (SELECT 
+                 DPY_NO 
+                ,DPY_KBN 
+                ,SUBSTR(IN_TENPO_CD,1,2) AS KAISYA_CD 
+                ,SUBSTR(IN_TENPO_CD,3,2) AS JIGYOUBU_CD 
+                ,SUBSTR(IN_TENPO_CD,5,3) AS TEN_CD 
+                ,IN_BMN_CD               AS BMN_CD 
+                ,OUT_BMN_CD 
+                ,SYUKA_YMD               AS NHN_YMD 
+                ,OUT_TENPO_CD            AS TORIHIKI_CD 
+                ,HAT_YMD 
+                ,NHN_YOTEI_YMD 
+                ,RUI_KEIJO_YMD 
+                ,LAST_KAKUTEI_YMD 
+                ,LAST_TANTO_CD 
+                ,ENTRY_KBN 
+                ,ENTRY_PLACE 
+                ,KASAN_KBN 
+                ,SYORI_STS_KBN 
+                ,S_KEN_GENK_KIN 
+                ,S_KEN_BAIK_KIN 
+                ,MOTO_DPY_NO 
+                FROM S003FRID) S
+        </if>
+        <if test="dpyKbn == '02' 
+                     or dpyKbn == '05' 
+                     or dpyKbn == '09' 
+                     or dpyKbn == '10'">
+            (SELECT 
+                 DPY_NO 
+                ,DPY_KBN 
+                ,KAISYA_CD 
+                ,JIGYOUBU_CD 
+                ,TEN_CD 
+                ,BMN_CD 
+                ,BMN_CD       AS OUT_BMN_CD 
+                ,KEIJO_YMD    AS NHN_YMD 
+                ,'         '  AS TORIHIKI_CD 
+                ,'        '   AS HAT_YMD 
+                ,NHN_YOTEI_YMD 
+                ,RUI_KEIJO_YMD 
+                ,LAST_KAKUTEI_YMD 
+                ,LAST_TANTO_CD 
+                ,ENTRY_KBN 
+                ,ENTRY_PLACE 
+                ,KASAN_KBN 
+                ,SYORI_STS_KBN 
+                ,S_KEN_GENK_KIN 
+                ,S_KEN_BAIK_KIN 
+                FROM S004BHHK) S
+        </if>
+    </if>
+    <include refid="Example_From_Clause" />
+    <include refid="Example_Where_Clause" />
+     ORDER BY DPY_NO
+ </select>
+
+ <select id="selectCountS001eosdS002tgkdS003fridS004bhhkS033seid02" parameterType="jp.co.necsoft.web_md.core.app.dto.si.S001eosdExecute" resultType="int">
+    <!--
+      This element is generated from SIBN0110#executeCount.
+    -->
+    select count(*) from 
+    <if test="dpyKbn != null and dpyKbn != ''">
+         <if test="dpyKbn =='11'">
+            S001EOSD S
+        </if>
+        <if test="dpyKbn == '14' 
+                     or dpyKbn == '19' 
+                     or dpyKbn == '24' 
+                     or dpyKbn == '29' 
+                     or dpyKbn == '25'">
+            S002TGKD S
+        </if>
+        <if test="dpyKbn == '31'">
+            (SELECT 
+                 DPY_NO 
+                ,DPY_KBN 
+                ,SUBSTR(IN_TENPO_CD,1,2) AS KAISYA_CD 
+                ,SUBSTR(IN_TENPO_CD,3,2) AS JIGYOUBU_CD 
+                ,SUBSTR(IN_TENPO_CD,5,3) AS TEN_CD 
+                ,IN_BMN_CD               AS BMN_CD 
+                ,OUT_BMN_CD 
+                ,SYUKA_YMD               AS NHN_YMD 
+                ,OUT_TENPO_CD            AS TORIHIKI_CD 
+                ,HAT_YMD 
+                ,NHN_YOTEI_YMD 
+                ,RUI_KEIJO_YMD 
+                ,LAST_KAKUTEI_YMD 
+                ,LAST_TANTO_CD 
+                ,ENTRY_KBN 
+                ,ENTRY_PLACE 
+                ,KASAN_KBN 
+                ,SYORI_STS_KBN 
+                ,S_KEN_GENK_KIN 
+                ,S_KEN_BAIK_KIN 
+                ,MOTO_DPY_NO 
+                FROM S003FRID) S
+        </if>
+        <if test="dpyKbn == '02' 
+                     or dpyKbn == '05' 
+                     or dpyKbn == '09' 
+                     or dpyKbn == '10'">
+            (SELECT 
+                 DPY_NO 
+                ,DPY_KBN 
+                ,KAISYA_CD 
+                ,JIGYOUBU_CD 
+                ,TEN_CD 
+                ,BMN_CD 
+                ,BMN_CD       AS OUT_BMN_CD 
+                ,KEIJO_YMD    AS NHN_YMD 
+                ,'         '  AS TORIHIKI_CD 
+                ,'        '   AS HAT_YMD 
+                ,NHN_YOTEI_YMD 
+                ,RUI_KEIJO_YMD 
+                ,LAST_KAKUTEI_YMD 
+                ,LAST_TANTO_CD 
+                ,ENTRY_KBN 
+                ,ENTRY_PLACE 
+                ,KASAN_KBN 
+                ,SYORI_STS_KBN 
+                ,S_KEN_GENK_KIN 
+                ,S_KEN_BAIK_KIN 
+                FROM S004BHHK) S
+        </if>
+    </if>
+    <include refid="Example_From_Clause" />
+    <include refid="Example_Where_Clause" />
+  </select>
+  
+    <sql id="Example_Select_Clause">
+        DPY_NO                          AS dpyNo
+        ,DPY_KBN                        AS dpyKbn
+        ,S.KAISYA_CD                    AS kaisyaCd
+        ,S.JIGYOUBU_CD                  AS jigyoubuCd
+        ,S.TEN_CD                       AS sTenCd
+        ,S.BMN_CD                       AS sBmnCd
+        <choose>
+            <when test="dpyKbn == '31'">
+                ,S.OUT_BMN_CD           As outBmnCd
+            </when>
+            <otherwise>
+                ,S.BMN_CD               As sBmnDummyCd
+            </otherwise>
+        </choose>
+        ,NHN_YMD                        AS nhnYmd
+        <choose>
+            <when test="dpyKbn == '11'">
+                ,MAIN_TORI_CD           As torIHikiCd 
+            </when>
+            <when test="dpyKbn == '14' 
+                         or dpyKbn == '19' 
+                         or dpyKbn == '24' 
+                         or dpyKbn == '29' 
+                         or dpyKbn == '25'">
+                ,MAIN_TORI_CD            As torIHikiCd 
+            </when>
+            <otherwise>
+                ,TORIHIKI_CD            As torIHikiCd 
+            </otherwise>
+        </choose>
+        ,HAT_YMD                        AS hatYmd
+        ,NHN_YOTEI_YMD                  AS nhnYoteiYmd 
+        ,RUI_KEIJO_YMD                  AS ruiKeijoYmd 
+        ,LAST_KAKUTEI_YMD               AS lastKakuteiYmd
+        ,LAST_TANTO_CD                  AS lastTantoCd 
+        ,ENTRY_KBN                      AS entryKbn 
+        ,ENTRY_PLACE                    AS entryPlace 
+        ,KASAN_KBN                      AS kasanKbn 
+        ,SYORI_STS_KBN                  AS syoriStsKbn 
+        ,S_KEN_GENK_KIN                 AS sKenGenkKin 
+        ,S_KEN_BAIK_KIN                 AS sKenBaikKin 
+        ,COALESCE(TS.TEN_NM_R1,' ')     AS tenNmR1
+        ,COALESCE(BS.BMN_NM_R,' ')      AS bmnNmR
+        ,COALESCE(RS.TRI_NM_R,' ')      AS triNmR
+        ,COALESCE(MS.NM,' ')            AS nm
+        ,COALESCE(T.HAKKO_DAY,'0')        AS tHakkoDay
+        ,COALESCE(T.TEN_CD,'0')           AS tTenCd
+        ,COALESCE(B.HAKKO_DAY,'0')        AS bHakkoDay
+        ,COALESCE(B.BMN_CD,'0')           AS bBmnCd
+        ,COALESCE(R.HAKKO_DAY,'0')        AS rHakkoDay
+        ,COALESCE(R.TRI_CD,'0')           AS triCd
+        ,COALESCE(M.HAKKO_DAY,'0')        AS mHakkoDay
+        ,COALESCE(M.CD_KBN,'0')           AS cdKbn
+        ,COALESCE(M.CD,'0')               AS cd
+    </sql>
+    
+    <sql id="Example_From_Clause" >
+       <!--
+          T:M006TENM 店舗マスタ
+        -->
+         LEFT OUTER JOIN (SELECT MAX(HAKKO_DAY) AS HAKKO_DAY, TEN_CD AS TEN_CD
+         FROM M006TENM WHERE HAKKO_DAY <![CDATA[ <= ]]> #{currentDay} 
+         GROUP BY TEN_CD)  T
+         ON S.KAISYA_CD||S.JIGYOUBU_CD||S.TEN_CD = T.TEN_CD 
+       <!--
+          TS:M006TENM 店舗マスタ
+        -->
+         LEFT OUTER JOIN (SELECT HAKKO_DAY,TEN_CD,TEN_NM_R1 FROM M006TENM)  TS
+         ON T.TEN_CD = TS.TEN_CD
+          AND  T.HAKKO_DAY = TS.HAKKO_DAY
+       <!--
+          B:M003BMNM 部門マスタ
+        -->
+         LEFT OUTER JOIN (SELECT MAX(HAKKO_DAY) AS HAKKO_DAY, BMN_CD AS BMN_CD
+         FROM M003BMNM WHERE HAKKO_DAY <![CDATA[ <= ]]> #{currentDay} 
+         GROUP BY BMN_CD)  B
+         ON S.BMN_CD = B.BMN_CD
+       <!--
+          B:M003BMNM 部門マスタ
+        -->
+         LEFT OUTER JOIN (SELECT HAKKO_DAY,BMN_CD,BMN_NM_R FROM M003BMNM)  BS
+         ON B.BMN_CD = BS.BMN_CD
+          AND  B.HAKKO_DAY = BS.HAKKO_DAY
+        
+       <!--
+          R:M011TRIM 取引先マスタ
+        -->
+         LEFT OUTER JOIN (SELECT MAX(HAKKO_DAY) AS HAKKO_DAY, TRI_CD AS TRI_CD
+         FROM M011TRIM WHERE HAKKO_DAY <![CDATA[ <= ]]> #{currentDay} 
+         GROUP BY TRI_CD)  R
+         ON S.TORIHIKI_CD = R.TRI_CD
+       <!--
+          RS:M011TRIM 取引先マスタ
+        -->
+         LEFT OUTER JOIN (SELECT HAKKO_DAY,TRI_CD,TRI_NM_R FROM M011TRIM)  RS
+         ON R.TRI_CD = RS.TRI_CD
+          AND  R.HAKKO_DAY = RS.HAKKO_DAY
+       <!--
+          M:M017MEIM 名称マスタ
+        -->
+         LEFT OUTER JOIN (SELECT MAX(HAKKO_DAY) AS HAKKO_DAY, CD_KBN AS CD_KBN, CD AS CD
+         FROM M017MEIM WHERE HAKKO_DAY <![CDATA[ <= ]]> #{currentDay} 
+          AND  CD_KBN = 'SIR'
+         GROUP BY CD_KBN,CD)  M
+         ON 'SYORI_STS_KBN_'||S.SYORI_STS_KBN||' ' = M.CD
+       <!--
+          MS:M017MEIM 名称マスタ
+        -->
+         LEFT OUTER JOIN (SELECT HAKKO_DAY,CD_KBN,CD,NM FROM M017MEIM)  MS
+         ON M.CD_KBN = MS.CD_KBN 
+          AND  M.CD = MS.CD
+          AND  M.HAKKO_DAY = MS.HAKKO_DAY
+    </sql>    
+    
+    <sql id="Example_Where_Clause" >
+        WHERE 
+         S.KAISYA_CD = #{kaisyaCd}
+        
+          AND  S.JIGYOUBU_CD = #{jigyobuCd}
+        
+        <if test="tenCd != null and tenCd != ''" >
+             AND  S.TEN_CD = #{tenCd}
+        </if>
+        
+         AND  DPY_KBN = #{dpyKbn}
+        
+        <if test="dpyNo != null and dpyNo != ''" >
+             AND  DPY_NO = #{dpyNo}
+        </if>
+        <if test="bmnCd != null and bmnCd != ''" >
+             AND  S.BMN_CD = #{jigyobuCd}||#{bmnCd}
+        </if>
+
+        <if test="torihikiCd != null and torihikiCd != ''" >
+            <choose>
+                <when test="dpyKbn == '11'">
+                     AND  MAIN_TORI_CD = #{torihikiCd}
+                </when>
+                <when test="dpyKbn == '14' 
+                             or dpyKbn == '19' 
+                             or dpyKbn == '24' 
+                             or dpyKbn == '29' 
+                             or dpyKbn == '25'">
+                     AND  MAIN_TORI_CD = #{torihikiCd}
+                </when>
+                <when test="dpyKbn == '31'">
+                     AND  TORIHIKI_CD = #{torihikiCd}
+                </when> 
+            </choose>
+        </if>
+        <if test="nhnYmdSt != null and nhnYmdSt != ''" >
+             AND  NHN_YMD <![CDATA[ >= ]]> #{nhnYmdSt}
+        </if>
+        <if test="nhnYmdEd != null and nhnYmdEd != ''" >
+             AND  NHN_YMD <![CDATA[ <= ]]> #{nhnYmdEd}
+        </if>
+        <if test="hatYmdSt != null and hatYmdSt != ''" >
+             AND  HAT_YMD <![CDATA[ >= ]]> #{hatYmdSt}
+        </if>
+        <if test="hatYmdEd != null and hatYmdEd != ''" >
+             AND  HAT_YMD <![CDATA[ <= ]]> #{hatYmdEd}
+        </if>
+        <if test="nhnYoteiYmdSt != null and nhnYoteiYmdSt != ''" >
+             AND  NHN_YOTEI_YMD <![CDATA[ >= ]]> #{nhnYoteiYmdSt}
+        </if>
+        <if test="nhnYoteiYmdEd != null and nhnYoteiYmdEd != ''" >
+             AND  NHN_YOTEI_YMD <![CDATA[ <= ]]> #{nhnYoteiYmdEd}
+        </if>
+        <if test="ruiKeijoYmdSt != null and ruiKeijoYmdSt != ''" >
+             AND  RUI_KEIJO_YMD <![CDATA[ >= ]]> #{ruiKeijoYmdSt}
+        </if>
+        <if test="ruiKeijoYmdEd != null and ruiKeijoYmdEd != ''" >
+             AND  RUI_KEIJO_YMD <![CDATA[ <= ]]> #{ruiKeijoYmdEd}
+        </if>
+        <if test="entryKbn != null and entryKbn != ''" >
+            <choose>
+                <when test="likeFlag == 1">
+                     AND  S.ENTRY_KBN LIKE '#{entryKbn}%' 
+                </when>
+                <otherwise>
+                     AND  S.ENTRY_KBN = #{entryKbn}
+                </otherwise>
+            </choose>
+        </if>
+        <if test="entryPlace != null and entryPlace != ''" >
+             AND  ENTRY_PLACE = #{entryPlace}
+        </if>
+        <if test="lastKakuteiYmdSt != null and lastKakuteiYmdSt != ''" >
+             AND  LAST_KAKUTEI_YMD <![CDATA[ >= ]]> #{lastKakuteiYmdSt}
+        </if>
+        <if test="lastKakuteiYmdEd != null and lastKakuteiYmdEd != ''" >
+             AND  LAST_KAKUTEI_YMD <![CDATA[ <= ]]> #{lastKakuteiYmdEd}
+        </if>
+        <if test="lastTantoCd != null and lastTantoCd != ''" >
+             AND  LAST_TANTO_CD = #{lastTantoCd}
+        </if>
+        <if test="syoriStsKbn != null and syoriStsKbn != ''" >
+             AND  SYORI_STS_KBN = #{syoriStsKbn}
+        </if>
+    </sql>
+<!-- 2014/02/28 自動生成後の変更NECVN) Trieuhth add end  -->
+</mapper>

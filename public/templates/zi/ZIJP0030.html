@@ -1,0 +1,97 @@
+<div id=ZIJP0030 ng-Controller='ZIJP0030Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3"
+								id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd"
+								cc-required="true" cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-combobox-focus="getFocusCond()" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd"
+								name="tenCd" ng-model="cond.tenCd" cc-required="false"
+								cc-shortname=false cc-delexist=false
+								cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+								cc-parameter03="" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-bmn-combobox cc-label="部門" cc-partition="3" id="bmnCd"
+								name="bmnCd" ng-model="cond.bmnCd" cc-required="false"
+								cc-delexist=false cc-shortname=false
+								cc-parameter01="cond.jigyobuCd" cc-parameter02="" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}"
+							ng-click="doSearch()" ng-disabled="!canSearch()">
+							<div>
+								検索<span>(F10)</span>
+							</div>
+						</button>
+						<button type="button"
+							ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}"
+							ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+							<div>
+								検索してから編集<span>(F9)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result" ng-if="hasResult || isNewData">
+			<div class="cs-result-bg cs-clearfix">
+            </div>
+			<div class="cs-zijp-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix" ng-if="result.bmnCd == null || result.bmnCd == ''">
+						<div class="cs-col-6">
+							<div class="gridStyleZIJP0030BmnTnJiArea"
+								ng-grid="gridOptionsZIJP0030BmnTnJiArea"></div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix" ng-if="result.bmnCd != null && result.bmnCd != ''  ">
+						<div class="cs-col-6">
+							<div class="gridStyleZIJP0030TenTnJiArea"
+								ng-grid="gridOptionsZIJP0030TenTnJiArea"></div>
+						</div>
+					</div>
+					<div style="float: right;" class="cs-row cs-clearfix" ng-if="result.bmnCd == null || result.bmnCd == ''">
+						<div class="cs-col-6">
+							<div class="gridStyleZIJP0030GaichuTnJiArea"
+								ng-grid="gridOptionsZIJP0030GaichuTnJiArea"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+			<button type="button"
+				ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}"
+				ng-click="doInsertUpdate()" ng-disabled="!canSave()">
+				<div>
+					保存<span>(F12)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

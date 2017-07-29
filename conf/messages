@@ -1,0 +1,5 @@
+cc.app.cm.exception.update_no_record=update no record
+cc.app.cm.exception.insert_no_record=insert no record
+cc.app.cm.exception.delete_no_record=delete no record
+cc.app.cm.exception.file_format_error=file format error
+cc.app.cm.exception.upload_folder_not_exist=upload folder not exist

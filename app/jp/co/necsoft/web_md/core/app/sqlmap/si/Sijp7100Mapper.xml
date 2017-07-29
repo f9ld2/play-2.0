@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7100Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7100Dto" >
+        <result column="JIGYOBUCD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGYNM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TENCD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TENNM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TRICD" property="triCd" jdbcType="VARCHAR" />
+        <result column="TRINM" property="triNm" jdbcType="VARCHAR" />
+        <result column="TAISYOYM" property="taisyoYm" jdbcType="VARCHAR" />
+        <result column="JANCD" property="janCd" jdbcType="VARCHAR" />
+        <result column="SHNNM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="GENK" property="genk" jdbcType="DECIMAL" />
+        <result column="BAIK" property="baik" jdbcType="INTEGER" />
+        <result column="GESHOZAIKO" property="geshoZaiko" jdbcType="DECIMAL" />
+        <result column="SIRSU" property="sirSu" jdbcType="DECIMAL" />
+        <result column="URITENSU" property="uriTensu" jdbcType="DECIMAL" />
+        <result column="FUMEISU" property="fumeiSu" jdbcType="DECIMAL" />
+        <result column="TNASU" property="tnaSu" jdbcType="DECIMAL" />
+        <result column="SEISANSU" property="seisanSu" jdbcType="DECIMAL" />
+        <result column="SEISANKIN" property="seisanKin" jdbcType="DECIMAL" />
+    </resultMap>
+    <select id="selectSijp7100" parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7100Param"
+        resultMap="BaseResultMap">
+        SELECT TRICD,
+                TRINM,
+                JANCD,
+                SHNNM,
+                GENK,
+                BAIK,
+                GESHOZAIKO,
+                SIRSU,
+                URITENSU,
+                FUMEISU,
+                TNASU,
+                SEISANSU,
+                SEISANKIN
+                FROM (
+                        SELECT
+                           S710ITSD.TRI_CD AS TRICD,
+                           M011.TRI_NM AS TRINM,
+                           S710ITSD.JAN_CD AS JANCD,
+                           M007.SHN_NM AS SHNNM,
+                           S710ITSD.GENK AS GENK,
+                           S710ITSD.BAIK AS BAIK,
+                           S710ITSD.GESHO_ZAIKO AS GESHOZAIKO,
+                           S710ITSD.SIR_SU AS SIRSU,
+                           S710ITSD.URI_TENSU AS URITENSU,
+                           S710ITSD.FUMEI_SU AS FUMEISU,
+                           S710ITSD.TNA_SU AS TNASU,
+                           S710ITSD.SEISAN_SU AS SEISANSU,
+                           S710ITSD.SEISAN_KIN AS SEISANKIN
+                        FROM
+                             S710ITSD
+                                LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M011" /> ) M011 ON 
+                         <![CDATA[
+                                    S710ITSD.TRI_CD = M011.TRI_CD
+                                   AND S710ITSD.SS_DATE >= M011.HAKKO_DAY ]]>
+                                LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" /> ) M007 ON 
+                         <![CDATA[
+                                    S710ITSD.JAN_CD = M007.JAN_CD
+                                   AND M007.HAKKO_DAY <= S710ITSD.SS_DATE
+                                   AND S710ITSD.SS_DATE <= M007.HAKKO_DAY_TO ]]>
+                        WHERE
+                            S710ITSD.JIGYOBU_CD = #{jigyobuCd}
+                            AND S710ITSD.TEN_CD = #{tenCd}
+                            AND S710ITSD.KAI_CD = #{kaisyaCd}
+                            AND S710ITSD.TAISYO_YM = #{taisyoY} || #{taisyoM}
+                            <if test="triCd != ''">
+                                AND S710ITSD.TRI_CD = #{triCd}
+                            </if>
+                            AND S710ITSD.DELETE_FLG = '0'
+                        ORDER BY S710ITSD.TRI_CD, S710ITSD.JAN_CD ASC)
+        WHERE <![CDATA[ 
+        ROWNUM <= #{maxRecordNumber}
+        ]]>
+    </select>
+    <select id="selectSijp7100ReportData" parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7100Param"
+        resultMap="BaseResultMap">
+            
+           SELECT
+                   S710ITSD.JIGYOBU_CD AS JIGYOBUCD,
+                   M001.JGY_NM AS JGYNM,
+                   S710ITSD.TEN_CD AS TENCD,
+                   M006.TEN_NM AS TENNM,
+                   S710ITSD.TRI_CD AS TRICD,
+                   M011.TRI_NM AS TRINM,
+                   S710ITSD.TAISYO_YM AS TAISYOYM,
+                   S710ITSD.JAN_CD AS JANCD,
+                   M007.SHN_NM AS SHNNM,
+                   S710ITSD.GENK AS GENK,
+                   S710ITSD.BAIK AS BAIK,
+                   S710ITSD.GESHO_ZAIKO AS GESHOZAIKO,
+                   S710ITSD.SIR_SU AS SIRSU,
+                   S710ITSD.URI_TENSU AS URITENSU,
+                   S710ITSD.FUMEI_SU AS FUMEISU,
+                   S710ITSD.TNA_SU AS TNASU,
+                   S710ITSD.SEISAN_SU AS SEISANSU,
+                   S710ITSD.SEISAN_KIN  AS SEISANKIN
+           FROM
+                S710ITSD
+                   LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" /> ) M001 ON 
+                <![CDATA[       
+                        S710ITSD.JIGYOBU_CD = M001.JIGYOBU_CD
+                       AND S710ITSD.SS_DATE >= M001.HAKKO_DAY ]]>
+                   LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006 ON 
+                <![CDATA[       
+                        S710ITSD.KAI_CD || S710ITSD.JIGYOBU_CD || S710ITSD.TEN_CD = M006.TEN_CD
+                       AND S710ITSD.SS_DATE >= M006.HAKKO_DAY ]]>
+                   LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" /> ) M007 ON 
+                <![CDATA[       
+                        S710ITSD.JAN_CD = M007.JAN_CD
+                       AND M007.HAKKO_DAY <= S710ITSD.SS_DATE
+                       AND S710ITSD.SS_DATE <= M007.HAKKO_DAY_TO ]]>
+                   LEFT JOIN ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M011" /> ) M011 ON 
+                <![CDATA[       
+                        S710ITSD.TRI_CD = M011.TRI_CD
+                       AND S710ITSD.SS_DATE >= M011.HAKKO_DAY ]]>
+           WHERE
+               S710ITSD.JIGYOBU_CD = #{jigyobuCd}
+               AND S710ITSD.TEN_CD = #{tenCd}
+               AND S710ITSD.KAI_CD = #{kaisyaCd}
+               AND S710ITSD.TAISYO_YM = #{taisyoY} || #{taisyoM}
+               <if test="triCd != ''">
+                   AND S710ITSD.TRI_CD = #{triCd}
+               </if>
+               AND S710ITSD.DELETE_FLG = '0'
+           ORDER BY S710ITSD.TRI_CD, S710ITSD.JAN_CD ASC
+           
+    </select>
+    
+</mapper>

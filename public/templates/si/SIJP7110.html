@@ -1,0 +1,86 @@
+<div id=SIJP7110 ng-Controller='SIJP7110Ctrl' ng-init='initCond()'>
+    <!-- Start Condition -->
+    <cc-mousetrap is-screen="false" />
+    <form name="form" novalidate>
+        <div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+            <div class="cs-sb-bgbottom cs-clearfix">
+                <div class="cs-sb-bg cs-clearfix">
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd"
+                                ng-model="cond.jigyobuCd" cc-required="true" cc-delexist=false cc-shortname=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-error="error"
+                                cc-combobox-focus="reFreshCond()" />
+                        </div>
+                        <div class="cs-col-2">
+                            <cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd"
+                                ng-model="cond.tenCd" cc-required="true" cc-shortname=false cc-delexist=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+                                cc-parameter03="" cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-date-input cc-label="作業（送信）日" cc-partition="3" id="sendDay" name="sendDay"
+                                ng-model="cond.sendDay" cc-required="false" cc-readonly="isEditable" cc-error="error" />
+                        </div>
+                        <div class="cs-col-4">
+                            <cc-tantocd-input cc-label="担当者" cc-partition="3"
+                                id="tantoCd" name="tantoCd" ng-model="cond.tantoCd"
+                                cc-required="false" cc-notexist=false cc-delexist=false
+                                cc-parameter01="" id2="tantoNm" name2="tantoNm"
+                                ng-model2="cond.tantoNm" cc-error="error" cc-width1="80" cc-width2="160" />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <div class="cs-label-large-required cs-label">
+                                対象<span class="cs-txt-required"> *</span>
+                            </div>
+                            <div class="common-radio-control select2-container cs-char-15 cs-left">
+                                <input type="radio" ng-model="cond.outTaisho" id="error_only" name="outTaisho" value="0">
+                                <label for="error_only">エラーリスト</label> <input type="radio" ng-model="cond.outTaisho"
+                                    name="outTaisho" id="all" value="1"> <label for="all">全件リスト</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-clearfix cs-search-bar">
+                        <button type="button"
+                            ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+                            ng-click="doExecute()" ng-disabled="!canExecute()">
+                            <div>
+                                実行<span>(F12)</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- End Condition -->
+    <!-- Start Result -->
+    <div id="result" ng-hide="hiddenBar">
+        <div class="cs-result-bg cs-clearfix"></div>
+        <div class="cs-report-scroll">
+            <div class="cs-result_box cs-clearfix">
+                <div class="cs-row cs-clearfix" id="loadingBarContainer">
+
+                    <cc-progress-bar></cc-progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Result -->
+    <!-- Start Footer -->
+    <div id="footer">
+        <div class="cs-footer-button">
+            <button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+                <div>
+                    クリア<span>(F3)</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- End Footer -->
+</div>

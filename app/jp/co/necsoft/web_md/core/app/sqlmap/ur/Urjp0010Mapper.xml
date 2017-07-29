@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ur.urjp0010.dao.Urjp0010Mapper">
+  
+  <select id="selectM006tenmM016tanm01" parameterType="java.util.HashMap"  resultType="jp.co.necsoft.web_md.core.app.dto.ur.M006tenmM016tanmResult">
+    <!--
+      This element is generated from URBN0010#setTantoTenCode.
+    -->
+    
+    SELECT M016.TEN_CD AS TENCD ,
+      M006.TEN_KBN     AS TENKBN
+    FROM
+      (SELECT TEN_CD ,
+        TEN_KBN
+      FROM M006TENM
+      WHERE (TEN_CD , HAKKO_DAY) IN
+        (SELECT TEN_CD ,
+          MAX(HAKKO_DAY)
+        FROM M006TENM
+        WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay}
+        GROUP BY TEN_CD
+        )
+      AND ACT_KBN <![CDATA[<>]]> '9'
+      ) M006 ,
+      (SELECT TEN_CD
+      FROM M016TANM
+      WHERE (TANTO_CD , HAKKO_DAY) IN
+        (SELECT TANTO_CD ,
+          MAX(HAKKO_DAY)
+        FROM M016TANM
+        WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay}
+        GROUP BY TANTO_CD
+        )
+      AND ACT_KBN  <![CDATA[<>]]> '9'
+      AND TANTO_CD = #{tantoCd}
+      ) M016
+    WHERE M006.TEN_CD = M016.TEN_CD
+            
+  </select>
+  
+  <select id="selectU001ybmn02" parameterType="java.util.HashMap" resultType="int">
+    <!--
+      This element is generated from URBN0010#chkExist.
+    -->
+    
+    SELECT COUNT(*)
+    FROM U001YBMN
+    WHERE TEN_CD             =#{sTenCd}
+    AND SUBSTR(YSN_DATE,1,6) = #{ysnDate}
+    AND ( SUBSTR(BMN_CD,1,2) = #{bmnCd}
+    OR BMN_CD                = '00000' )             
+  </select>
+  
+ 
+ <select id="selectU002ybmnM003bmnmM004tbum03" parameterType="jp.co.necsoft.web_md.core.app.dto.ur.U002ybmnM003bmnmM004tbumResult" resultType="int">
+    <!--
+      This element is generated from URBN0010#getMonYosan.
+    -->
+SELECT COALESCE(SUM(ROUND(U002.YSN_URI_KIN /1000 ,0)) ,0) 
+ FROM U002YBMN U002 ,
+    (SELECT BMN_CD , BMN_NM 
+     FROM M003BMNM  
+     WHERE (HAKKO_DAY , BMN_CD) in 
+        (SELECT MAX(HAKKO_DAY) , BMN_CD 
+        FROM M003BMNM 
+        WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay} 
+            <if test="lsBmnCd != ''" >
+                 AND BMN_CD NOT IN (#{lsBmnCd})
+            </if>
+        GROUP BY BMN_CD) 
+     AND ACT_KBN <![CDATA[<>]]> '9' 
+    ) Bmn , 
+    (SELECT TEN_CD , BMN_CD 
+     FROM M004TBUM  
+     WHERE (HAKKO_DAY , TEN_CD , BMN_CD) in 
+        (SELECT MAX(HAKKO_DAY) , TEN_CD , BMN_CD 
+        FROM M004TBUM 
+        WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay} 
+        GROUP BY TEN_CD, BMN_CD) 
+     AND ACT_KBN <![CDATA[<>]]> '9' 
+     AND  TEN_CD = #{tenCd} 
+     AND  SUBSTR(BMN_CD,1,2) = #{bmnCd}
+    ) TBmn  
+ WHERE U002.YSN_YYYYMM = #{ysnYyyymm}
+  AND  U002.TEN_CD = #{tenCd}
+  AND  Bmn.BMN_CD = TBmn.BMN_CD 
+  AND  Bmn.BMN_CD = U002.BMN_CD 
+  AND  Bmn.BMN_CD <![CDATA[<>]]> '00000' 
+            
+  </select>
+  
+ 
+ 
+ <select id="selectU002ybmn04" parameterType="java.util.HashMap" resultType = "int">
+    <!--
+      This element is generated from URBN0010#getMonYosan.
+    -->
+    SELECT
+     COALESCE(SUM(YSN_KYAKSU),0) 
+      FROM
+        U002YBMN
+      WHERE
+        YSN_YYYYMM = #{ysnYyyymm}
+        AND TEN_CD = #{tenCd}
+        AND BMN_CD = '00000'
+  </select>
+  
+<select id="selectM019ymdmU001ybmnU012bmnjU011tenjM019ymdm05" parameterType="jp.co.necsoft.web_md.core.app.dto.ur.M019ymdmU001ybmnU012bmnjParam" resultType="jp.co.necsoft.web_md.core.app.dto.ur.M019ymdmU001ybmnU012bmnjResult">
+    <!--
+      This element is generated from URBN0010#setPageData.
+    -->
+    SELECT SUBSTR(Ymdm.CAL_DATE,7,2) AS DT ,
+  TRANSLATE(MAX(Ymdm.WEEK_DAY) , '1234567' , '月火水木金土日')AS WEEKDAY ,
+  MAX(NVL(ROUND(YosKin.YSN_KIN / 1000 ,0) ,0) ) AS YSNKIN ,
+  MAX(NVL(ROUND(SakKin.SAK_KIN / 1000 ,0) ,0) ) AS SAKKIN,
+  MAX(NVL(YosKyaku.YSN_KYAKU,0) ) AS YSNKYAKU,
+  MAX(NVL(SakKyaku.SAK_KYAKU,0) ) AS SAKKYAKU
+FROM M019YMDM Ymdm ,
+  (SELECT YSN_DATE DT,
+    SUM(YSN_URI_KIN) YSN_KIN
+  FROM U001YBMN
+  WHERE TEN_CD             = #{tenCd}
+  AND SUBSTR(YSN_DATE,1,6) = #{ysnDate}
+  AND BMN_CD  <![CDATA[<>]]>  '00000'
+  AND SUBSTR(BMN_CD,1,2)   = #{bmnCd}
+   <if test="msExceptBmn != ''">
+      AND BMN_CD NOT IN (#{msExceptBmn})
+      </if>
+  GROUP BY YSN_DATE
+  ) YosKin ,
+  (SELECT YSN_DATE DT ,
+    SUM(YSN_KYAKSU) YSN_KYAKU
+  FROM U001YBMN
+  WHERE TEN_CD             = #{tenCd}
+  AND SUBSTR(YSN_DATE,1,6) = #{ysnDate}
+  AND BMN_CD               = '00000'
+  GROUP BY YSN_DATE
+  ) YosKyaku ,
+  (SELECT Ymd.CAL_DATE DT ,
+    SUM(Jis.URI_KIN) SAK_KIN
+  FROM U012BMNJ Jis ,
+    M019YMDM Ymd
+  WHERE Jis.URI_DATE = (
+    CASE
+      WHEN Ymd.NHLDAY_KBN                            = '2'
+      AND LENGTH(RTRIM(LTRIM(Ymd.DAY_LYEAR_NHLDAY))) > 0
+      THEN Ymd.DAY_LYEAR_NHLDAY
+      ELSE Ymd.WEEk_LYEAR
+    END)
+  AND Jis.TEN_CD               = #{tenCd}
+  AND Ymd.TEN_CD               = #{tenCd}
+  AND Jis.BMN_CD             <![CDATA[<>]]> '00000'
+   <if test="msExceptBmn != ''">
+      AND Jis.BMN_CD NOT IN (#{msExceptBmn})
+      </if>
+  AND SUBSTR(BMN_CD,1,2)       =  #{bmnCd}
+  AND SUBSTR(Ymd.CAL_DATE,1,6) = #{ysnDate}
+  GROUP BY Ymd.CAL_DATE
+  ) SakKin ,
+  (SELECT Ymd.CAL_DATE DT ,
+    Jis.TEN_KYAKU SAK_KYAKU
+  FROM U011TENJ Jis ,
+    M019YMDM Ymd
+  WHERE Jis.URI_DATE = (
+    CASE
+      WHEN Ymd.NHLDAY_KBN                            = '2'
+      AND LENGTH(RTRIM(LTRIM(Ymd.DAY_LYEAR_NHLDAY))) > 0
+      THEN Ymd.DAY_LYEAR_NHLDAY
+      ELSE Ymd.WEEk_LYEAR
+    END)
+  AND Jis.TEN_CD               = #{tenCd}
+  AND Ymd.TEN_CD               = #{tenCd}
+  AND SUBSTR(Ymd.CAL_DATE,1,6) = #{ysnDate}
+  ) SakKyaku
+WHERE YosKin.DT (+)           = Ymdm.CAL_DATE
+AND YosKyaku.DT (+)           = Ymdm.CAL_DATE
+AND SakKin.DT (+)             = Ymdm.CAL_DATE
+AND SakKyaku.DT (+)           = Ymdm.CAL_DATE
+AND SUBSTR(Ymdm.CAL_DATE,1,6) = #{ysnDate}
+AND Ymdm.TEN_CD               = #{tenCd}
+GROUP BY Ymdm.CAL_DATE
+ORDER BY Ymdm.CAL_DATE         
+  </select>
+  
+<select id="selectU002ybmnM003bmnmM003bmnmM004tbum06" parameterType="jp.co.necsoft.web_md.core.app.dto.ur.M019ymdmU001ybmnU012bmnjParam" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U002ybmnM003bmnmM003bmnmM004Res">
+    <!--
+      This element is generated from URBN0010#setPageData.
+    -->
+    SELECT TBmn.BMN_CD AS BMNCD,
+      MAX(Bmn.BMN_NM) AS BMNNM,
+      COALESCE(SUM(ROUND(Yosan.YSN_URI_KIN /1000 , 0)), 0) AS YSNURIKIN
+    FROM u002ybmn Yosan
+    RIGHT JOIN
+      (SELECT TEN_CD ,
+        BMN_CD
+      FROM m004tbum
+      WHERE (HAKKO_DAY , TEN_CD , BMN_CD) IN
+        (SELECT MAX(HAKKO_DAY) ,
+          TEN_CD ,
+          BMN_CD
+        FROM M004TBUM
+        WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay}
+        GROUP BY TEN_CD,
+          BMN_CD
+        )
+      AND ACT_KBN <![CDATA[<>]]> '9'
+      AND TEN_CD  = #{tenCd}
+      AND BMN_CD LIKE #{bmnCd}||'%'
+      ) TBmn
+    ON Yosan.BMN_CD  = TBmn.BMN_CD
+    AND Yosan.TEN_CD = TBmn.TEN_CD
+    JOIN
+      (SELECT BMN_CD ,
+        BMN_NM
+      FROM m003bmnm
+      WHERE (HAKKO_DAY , BMN_CD) IN
+        (SELECT MAX(HAKKO_DAY) ,
+          BMN_CD
+        FROM m003bmnm
+        WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay}
+        <if test="msExceptBmn != ''">
+        AND BMN_CD NOT IN (#{msExceptBmn})
+        </if>
+        GROUP BY BMN_CD
+        )
+      AND ACT_KBN <![CDATA[<>]]> '9'
+      ) Bmn
+    ON Bmn.BMN_CD        = TBmn.BMN_CD
+    AND Yosan.BMN_CD <![CDATA[<>]]> '00000'
+    AND Yosan.YSN_YYYYMM = #{ysnYyyymm}
+    GROUP BY TBmn.BMN_CD
+    ORDER BY TBmn.BMN_CD 
+            
+  </select>
+ 
+<select id="selectU011tenjM019ymdmU012bmnj07" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U011tenjM019ymdmU012bmnjResult">
+    <!--
+      This element is generated from URBN0010#setPageData.
+    -->
+    SELECT Ymd.CAL_DATE AS DT ,
+      COALESCE(ROUND(U012.URI_KIN / 1000 ,0) ,0) AS SAKKIN ,
+      U011.TEN_KYAKU AS SAKKYAKU
+    FROM U011TENJ U011 ,
+      M019YMDM Ymd ,
+      (SELECT Jis.URI_DATE URI_DATE ,
+        Jis.TEN_CD TEN_CD ,
+        SUM(Jis.URI_KIN) URI_KIN
+      FROM U012BMNJ Jis ,
+        M019YMDM Ymd
+      WHERE Jis.URI_DATE = (
+        CASE
+          WHEN Ymd.NHLDAY_KBN  = '2'
+          AND LENGTH(RTRIM(LTRIM(Ymd.DAY_LYEAR_NHLDAY))) > 0
+          THEN Ymd.DAY_LYEAR_NHLDAY
+          ELSE Ymd.WEEk_LYEAR
+        END)
+      AND Ymd.CAL_DATE LIKE #{calDate}
+      AND Jis.TEN_CD = Ymd.TEN_CD
+      AND Jis.BMN_CD <![CDATA[<>]]> '00000'
+      <if test="bmnCd != ''">
+      AND Jis.BMN_CD NOT IN #{bmnCd}
+      </if>
+      GROUP BY Jis.URI_DATE ,
+        Jis.TEN_CD
+      ) U012
+    WHERE U011.URI_DATE = U012.URI_DATE
+    AND U011.TEN_CD     = U012.TEN_CD
+    AND U011.URI_DATE   = (
+      CASE
+        WHEN Ymd.NHLDAY_KBN  = '2'
+        AND LENGTH(RTRIM(LTRIM(Ymd.DAY_LYEAR_NHLDAY))) > 0
+        THEN Ymd.DAY_LYEAR_NHLDAY
+        ELSE Ymd.WEEk_LYEAR
+      END)
+    AND U011.TEN_CD = #{tenCd}
+    AND Ymd.CAL_DATE LIKE #{calDate}
+    AND Ymd.TEN_CD = #{tenCd} 
+                
+  </select> 
+  
+  <select id="selectu001ybmn08" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U001ybmnResult">
+    <!--
+      This element is generated from URBN0010#setDayBmnPage.
+    -->
+ SELECT YSN_DATE AS YSNDATE 
+  , BMN_CD AS BMNCD
+  , COALESCE(ROUND(YSN_URI_KIN / 1000 , 0) ,0) AS YSNURIKIN 
+ FROM U001YBMN 
+ WHERE TEN_CD= #{tenpo} 
+  AND SUBSTR(YSN_DATE,1,6) = #{ysnDate}
+  AND BMN_CD <![CDATA[<>]]> '00000' 
+  AND SUBSTR(BMN_CD,1,2) = #{jigyo} 
+  <if test="exceptBmn != ''">
+       AND BMN_CD NOT IN (#{exceptBmn})  
+  </if>
+ ORDER BY YSN_DATE , BMN_CD 
+                
+  </select> 
+    
+ <select id="selectU001ybmn09" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U001ybmnResult">
+    <!--
+      This element is generated from URBN0010#setDayBmnPage.
+    -->
+ SELECT YSN_DATE AS YSNDATE 
+ , COALESCE(YSN_KYAKSU,0) AS YSNKYAKSU  
+ FROM U001YBMN 
+ WHERE TEN_CD= #{tenpo} 
+  AND SUBSTR(YSN_DATE,1,6) = #{ysnDate}
+  AND BMN_CD = '00000' 
+ ORDER BY YSN_DATE 
+                
+  </select> 
+ <delete id="deleteU001ybmn" parameterType="java.util.HashMap" >
+     DELETE FROM U001YBMN WHERE  
+            TEN_CD = #{tenCd}
+          AND SUBSTR(YSN_DATE,1,6) = #{ysnDate}
+  </delete> 
+</mapper>

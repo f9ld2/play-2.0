@@ -1,0 +1,106 @@
+<div id=SIJP7100 ng-Controller='SIJP7100Ctrl' ng-init="initCond()">
+    <!-- Start Condition -->
+    <cc-mousetrap is-screen="true"/>
+    <form name="form" novalidate>
+        <div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+            <div class="cs-sb-bgbottom cs-clearfix">
+                <div class="cs-sb-bg cs-clearfix">
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-jigyobu-combobox cc-label="事業部" cc-partition="3"
+                                id="jigyoubuCd" name="jigyoubuCd" ng-model="cond.jigyoubuCd"
+                                cc-required="true" cc-delexist=false cc-shortname=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02=""
+                                cc-error="error" cc-combobox-focus="getFocusCond()"/>
+                        </div>
+                        <div class="cs-col-2">
+                            <cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd"
+                                name="tenCd" ng-model="cond.tenCd" cc-required="true"
+                                cc-shortname=false cc-delexist=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyoubuCd"
+                                cc-parameter03="" cc-readonly="false" cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-f-left">
+                                <cc-kbn2-combobox cc-label="対象月" cc-partition="3" id="taisyoY"
+                                    name="taisyoY" ng-model="cond.taisyoY" cc-required="true"
+                                    ng-maxlength="4" cc-key1="X0001" cc-readonly="false" cc-error="error"/>
+                        </div>
+                        <div class="cs-hachu-year-date-small cs-f-left">
+                            <cc-kbn2-combobox cc-label="" cc-partition="" id="taisyoM"
+                                name="taisyoM" ng-model="cond.taisyoM" cc-required="true"
+                                ng-maxlength="2" cc-key1="X0002" cc-readonly="false" cc-error="error"/>
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-6">
+                            <cc-tricd-input cc-tri-search cc-label="取引先" cc-partition="3" id="triCd"
+                                name="triCd" ng-model="cond.triCd" cc-required="false"
+                                cc-readonly="false" cc-notexist=false cc-delexist=false
+                                cc-shortname=false cc-parameter01="" id2="triNm" name2="triNm"
+                                ng-model2="cond.triNm" cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-clearfix cs-search-bar">
+                        <button type="button"
+                            ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}"
+                            ng-click="doSearch()" ng-disabled="!canSearch()">
+                            <div>
+                                検索<span>(F10)</span>
+                            </div>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Condition -->
+        <!-- Start Result -->
+        <div id="result" ng-if="hasResult">
+            <div class="cs-result-bg cs-clearfix"></div>
+            <div class="cs-sijp7100-scroll">
+                <div class="sijp7100-loading cs-result_box cs-clearfix" ng-hide="hiddenBar">
+                    <div class="cs-row cs-clearfix" id="loadingBarContainer">
+    
+                        <cc-progress-bar></cc-progress-bar>
+                    </div>
+                </div>
+                <div class="cs-result_box cs-clearfix">
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-6">
+                            <div class="gridOptionsSIJP7100Area"
+                                ng-grid="gridOptionsSIJP7100Area" 
+                                />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-f-right">
+                            <span class="sijp7100-total-title">合計</span><div class="sijp7100-total"> {{queryResult.sum | number:2}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- End Result -->
+    <!-- Start Footer -->
+    <div id="footer">
+        <div class="cs-footer-button">
+            <button type="button" class="cs-btn-reset" tabindex="-1"
+                ng-click="doClear()">
+                <div>
+                    クリア<span>(F3)</span>
+                </div>
+            </button>
+            <button type="button"
+                ng-class="{'cs-btn-report-dis': !canSave(), 'cs-btn-report': canSave()}"
+                ng-click="doSave()" ng-disabled="!canSave()">
+                <div>
+                                             委託精算チェックリスト<span>(F12)</span>
+                </div>
+            </button>
+        </div>
+    </div>
+    <!-- End Footer -->
+</div>

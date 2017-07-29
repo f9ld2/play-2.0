@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ha.hajp1020.dao.Hajp1020Mapper">
+	<resultMap id="H010hnbhHajp1020ResultMap" 
+		type="jp.co.necsoft.web_md.core.app.dto.ha.H010hnbhHajp1020Result">
+	  	<result column="SHNCD" property="shnCd" jdbcType="VARCHAR" />
+		<result column="KAICD" property="kaiCd" jdbcType="VARCHAR" />
+		<result column="JGBCD" property="jgbCd" jdbcType="VARCHAR" />
+		<result column="TENCD" property="tenCd" jdbcType="VARCHAR" />
+		<result column="HATDD" property="hatDd" jdbcType="VARCHAR" />
+		<result column="NHNDD" property="nhnDd" jdbcType="VARCHAR" />
+		<result column="HATSRUIKBN" property="hatSruiKbn" jdbcType="VARCHAR" />
+		<result column="BIN" property="bin" jdbcType="VARCHAR" />
+		<result column="HATSU" property="hatSu" jdbcType="VARCHAR" />
+		<result column="TRICD" property="triCd" jdbcType="VARCHAR" />
+		<result column="GENK" property="genk" jdbcType="VARCHAR" />
+		<result column="BAIK" property="baik" jdbcType="VARCHAR" />
+		<result column="HATTYUIRISU" property="hattyuIrisu" jdbcType="VARCHAR" />
+		<result column="HATTRIDD" property="hatTriDd" jdbcType="VARCHAR" />
+		<result column="HATTRITIME" property="hatTriTime" jdbcType="VARCHAR" />
+		<result column="HATCHUFLG" property="hatChuFlg" jdbcType="VARCHAR" />
+		<result column="HATSIMEFLG" property="hatSimeFlg" jdbcType="VARCHAR" />
+		<result column="CMNTANTOCD" property="cmnTantoCd" jdbcType="VARCHAR" />
+		<result column="CMNTERMID" property="cmnTermId" jdbcType="VARCHAR" />
+		<result column="CMNINSDD" property="cmnInsdd" jdbcType="VARCHAR" />
+		<result column="CMNUPDDD" property="cmnUpddd" jdbcType="VARCHAR" />
+		<result column="CMNUPDTIME" property="cmnUpdtime" jdbcType="VARCHAR" />
+  	</resultMap>	
+	
+	<select id="selectH010hnbhHajp1020" resultMap="H010hnbhHajp1020ResultMap" 
+		parameterType="jp.co.necsoft.web_md.core.app.dto.ha.Hajp1020ExecuteInfo">
+		<!--
+		This element is generated from HABN1020#execute.
+		-->
+		SELECT
+			SHN_CD AS SHNCD
+			,KAI_CD AS KAICD
+			,JGB_CD AS JGBCD
+			,TEN_CD AS TENCD
+			,HAT_DD AS HATDD
+			,NHN_DD AS NHNDD
+			,HAT_SRUI_KBN AS HATSRUIKBN
+			,BIN AS BIN
+			,HAT_SU AS HATSU
+			,TRI_CD AS TRICD
+			,GENK AS GENK
+			,BAIK AS BAIK
+			,HATTYU_IRISU AS HATTYUIRISU
+			,HAT_TRI_DD AS HATTRIDD
+			,HAT_TRI_TIME AS HATTRITIME
+			,HAT_CHU_FLG AS HATCHUFLG
+			,HAT_SIME_FLG AS HATSIMEFLG
+			,CMN_TANTO_CD AS CMNTANTOCD
+			,CMN_TERM_ID AS CMNTERMID
+			,CMN_INSDD AS CMNINSDD
+			,CMN_UPDDD AS CMNUPDDD
+			,CMN_UPDTIME AS CMNUPDTIME
+		FROM
+			H010HNBH
+		WHERE
+			HAT_DD BETWEEN #{hachuSt} AND #{hachuEd}
+			AND KAI_CD = #{kaisyaCd}
+			<if test="jigyobuCd != ''">
+				AND JGB_CD = #{jigyobuCd}
+			</if>
+			<if test="(tenCdSt != '') and (tenCdEd != '')">
+				AND TEN_CD BETWEEN #{tenCdSt} AND #{tenCdEd}
+			</if>
+			<if test="(tenCdSt == '') or (tenCdEd == '')">
+				<if test="tenCdSt != ''">
+					AND TEN_CD <![CDATA[ >= ]]> #{tenCdSt}
+				</if>
+				<if test="tenCdEd != ''">
+					AND TEN_CD <![CDATA[ <= ]]> #{tenCdEd} 
+				</if>
+			</if>
+			<if test="hatSruiKbn != ''">
+				AND HAT_SRUI_KBN = #{hatSruiKbn}
+			</if>
+			<if test="sort == 2">
+				ORDER BY HAT_DD,SHN_CD,KAI_CD,JGB_CD,TEN_CD,NHN_DD,HAT_SRUI_KBN,BIN
+			</if>
+			<if test="sort == 3">
+				ORDER BY HAT_DD,KAI_CD,JGB_CD,TEN_CD,SHN_CD,HAT_SRUI_KBN,NHN_DD,TRI_CD,GENK,BAIK
+			</if>
+			<if test="(sort != 2) and (sort != 3)">
+				ORDER BY HAT_DD,CMN_UPDDD,CMN_UPDTIME
+			</if>
+	</select>
+</mapper>

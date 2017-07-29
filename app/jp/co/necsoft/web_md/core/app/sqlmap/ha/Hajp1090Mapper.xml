@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.ha.Hajp1090Mapper">
+  <select id="selectHajp1090H040btrs" parameterType="HashMap" resultType="jp.co.necsoft.web_md.core.common.mybatis.dto.H040btrs">
+    <!--
+      This element is generated from HABN1090#execute.
+    -->
+    SELECT 
+        TRI_CD AS TRICD,
+        YYYYMM AS YYYYMM,
+        TEI_HAT_DD_01 AS TEIHATDD01,
+        TEI_HAT_DD_02 AS TEIHATDD02,
+        TEI_HAT_DD_03 AS TEIHATDD03,
+        TEI_HAT_DD_04 AS TEIHATDD04,
+        TEI_HAT_DD_05 AS TEIHATDD05,
+        TEI_HAT_DD_06 AS TEIHATDD06,
+        TEI_HAT_DD_07 AS TEIHATDD07,
+        TEI_HAT_DD_08 AS TEIHATDD08,
+        TEI_HAT_DD_09 AS TEIHATDD09,
+        TEI_HAT_DD_10 AS TEIHATDD10,
+        TEI_HAT_DD_11 AS TEIHATDD11,
+        TEI_HAT_DD_12 AS TEIHATDD12,
+        TEI_HAT_DD_13 AS TEIHATDD13,
+        TEI_HAT_DD_14 AS TEIHATDD14,
+        TEI_HAT_DD_15 AS TEIHATDD15,
+        TEI_HAT_DD_16 AS TEIHATDD16,
+        TEI_HAT_DD_17 AS TEIHATDD17,
+        TEI_HAT_DD_18 AS TEIHATDD18,
+        TEI_HAT_DD_19 AS TEIHATDD19,
+        TEI_HAT_DD_20 AS TEIHATDD20,
+        TEI_HAT_DD_21 AS TEIHATDD21,
+        TEI_HAT_DD_22 AS TEIHATDD22,
+        TEI_HAT_DD_23 AS TEIHATDD23,
+        TEI_HAT_DD_24 AS TEIHATDD24,
+        TEI_HAT_DD_25 AS TEIHATDD25,
+        TEI_HAT_DD_26 AS TEIHATDD26,
+        TEI_HAT_DD_27 AS TEIHATDD27,
+        TEI_HAT_DD_28 AS TEIHATDD28,
+        TEI_HAT_DD_29 AS TEIHATDD29,
+        TEI_HAT_DD_30 AS TEIHATDD30,
+        TEI_HAT_DD_31 AS TEIHATDD31,
+        TOK_HAT_DD_01 AS TOKHATDD01,
+        TOK_HAT_DD_02 AS TOKHATDD02,
+        TOK_HAT_DD_03 AS TOKHATDD03,
+        TOK_HAT_DD_04 AS TOKHATDD04,
+        TOK_HAT_DD_05 AS TOKHATDD05,
+        TOK_HAT_DD_06 AS TOKHATDD06,
+        TOK_HAT_DD_07 AS TOKHATDD07,
+        TOK_HAT_DD_08 AS TOKHATDD08,
+        TOK_HAT_DD_09 AS TOKHATDD09,
+        TOK_HAT_DD_10 AS TOKHATDD10,
+        TOK_HAT_DD_11 AS TOKHATDD11,
+        TOK_HAT_DD_12 AS TOKHATDD12,
+        TOK_HAT_DD_13 AS TOKHATDD13,
+        TOK_HAT_DD_14 AS TOKHATDD14,
+        TOK_HAT_DD_15 AS TOKHATDD15,
+        TOK_HAT_DD_16 AS TOKHATDD16,
+        TOK_HAT_DD_17 AS TOKHATDD17,
+        TOK_HAT_DD_18 AS TOKHATDD18,
+        TOK_HAT_DD_19 AS TOKHATDD19,
+        TOK_HAT_DD_20 AS TOKHATDD20,
+        TOK_HAT_DD_21 AS TOKHATDD21,
+        TOK_HAT_DD_22 AS TOKHATDD22,
+        TOK_HAT_DD_23 AS TOKHATDD23,
+        TOK_HAT_DD_24 AS TOKHATDD24,
+        TOK_HAT_DD_25 AS TOKHATDD25,
+        TOK_HAT_DD_26 AS TOKHATDD26,
+        TOK_HAT_DD_27 AS TOKHATDD27,
+        TOK_HAT_DD_28 AS TOKHATDD28,
+        TOK_HAT_DD_29 AS TOKHATDD29,
+        TOK_HAT_DD_30 AS TOKHATDD30,
+        TOK_HAT_DD_31 AS TOKHATDD31,
+        CMN_TANTO_CD AS CMNTANTOCD,
+        CMN_TERM_ID AS CMNTERMID,
+        CMN_INSDD AS CMNINSDD,
+        CMN_UPDDD AS CMNUPDDD,
+        CMN_UPDTIME AS CMNUPDTIME,
+        BIN
+    FROM 
+        H040BTRS
+    WHERE
+            YYYYMM = #{yyyyMm} 
+        AND NOT (
+                        TEI_HAT_DD_01 = '        ' 
+                    AND TEI_HAT_DD_02 = '        ' 
+                    AND TEI_HAT_DD_03 = '        ' 
+                    AND TEI_HAT_DD_04 = '        ' 
+                    AND TEI_HAT_DD_05 = '        ' 
+                    AND TEI_HAT_DD_06 = '        ' 
+                    AND TEI_HAT_DD_07 = '        ' 
+                    AND TEI_HAT_DD_08 = '        ' 
+                    AND TEI_HAT_DD_09 = '        ' 
+                    AND TEI_HAT_DD_11 = '        ' 
+                    AND TEI_HAT_DD_12 = '        ' 
+                    AND TEI_HAT_DD_13 = '        ' 
+                    AND TEI_HAT_DD_14 = '        ' 
+                    AND TEI_HAT_DD_15 = '        ' 
+                    AND TEI_HAT_DD_16 = '        ' 
+                    AND TEI_HAT_DD_17 = '        ' 
+                    AND TEI_HAT_DD_18 = '        ' 
+                    AND TEI_HAT_DD_19 = '        ' 
+                    AND TEI_HAT_DD_20 = '        ' 
+                    AND TEI_HAT_DD_21 = '        ' 
+                    AND TEI_HAT_DD_22 = '        ' 
+                    AND TEI_HAT_DD_23 = '        ' 
+                    AND TEI_HAT_DD_24 = '        ' 
+                    AND TEI_HAT_DD_25 = '        ' 
+                    AND TEI_HAT_DD_26 = '        ' 
+                    AND TEI_HAT_DD_27 = '        ' 
+                    AND TEI_HAT_DD_28 = '        ' 
+                    AND TEI_HAT_DD_29 = '        ' 
+                    AND TEI_HAT_DD_30 = '        ' 
+                    AND TEI_HAT_DD_31 = '        ' 
+                )
+    ORDER BY 
+        TRI_CD, 
+        BIN
+
+  </select>
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ur.urjp0040.dao.Urjp0040Mapper">
+  <select id="selectU012bmnj01" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U012bmnJm004tBumM003bmnmResult">
+    <!--
+      This element is generated from URBN0040#execute.
+    -->
+
+    SELECT SUBSTR( Tbum.BMN_CD, 3, 3 ) AS BMNCD,
+          Bmnm.BMN_NM AS BMNNM,
+          COALESCE( Bmnj.URI_KIN, 0 ) URIKIN,
+          COALESCE( Bmnj.TAX, 0 ) TAX,
+          COALESCE( Bmnj.UTI_TAX, 0 ) UTITAX,
+          COALESCE( Bmnj.KYAKSU, 0 ) AS KYAKSU,
+          COALESCE( Bmnj.URI_SU, 0 ) AS URISU
+        FROM U012BMNJ Bmnj
+        RIGHT JOIN
+          (SELECT TEN_CD ,
+            BMN_CD
+          FROM M004TBUM
+          WHERE (HAKKO_DAY , TEN_CD , BMN_CD) IN
+            (SELECT MAX(HAKKO_DAY) ,
+              TEN_CD ,
+              BMN_CD
+            FROM M004TBUM
+            WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay}
+            GROUP BY TEN_CD,
+              BMN_CD
+            )
+          AND ACT_KBN  <![CDATA[<>]]> '9'
+          AND SUBSTR(BMN_CD,1,2) = #{jigyobuCd}
+          ) Tbum
+        ON Bmnj.TEN_CD   = Tbum.TEN_CD
+        AND Bmnj.BMN_CD  = Tbum.BMN_CD
+        AND Bmnj.URI_DATE = #{uriDate}
+        JOIN
+          (SELECT BMN_CD ,
+            BMN_NM
+          FROM M003BMNM
+          WHERE (HAKKO_DAY , BMN_CD) IN
+            (SELECT MAX(HAKKO_DAY) ,
+              BMN_CD
+            FROM M003BMNM
+            WHERE HAKKO_DAY <![CDATA[<=]]> #{hakkoDay}
+            GROUP BY BMN_CD
+            )
+          AND ACT_KBN  <![CDATA[<>]]> '9'
+          AND SUBSTR(BMN_CD,1,2) = #{jigyobuCd}
+          ) Bmnm
+        ON Bmnm.BMN_CD  = Tbum.BMN_CD
+        AND Tbum.TEN_CD = #{tenCd}
+        ORDER BY Tbum.BMN_CD
+  </select>
+
+   <select id="selectU022bmnj02" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U022bmnjResult">
+    <!--
+      This element is generated from URBN0040#getTukiBmnj.
+    -->
+    SELECT
+        URI_KIN AS URIKIN
+        ,KYAKSU AS KYAKSU
+        ,URI_SU AS URISU
+        ,TAX AS TAX
+        ,UTI_TAX AS UTITAX
+      FROM
+        U022BMNJ
+      WHERE
+        TEN_CD = #{tenCd}
+        AND BMN_CD = #{bmnCd}
+        AND YYYYMM = #{yyyymm}
+  </select>
+
+   <select id="selectU012bmnj03" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U012bmnjResult">
+    <!--
+      This element is generated from URBN0040#getHiBmnj.
+    -->
+    SELECT
+        URI_KIN AS URIKIN
+        ,KYAKSU AS KYAKSU
+        ,URI_SU AS URISU
+        ,TAX AS TAX
+        ,UTI_TAX AS UTITAX
+      FROM
+        U012BMNJ
+      WHERE
+        TEN_CD = #{tenCd}
+        AND BMN_CD = #{bmnCd}
+        AND URI_DATE = #{uriDate}
+  </select>
+
+   <select id="selectU011tenj04" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.ur.U011tenjResult">
+    <!--
+      This element is generated from URBN0040#execute.
+    -->
+    SELECT KYAKSU,
+      WEATHER AS WEATHER,
+      URI_KIN AS URIKIN,
+      GNK_URI_KIN AS GNKURIKIN,
+      CREDIT_UTIWAKE_06 AS CREDITUTIWAKE06,
+      CREDIT_UTIWAKE_05 AS CREDITUTIWAKE05,
+      CREDIT_UTIWAKE_09 AS CREDITUTIWAKE09,
+      CREDIT_UTIWAKE_02 AS CREDITUTIWAKE02,
+      CREDIT_UTIWAKE_01 AS CREDITUTIWAKE01,
+      CREDIT_UTIWAKE_07 AS CREDITUTIWAKE07,
+      CREDIT_UTIWAKE_08 AS CREDITUTIWAKE08,
+      CREDIT_UTIWAKE_14 AS CREDITUTIWAKE14,
+      CREDIT_UTIWAKE_SU_06 AS CREDITUTIWAKESU06,
+      CREDIT_UTIWAKE_SU_05 AS CREDITUTIWAKESU05,
+      CREDIT_UTIWAKE_SU_09 AS CREDITUTIWAKESU09,
+      CREDIT_UTIWAKE_SU_02 AS CREDITUTIWAKESU02,
+      CREDIT_UTIWAKE_SU_01 AS CREDITUTIWAKESU01,
+      CREDIT_UTIWAKE_SU_07 AS CREDITUTIWAKESU07,
+      CREDIT_UTIWAKE_SU_08 AS CREDITUTIWAKESU08,
+      CREDIT_UTIWAKE_SU_14 AS CREDITUTIWAKESU14,
+      CRD_KIN AS CRDKIN,
+      GFT_KEN_KIN AS GFTKENKIN,
+      SAI_KEI AS SAIKEI,
+      TAX AS TAX,
+      CRD_SU AS CRDSU
+    FROM U011TENJ
+    WHERE TEN_CD = #{tenCode}
+    AND URI_DATE = #{uriDate}
+    
+     </select>
+
+</mapper>

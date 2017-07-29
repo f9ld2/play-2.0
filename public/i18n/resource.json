@@ -1,0 +1,22 @@
+{
+	"ytjp0020grid2label": [{"label":"商品券（1000円）", "disControl1":false, "disControl2":false}
+					, {"label":"商品券（500円）", "disControl1":false, "disControl2":false}
+					, {"label":"クレジット", "disControl1":false, "disControl2":false}
+					, {"label":"ギフト券", "disControl1":false, "disControl2":false}
+					, {"label":"値引券", "disControl1":false, "disControl2":false}
+					, {"label": "", "disControl1":false, "disControl2":false}
+					, {"label": "", "disControl1":false, "disControl2":false}
+					, {"label": "", "disControl1":false, "disControl2":false}
+					, {"label": "", "disControl1":false, "disControl2":false}
+					, {"label": "", "disControl1":false, "disControl2":false}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}
+					, {"label": "", "disControl1":true, "disControl2":true}]
+}

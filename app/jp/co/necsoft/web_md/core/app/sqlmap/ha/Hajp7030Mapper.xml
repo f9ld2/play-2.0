@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.ha.Hajp7030Mapper">
+  <select id="selectHajp7030" parameterType="jp.co.necsoft.web_md.core.app.dto.ha.Hajp7030Param" resultType="jp.co.necsoft.web_md.core.app.dto.ha.Hajp7030Dto">
+SELECT * FROM (SELECT 
+  TRI_CD AS TRICD,
+  M009.JAN_CD AS SHNCD,
+  M007.SHN_NM AS SHNNM,
+  M009.GENK   AS GENK,
+  M009.JIDO_HAT_KIJUNSU AS JIDOHATKIJUNSU,
+  M009.HATTYU_IRISU AS HATTYUIRISU,
+  Z009.RRN_SU AS RRNSU,
+  M009.JIDO_HAT_KIJUNSU - Z009.RRN_SU AS NYUKOYOTEISU,
+ '' AS DELIVERNUMBER
+FROM
+(
+  SELECT *
+        FROM M009MSYM
+        WHERE(JAN_CD,   TEN_CD,   HAKKO_DAY) IN
+          (SELECT JAN_CD, TEN_CD, MAX(HAKKO_DAY)
+           FROM M009MSYM
+           WHERE
+            <![CDATA[ 
+            HAKKO_DAY <= #{unyoDate}
+            AND HAKKO_DAY_TO >= #{unyoDate}
+            ]]>
+           GROUP BY JAN_CD, TEN_CD)
+) M009
+LEFT JOIN (<include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />) M007
+  ON M009.JAN_CD = M007.JAN_CD
+INNER JOIN Z009SHND Z009
+  on M009.JAN_CD = Z009.SHN_CD
+  AND M009.TEN_CD = Z009.TEN_CD
+  AND Z009.UNY_DD = #{unyoDate}
+WHERE
+<![CDATA[ 
+M009.HAKKO_DAY <= #{unyoDate}
+AND M009.HAKKO_DAY_TO >= #{unyoDate}
+]]>
+<if test="triCd != null and triCd != ''">
+  AND M009.TRI_CD = #{triCd}
+</if>
+AND M009.HAT_STOP = '1'
+AND M009.AUTO_HAT_FLG = '1'
+AND M009.ACT_KBN <![CDATA[ <> ]]> '9'
+<![CDATA[ 
+AND (M009.HACHU_TEISI_FROM > #{unyoDate}
+OR M009.HACHU_TEISI_TO < #{unyoDate})
+]]>
+AND M009.DELETE_FLG = '0'
+AND M009.TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+  )
+WHERE <![CDATA[ 
+ROWNUM <= #{maxRecordNumber}
+]]>
+  </select>
+</mapper>

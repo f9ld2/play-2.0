@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.zi.Zijp7060Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7060Dto" >
+        <result column="TANA_NO" property="tanaNo" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="URI_ZAI_SU" property="uriZaiSu" jdbcType="DECIMAL" />
+    </resultMap>
+    <select id="selectZijp7060Data" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7060Param">
+        SELECT
+            z000.TANA_NO,
+            z000.SHN_CD,
+            m007.SHN_NM,
+            z000.URI_ZAI_SU
+        FROM 
+            Z000SHNT z000
+            LEFT JOIN (
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />
+            ) m007 ON(z000.SHN_CD=m007.JAN_CD)
+        WHERE 
+            z000.DELETE_FLG = '0' AND
+            z000.KAISYA_CD = #{kaisyaCd} AND
+            z000.JIGYOBU_CD = #{jigyobuCd} AND
+            z000.TEN_CD =  #{kaisyaCd} || #{jigyobuCd} || #{tenCd} AND
+            z000.TNA_KBN = #{tnaKbn}
+            <if test="tnaUnyDd != null and tnaUnyDd != ''">
+                AND z000.TNA_UNY_DD = #{tnaUnyDd}
+            </if>
+            <choose>
+                <when  test="tanaNoFr != null and tanaNoFr != ''">
+                    AND z000.TANA_NO <![CDATA[>=]]> #{tanaNoFr}
+                </when>
+                <otherwise>
+                    AND z000.TANA_NO <![CDATA[>=]]> '000000'
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="tanaNoTo != null and tanaNoTo != ''">
+                    AND z000.TANA_NO <![CDATA[<=]]> #{tanaNoTo}
+                </when>
+                <otherwise>
+                    AND z000.TANA_NO <![CDATA[<=]]> '999999'
+                </otherwise>
+            </choose>
+      </select>
+      <select id="selectZijp7060ShnNm" parameterType="java.util.HashMap" resultType="String">
+         SELECT 
+            m007.SHN_NM
+         FROM 
+            (<include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />) m007
+         WHERE 
+            m007.JAN_CD = #{shnCd}
+      </select>
+      <select id="selectZijp7060Genk" parameterType="java.util.HashMap" resultType="DECIMAL">
+         SELECT 
+            m009.GENK
+         FROM 
+            (<include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M009" />) m009
+         WHERE 
+            m009.JAN_CD = #{shnCd} AND
+            m009.TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+      </select>
+</mapper>

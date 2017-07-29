@@ -1,0 +1,98 @@
+<div id=SIJP1280 ng-Controller='SIJP1280Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="false"/>
+	<form name="form">
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-fromto-date-input cc-label="出荷日" cc-error="error"
+								cc-partition="3" id="syukaYmdSt" name="syukaYmdSt"
+								ng-model="cond.syukaYmdSt" cc-required="true" id2="syukaYmdEd"
+								name2="syukaYmdEd" ng-model2="cond.syukaYmdEd"
+								cc-required2="true" cc-focus="reFreshCond()" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="入荷事業部" cc-error="error"
+								cc-partition="3" id="inJigyobuCd" name="inJigyobuCd"
+								ng-model="cond.inJigyobuCd" cc-required="false" cc-delexist=true
+								cc-shortname=false cc-parameter01="cond.inKaisyaCd"
+								cc-parameter02="" />
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="入荷店" cc-error="error" cc-partition="3"
+								id="inTenCd" name="inTenCd" ng-model="cond.inTenCd"
+								cc-required="false" cc-shortname=false cc-delexist=true
+								cc-parameter01="cond.inKaisyaCd"
+								cc-parameter02="cond.inJigyobuCd" cc-parameter03="sysdate" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="出荷事業部" cc-error="error"
+								cc-partition="3" id="outJigyobuCd" name="outJigyobuCd"
+								ng-model="cond.outJigyobuCd" cc-required="false"
+								cc-delexist=true cc-shortname=false
+								cc-parameter01="cond.outKaisyaCd" cc-parameter02="" />
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="出荷店(FR)" cc-error="error"
+								cc-partition="3" id="outTenCdSt" name="outTenCdSt"
+								ng-model="cond.outTenCdSt" cc-required="false"
+								cc-shortname=false cc-delexist=true
+								cc-parameter01="cond.outKaisyaCd"
+								cc-parameter02="cond.outJigyobuCd" cc-parameter03="sysdate" />
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="出荷店(TO)" cc-error="error"
+								cc-partition="3" id="outTenCdEd" name="outTenCdEd"
+								ng-model="cond.outTenCdEd" cc-required="false"
+								cc-shortname=false cc-delexist=true
+								cc-parameter01="cond.outKaisyaCd"
+								cc-parameter02="cond.outJigyobuCd" cc-parameter03="" />
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+							ng-click="doExecute()" ng-disabled="!canExecute()">
+							<div>
+								実行<span>(F12)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Condition -->
+	<!-- Start Result -->
+	<div id="result" ng-hide="hiddenBar">
+		<div class="cs-result-bg cs-clearfix"></div>
+		<div class="cs-report-scroll">
+			<div class="cs-result_box cs-clearfix">
+				<div class="cs-row cs-clearfix" id="loadingBarContainer">
+					
+					<cc-progress-bar></cc-progress-bar>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+</div>
+<!-- End Footer -->
+</div>

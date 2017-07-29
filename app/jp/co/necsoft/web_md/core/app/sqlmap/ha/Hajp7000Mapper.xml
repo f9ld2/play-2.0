@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.ha.Hajp7000Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.ha.Hajp7000Dto" >
+        <result column="JIGYOBU_CD" property="JIGYOBUCD" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TERM_ID" property="termId" jdbcType="VARCHAR" />
+        <result column="TANTO_NM" property="tantoNm" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="HAT_DD" property="hatDd" jdbcType="VARCHAR" />
+        <result column="SEND_DD" property="sendDd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="MAKER_HIN_CD" property="makerHinCd" jdbcType="VARCHAR" />
+        <result column="TRI_CD" property="triCd" jdbcType="VARCHAR" />
+        <result column="TRI_NM" property="triNm" jdbcType="VARCHAR" />
+        <result column="ERR_MSG" property="errMsg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectHajp7000ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.ha.Hajp7000Param">
+        SELECT
+            JIGYOBU_CD AS JIGYOBUCD,
+            JGY_NM AS JGYNM,
+            TEN_CD AS TENCD,
+            TEN_NM AS TENNM,
+            TERM_ID AS TERMID,
+            TANTO_NM AS TANTONM,
+            SHN_CD AS SHNCD,
+            SURYO AS SURYO,
+            HAT_DD AS HATDD,
+            SOSIN_NICHIJI AS SENDDD,
+            SHN_NM AS SHNNM,
+            MAKER_HIN_CD AS MAKERHINCD,
+            TRI_CD AS TRICD,
+            TRI_NM AS TRINM,
+            MSG AS ERRMSG
+        FROM
+            H700HTIN
+        WHERE
+            JIGYOBU_CD = #{jigyobuCd}
+            AND TEN_CD = #{tenCd}
+            <if test="hatDayFr != ''">
+                AND HAT_DD <![CDATA[>=]]> #{hatDayFr}
+            </if>
+            <if test="hatDayTo != ''">
+                AND HAT_DD <![CDATA[<=]]> #{hatDayTo}
+            </if>
+            AND SUBSTR(SOSIN_NICHIJI,1,8) = #{sendDay}
+            <if test="tantoCd != ''">
+                AND TANTO_CD = #{tantoCd}
+            </if>
+            <if test="outTaisyo == 0">
+                AND IMP_ERR_FLG = 1
+            </if>
+    </select>
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.ur.Urjp7030Mapper">
+
+    <select id="selectUrjp7030" resultType="jp.co.necsoft.web_md.core.app.dto.ur.Urjp7030Result"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.ur.Urjp7030Param">
+
+        SELECT 
+            S002TGKD.JIGYOUBU_CD AS JIGYOUBUCD,                                   
+            M001JGYM.JGY_NM AS JGYNM,                                        
+            S002TGKD.TEN_CD AS TENCD,                                        
+            M006TENM.TEN_NM AS TENNM,                                    
+            M708DPKM.DNP_SUB_KBN_NM AS DNPSUBKBNNM,
+            M708DPKM.DEN_KBN_NM AS DENKBNNM,                                    
+            S002TGKD.NHN_YMD AS NHNYMD,                                        
+            S002TGKD.DPY_NO AS DPYNO,                                        
+            S002TGKD.TEKIYO AS TEKIYO,                                        
+            S002TGKD.TORIHIKI_CD AS TORIHIKICD,                                        
+            M011TRIM.TRI_NM AS TRINM,
+            S002TGKD.SHN_CD_01 AS SHNCD01,
+            S002TGKD.SHN_CD_02 AS SHNCD02,
+            S002TGKD.SHN_CD_03 AS SHNCD03,
+            S002TGKD.SHN_CD_04 AS SHNCD04,
+            S002TGKD.SHN_CD_05 AS SHNCD05,
+            S002TGKD.SHN_CD_06 AS SHNCD06,
+            S002TGKD.SHN_CD_07 AS SHNCD07,
+            S002TGKD.SHN_CD_08 AS SHNCD08,
+            S002TGKD.SHN_CD_09 AS SHNCD09,
+            S002TGKD.SHN_CD_10 AS SHNCD10,
+            S002TGKD.KEN_GENK_KIN_01 AS KENGENKKIN01,
+            S002TGKD.KEN_GENK_KIN_02 AS KENGENKKIN02,
+            S002TGKD.KEN_GENK_KIN_03 AS KENGENKKIN03,
+            S002TGKD.KEN_GENK_KIN_04 AS KENGENKKIN04,
+            S002TGKD.KEN_GENK_KIN_05 AS KENGENKKIN05,
+            S002TGKD.KEN_GENK_KIN_06 AS KENGENKKIN06,
+            S002TGKD.KEN_GENK_KIN_07 AS KENGENKKIN07,
+            S002TGKD.KEN_GENK_KIN_08 AS KENGENKKIN08,
+            S002TGKD.KEN_GENK_KIN_09 AS KENGENKKIN09,
+            S002TGKD.KEN_GENK_KIN_10 AS KENGENKKIN10,
+            S002TGKD.KEN_BAIK_KIN_01 AS KENBAIKKIN01,
+            S002TGKD.KEN_BAIK_KIN_02 AS KENBAIKKIN02,
+            S002TGKD.KEN_BAIK_KIN_03 AS KENBAIKKIN03,
+            S002TGKD.KEN_BAIK_KIN_04 AS KENBAIKKIN04,
+            S002TGKD.KEN_BAIK_KIN_05 AS KENBAIKKIN05,
+            S002TGKD.KEN_BAIK_KIN_06 AS KENBAIKKIN06,
+            S002TGKD.KEN_BAIK_KIN_07 AS KENBAIKKIN07,
+            S002TGKD.KEN_BAIK_KIN_08 AS KENBAIKKIN08,
+            S002TGKD.KEN_BAIK_KIN_09 AS KENBAIKKIN09,
+            S002TGKD.KEN_BAIK_KIN_10 AS KENBAIKKIN10
+            
+        FROM S002TGKD
+        INNER JOIN M001JGYM
+           ON S002TGKD.JIGYOUBU_CD = M001JGYM.JIGYOBU_CD
+           AND M001JGYM.DELETE_FLG = '0'
+        INNER JOIN M006TENM
+           ON CONCAT(CONCAT(S002TGKD.KAISYA_CD, S002TGKD.JIGYOUBU_CD), S002TGKD.TEN_CD) = M006TENM.TEN_CD
+           AND M006TENM.DELETE_FLG = '0'
+        LEFT JOIN M708DPKM
+           ON S002TGKD.DNP_SUB_KBN = M708DPKM.DNP_SUB_KBN
+           AND S002TGKD.DEN_KBN = M708DPKM.DEN_KBN
+           AND M708DPKM.DELETE_FLG = '0'
+        
+        LEFT JOIN M011TRIM
+           ON S002TGKD.TORIHIKI_CD = M011TRIM.TRI_CD
+           AND M011TRIM.DELETE_FLG = '0'
+        WHERE
+            S002TGKD.JIGYOUBU_CD = #{jigyobuCd}
+            AND S002TGKD.TEN_CD    = #{tenCd}
+            AND S002TGKD.NHN_YMD <![CDATA[>=]]> #{calDateSt}
+            AND S002TGKD.NHN_YMD <![CDATA[<=]]> #{calDateEd}
+            <if test="dpyKbn != ''">
+                AND S002TGKD.DEN_KBN = #{dpyKbn}
+            </if>
+            <if test="idoDenKbn != ''">
+                AND S002TGKD.DNP_SUB_KBN = #{idoDenKbn}
+            </if>
+            AND S002TGKD.DELETE_FLG = '0'
+    </select>
+    <select id="selectURJP7030M007" parameterType="jp.co.necsoft.web_md.core.app.dto.ur.Urjp7030Param"
+            resultType="jp.co.necsoft.web_md.core.app.dto.ha.M007CodeMaster">
+        SELECT JAN_CD as shnCd, SHN_NM_A as shnNm, ACT_KBN as actKbn, HAKKO_DAY as hakkoDay
+        FROM M007KIJM
+            WHERE (JAN_CD,HAKKO_DAY) in 
+            (
+                select JAN_CD, MAX(HAKKO_DAY) from M007KIJM WHERE 
+                    HAKKO_DAY <![CDATA[ <= ]]> #{searchDate}
+                    and HAKKO_DAY_TO <![CDATA[ >= ]]> #{searchDate}
+                group by JAN_CD
+            )
+            AND JAN_CD = #{shnCd}
+    </select>
+</mapper>

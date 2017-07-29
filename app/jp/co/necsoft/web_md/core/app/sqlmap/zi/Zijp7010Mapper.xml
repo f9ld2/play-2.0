@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.zi.Zijp7010Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7010Dto" >
+        <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TNA_UNY_DD" property="tnaUnyDd" jdbcType="VARCHAR" />
+        <result column="TANA_NO" property="tanaNo" jdbcType="VARCHAR" />
+        <result column="MEISAI_KENSU" property="meisaiKensu" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="GENK_KIN" property="genkKin" jdbcType="VARCHAR" />
+        <result column="BAIK_KIN" property="baikKin" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectZijp7010ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7010Param">
+       SELECT
+            t.JIGYOBU_CD,
+            t.JGY_NM,
+            t.TEN_CD,
+            t.TEN_NM,
+            t.TNA_UNY_DD,
+            t.TANA_NO,
+            COUNT(*) AS MEISAI_KENSU,
+            SUM(t.SURYO) AS SURYO,
+            SUM(t.GENK_KIN) AS GENK_KIN,
+            SUM(t.BAIK_KIN) AS BAIK_KIN
+       FROM (
+            SELECT 
+                z000.JIGYOBU_CD,
+                m001.JGY_NM,
+                z000.TEN_CD,
+                m006.TEN_NM,
+                z000.TNA_UNY_DD,
+                z000.TANA_NO,
+                (z000.URI_ZAI_SU + z000.SOKO_ZAI_SU + z000.EOS_ZAI_SU + z000.GAI_ZAI_SU) AS SURYO,
+                (m009.GENK * (z000.URI_ZAI_SU + z000.SOKO_ZAI_SU + z000.EOS_ZAI_SU + z000.GAI_ZAI_SU)) AS GENK_KIN,
+                (m009.BAIK * (z000.URI_ZAI_SU + z000.SOKO_ZAI_SU + z000.EOS_ZAI_SU + z000.GAI_ZAI_SU)) AS BAIK_KIN
+            FROM 
+                Z000SHNT z000
+                LEFT JOIN ( 
+                   <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" />
+                ) m001 ON(z000.JIGYOBU_CD=m001.JIGYOBU_CD)
+                LEFT JOIN (
+                    <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" />
+                ) m006 ON(z000.TEN_CD=m006.TEN_CD)
+                INNER JOIN (
+                    <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M009" />
+                ) m009 ON(z000.SHN_CD=m009.JAN_CD AND z000.TEN_CD=m009.TEN_CD)
+           WHERE
+                z000.DELETE_FLG = '0' AND
+                z000.KAISYA_CD  = #{kaisyaCd} AND
+                z000.JIGYOBU_CD = #{jigyobuCd} AND
+                z000.TNA_UNY_DD = #{tnaUnyDd}
+                <if test="tenCd != null and tenCd != ''">
+                    AND z000.TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+                </if>
+          ORDER BY
+            z000.TANA_NO ASC
+       ) t
+       GROUP BY 
+            t.JIGYOBU_CD,
+            t.JGY_NM,
+            t.TEN_CD,
+            t.TEN_NM,
+            t.TNA_UNY_DD,
+            t.TANA_NO
+    </select>
+</mapper>

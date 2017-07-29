@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7040Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7040Dto" >
+        <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TERM_ID" property="termId" jdbcType="VARCHAR" />
+        <result column="NHN_YMD" property="nhnYmd" jdbcType="VARCHAR" />
+        <result column="TANTO_CD" property="tantoCd" jdbcType="VARCHAR" />
+        <result column="DPY_NO" property="dpyNo" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="SOSIN_NICHIJI" property="sosinNichiji" jdbcType="VARCHAR" />
+        <result column="MKR_CD" property="mkrCd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="TORIHIKI_CD" property="torihikiCd" jdbcType="VARCHAR" />
+        <result column="TRI_NM" property="triNm" jdbcType="VARCHAR" />
+        <result column="HAT_CASE_SU_01" property="hatCaseSu01" jdbcType="VARCHAR" />
+        <result column="MSG" property="msg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectSijp7040ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7040Param">
+        SELECT 
+            s700.JIGYOBU_CD AS jigyobuCd,
+            s700.JGY_NM AS jgyNm,
+            s700.TEN_CD AS tenCd,
+            s700.TEN_NM AS tenNm,
+            s700.TERM_ID AS termId,
+            s700.NHN_YMD AS nhnYmd,
+            s700.TANTO_CD AS tantoCd,
+            s700.DPY_NO AS dpyNo,
+            s700.SHN_CD AS shnCd,
+            s700.SURYO AS suryo,
+            s700.SOSIN_NICHIJI AS sosinNichiji,
+            s700.MKR_CD AS mkrCd,
+            s700.SHN_NM As shnNm,
+            s700.TORIHIKI_CD AS torihikiCd,
+            s700.TRI_NM AS triNm,
+            s001.HAT_CASE_SU_01 AS hatCaseSu01,
+            s700.MSG AS msg
+        FROM 
+            S700KNPT s700 INNER JOIN 
+            S001EOSD s001 ON(    
+                s700.DPY_NO = s001.DPY_NO AND 
+                s700.TEN_CD = s001.TEN_CD AND 
+                s700.SHN_CD = s001.SHN_CD_01
+            )
+        WHERE s001.KAISYA_CD = #{kaisyaCd}
+            AND s700.JIGYOBU_CD = #{jigyobuCd}
+            AND s700.TEN_CD =  #{tenCd}
+            <if test="sosinNichiji != null and sosinNichiji != ''">
+                AND SUBSTR(s700.SOSIN_NICHIJI,1,8) = #{sosinNichiji}
+            </if>
+            <if test="tantoCd != null and tantoCd != ''">
+                AND s700.TANTO_CD = #{tantoCd}
+            </if>
+            <if test="outTaisyo == 0">
+                AND s700.IMP_ERR_FLG = 1
+            </if>
+    </select>
+</mapper>

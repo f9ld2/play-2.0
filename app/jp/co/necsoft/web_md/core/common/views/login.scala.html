@@ -1,0 +1,85 @@
+@()
+@import helper._
+<!DOCTYPE html>
+<html ng-app="xxjp0000"  ng-controller="XXJP0000Ctrl" w-mousetrap="{'enter': handleKeyEnter}">
+  <head>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>{{comInfo.title}}</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-theme.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/vn/login.css")">
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/select2.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/select2_locale_ja.js")"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/mousetrap.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/mousetrap-global-bind.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/wMousetrap.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-resource.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-ui-select2/src/select2.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-route.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-cookies.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-storage-cookie.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-storage-local.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-loader-static-files.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-handler-log.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-ui.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/XXJP0000Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/XXJP0000Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/filter/filters.js")"></script>
+    <!-- directive -->
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/directiveCommon.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/directive-conf.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/commonFunctions.js")"></script>
+    
+  </head>
+
+<body>
+    <form name="form" autocomplete="off">
+        <div id="login">
+            <div id="XXJP0000">
+                <div id="logo">
+                    <img src="@routes.Assets.at("images/chasecore_login_logo.png")" alt="WebMD ChaseCore" width="240"
+                        height="50">
+                </div>
+                <div class="cs-login-title-bg cs-clearfix">
+                    <div class="cs-login-title">ログイン</div>
+                    <div
+                        ng-class="{'cs-message-error':comInfo.level=='E',
+                        'cs-message-info':comInfo.level=='I'}">{{comInfo.message}}</div>
+                </div>
+                <div id="content" class="cs-clearfix">
+                    <div class="cs-login-username">
+                        <div>
+                            <input onKeyDown="return setNextFocusLogin(this);" id="tantoCd" name="tantoCd" ng-model="cond.tantoCd" required ng-minlength="1"
+                                maxlength="9" cc-focus='true' class="cs-ime-off"/>
+                        </div>
+                    </div>
+                    <div class="cs-login-pass">
+                        <div>
+                            <input onKeyDown="return setNextFocusLogin(this);" type="password" id="password" name="password" ng-model="cond.password" required
+                                ng-minlength="1" maxlength="12" />
+                        </div>
+                    </div>
+                    <button onKeyDown="return setNextFocusLogin(this);" type="button" ng-class="{'cs-btn-login': canLogin(), 'cs-btn-login-dis': !canLogin()}"
+                        ng-click="doLogin()" ng-disabled="!canLogin()">
+                        <div>
+                            ログイン<span>(Enter)</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

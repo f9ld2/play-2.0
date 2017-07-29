@@ -1,0 +1,93 @@
+﻿<div id=SIJP1150 ng-Controller='SIJP1150Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="false"/>
+	<form name="form">
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyoubuCd" name="jigyoubuCd" ng-model="cond.jigyoubuCd" cc-required="true" cc-delexist=false cc-shortname=false cc-parameter01="cond.kaisyaCd" cc-parameter02="sysdate" cc-combobox-focus="reFreshCond()" cc-error="error"//>
+						</div>
+					
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="確定区分" cc-partition="3" id="entryKbn" name="entryKbn" ng-model="cond.entryKbn" cc-required="false" ng-maxlength="2" cc-delexist=false cc-shortname=false cc-key1="SIR" cc-key2="ENTRY_KBN_" cc-parameter01="" cc-error="error" />
+						</div>
+						</div>
+						<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="伝票区分" cc-partition="3" id="dpyKbn" name="dpyKbn" ng-model="cond.dpyKbn" cc-required="false" ng-maxlength="2" cc-delexist=false cc-shortname=false cc-key1="SIR" cc-key2="DPY_KBN_" cc-parameter01="" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-kbn-combobox cc-label="移動伝票印字区分" cc-partition="3" id="idoDenKbn" name="idoDenKbn" ng-model="cond.idoDenKbn" cc-required="false" ng-maxlength="1" cc-key1="S0001" cc-shortname=false cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<cc-ten-mltcombobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd" ng-model="cond.tenCd" cc-required="false" cc-max="10" cc-shortname=false cc-datalist="tenCdList" cc-delexist=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyoubuCd" cc-parameter03="" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<cc-bmn-mltcombobox cc-label="部門" cc-partition="3" id="bmnCd" name="bmnCd" ng-model="cond.bmnCd" cc-required="false" cc-max="10" cc-shortname=false cc-datalist="bmnCdList" cc-delexist=false cc-parameter01="cond.jigyoubuCd" cc-parameter02="" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<cc-mtori-mltcombobox cc-label="代表取引先" cc-partition="3" id="torihikiCd" name="torihikiCd" ng-model="cond.torihikiCd" cc-required="false" cc-max="5" cc-shortname=false cc-delexist=false cc-parameter01="" cc-error="error" cc-width ="602"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-fromto-date-input cc-label="伝票日付" cc-partition="3" id="nhnYMDSt" name="nhnYMDSt" ng-model="cond.nhnYMDSt" cc-required="false" id2="nhnYMDEd" name2="nhnYMDEd" ng-model2="cond.nhnYMDEd" cc-required2="false" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-fromto-date-input cc-label="登録日" cc-partition="3" id="cmnInsddSt" name="cmnInsddSt" ng-model="cond.cmnInsddSt" cc-required="false" id2="cmnInsddEd" name2="cmnInsddEd" ng-model2="cond.cmnInsddEd" cc-required2="false" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-fromto-date-input cc-label="買掛計上日" cc-partition="3" id="keijdateSt" name="keijdateSt" ng-model="cond.keijdateSt" cc-required="false" id2="keijdateEd" name2="keijdateEd" ng-model2="cond.keijdateEd" cc-required2="false" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+							ng-click="doExecute()" ng-disabled="!canExecute()">
+							<div>
+								実行<span>(F12)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+<!-- End Condition -->
+<!-- Start Result -->
+		<div id="result" ng-hide="hiddenBar">
+			<div class="cs-result-bg cs-clearfix"></div>
+			<div class="cs-report-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix" id="loadingBarContainer">
+						
+						<cc-progress-bar></cc-progress-bar>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<!-- End Result -->
+		<!-- Start Footer -->
+	<div id="footer">
+			<div class="cs-footer-button">
+							<button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+                  					<div>クリア<span>(F3)</span></div>
+						</button>
+					</div>
+			</div>
+		</div>
+		<!-- End Footer -->
+</div>

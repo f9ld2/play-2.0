@@ -1,0 +1,86 @@
+<div id=SIJP1230 ng-Controller='SIJP1230Ctrl' ng-init="initAndFocusCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="false"/>
+	<form name="form">
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-tantocd-input cc-label="入力担当者" cc-error="error"
+								cc-partition="3" id="tantoCd" name="tantoCd"
+								ng-model="cond.tantoCd" cc-required="true" cc-notexist=false
+								cc-delexist=false cc-parameter01="sysdate" id2="lastTantoNm"
+								name2="lastTantoNm" ng-model2="cond.lastTantoNm"
+								cc-focus="reFreshCond()" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-date-input cc-label="納品日" cc-error="error" cc-partition="3"
+								id="nhmYmd" name="nhmYmd" ng-model="cond.nhmYmd"
+								cc-required="false" />
+						</div>
+						<div class="cs-col-2">
+							<cc-date-input cc-label="入力日付" cc-error="error" cc-partition="3"
+								id="cmnUpddd" name="cmnUpddd" ng-model="cond.cmnUpddd"
+								cc-required="false" />
+						</div>
+						<div class="cs-col-2">
+							<cc-fromto-time-input cc-label="入力時刻" cc-error="error"
+								cc-partition="3" id="insTimeSt" name="insTimeSt"
+								ng-model="cond.insTimeSt" cc-required="false" id2="insTimeEd"
+								name2="insTimeEd" ng-model2="cond.insTimeEd"
+								cc-required2="false" />
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="伝区" cc-error="error" cc-partition="3"
+								id="dpyKbn" name="dpyKbn" ng-model="cond.dpyKbn"
+								cc-required="false" ng-maxlength="2" cc-delexist=false
+								cc-shortname=false cc-key1="SIR" cc-key2="DPY_KBN_"
+								cc-parameter01="" />
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+							ng-click="doExecute()" ng-disabled="!canExecute()">
+							<div>
+								実行<span>(F12)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Condition -->
+	<!-- Start Result -->
+	<div id="result" ng-hide="hiddenBar">
+		<div class="cs-result-bg cs-clearfix"></div>
+		<div class="cs-report-scroll">
+			<div class="cs-result_box cs-clearfix">
+				<div class="cs-row cs-clearfix" id="loadingBarContainer">
+					
+					<cc-progress-bar></cc-progress-bar>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+</div>
+<!-- End Footer -->
+</div>

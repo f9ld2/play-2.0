@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ha.hajp1040.dao.Hajp1040Mapper">
+    
+    <select id="selectHajp1040" 
+        parameterType="jp.co.necsoft.web_md.core.app.dto.ha.Hajp1040ExecuteInfo"
+        resultType="jp.co.necsoft.web_md.core.app.dto.ha.Hajp1040Result">
+    <!--
+    This element is generated from HABN1040#execute.
+    -->
+    SELECT 
+        A.TORIHIKI_CD AS TORIHIKICD,
+        B.HAT_SYORI_KBN AS HATSYORIKBN,
+        A.TEN_CD AS TENCD,
+        A.TEN_NM_A AS TENNMA,
+        A.BMN_CD AS BMNCD,
+        A.DPY_NO AS DPYNO,
+        B.TOK_KBN AS TOKKBN,
+        B.KIKAKU_CD AS KIKAKUCD,
+        A.HAT_YMD AS HATYMD,
+        A.NHN_YOTEI_YMD AS NHNYOTEIYMD,
+        A.MESAI_NO_01 AS MESAINO01,
+        A.SHN_CD_01 AS SHNCD01,
+        A.KIKAKU_SU_01 AS KIKAKUSU01,
+        A.KIKAKU_TANI_01 AS KIKAKUTANI01,
+        A.HATTYU_IRISU_01 AS HATTYUIRISU01,
+        A.HAT_CASE_SU_01 AS HATCASESU01,
+        A.HAT_BARA_SU_01 AS HATBARASU01,
+        A.HAT_GENK_01 AS HATGENK01,
+        A.HAT_GENK_KIN_01 AS HATGENKKIN01,
+        A.HAT_BAIK_01 AS HATBAIK01,
+        A.HAT_BAIK_KIN_01 AS HATBAIKKIN01,
+        A.MESAI_NO_02 AS MESAINO02,
+        A.SHN_CD_02 AS SHNCD02,
+        A.KIKAKU_SU_02 AS KIKAKUSU02,
+        A.KIKAKU_TANI_02 AS KIKAKUTANI02,
+        A.HATTYU_IRISU_02 AS HATTYUIRISU02,
+        A.HAT_CASE_SU_02 AS HATCASESU02,
+        A.HAT_BARA_SU_02 AS HATBARASU02,
+        A.HAT_GENK_02 AS HATGENK02,
+        A.HAT_GENK_KIN_02 AS HATGENKKIN02,
+        A.HAT_BAIK_02 AS HATBAIK02,
+        A.HAT_BAIK_KIN_02 AS HATBAIKKIN02,
+        A.MESAI_NO_03 AS MESAINO03,
+        A.SHN_CD_03 AS SHNCD03,
+        A.KIKAKU_SU_03 AS KIKAKUSU03,
+        A.KIKAKU_TANI_03 AS KIKAKUTANI03,
+        A.HATTYU_IRISU_03 AS HATTYUIRISU03,
+        A.HAT_CASE_SU_03 AS HATCASESU03,
+        A.HAT_BARA_SU_03 AS HATBARASU03,
+        A.HAT_GENK_03 AS HATGENK03,
+        A.HAT_GENK_KIN_03 AS HATGENKKIN03,
+        A.HAT_BAIK_03 AS HATBAIK03,
+        A.HAT_BAIK_KIN_03 AS HATBAIKKIN03,
+        A.MESAI_NO_04 AS MESAINO04,
+        A.SHN_CD_04 AS SHNCD04,
+        A.KIKAKU_SU_04 AS KIKAKUSU04,
+        A.KIKAKU_TANI_04 AS KIKAKUTANI04,
+        A.HATTYU_IRISU_04 AS HATTYUIRISU04,
+        A.HAT_CASE_SU_04 AS HATCASESU04,
+        A.HAT_BARA_SU_04 AS HATBARASU04,
+        A.HAT_GENK_04 AS HATGENK04,
+        A.HAT_GENK_KIN_04 AS HATGENKKIN04,
+        A.HAT_BAIK_04 AS HATBAIK04,
+        A.HAT_BAIK_KIN_04 AS HATBAIKKIN04,
+        A.MESAI_NO_05 AS MESAINO05,
+        A.SHN_CD_05 AS SHNCD05,
+        A.KIKAKU_SU_05 AS KIKAKUSU05,
+        A.KIKAKU_TANI_05 AS KIKAKUTANI05,
+        A.HATTYU_IRISU_05 AS HATTYUIRISU05,
+        A.HAT_CASE_SU_05 AS HATCASESU05,
+        A.HAT_BARA_SU_05 AS HATBARASU05,
+        A.HAT_GENK_05 AS HATGENK05,
+        A.HAT_GENK_KIN_05 AS HATGENKKIN05,
+        A.HAT_BAIK_05 AS HATBAIK05,
+        A.HAT_BAIK_KIN_05 AS HATBAIKKIN05,
+        A.MESAI_NO_06 AS MESAINO06,
+        A.SHN_CD_06 AS SHNCD06,
+        A.KIKAKU_SU_06 AS KIKAKUSU06,
+        A.KIKAKU_TANI_06 AS KIKAKUTANI06,
+        A.HATTYU_IRISU_06 AS HATTYUIRISU06,
+        A.HAT_CASE_SU_06 AS HATCASESU06,
+        A.HAT_BARA_SU_06 AS HATBARASU06,
+        A.HAT_GENK_06 AS HATGENK06,
+        A.HAT_GENK_KIN_06 AS HATGENKKIN06,
+        A.HAT_BAIK_06 AS HATBAIK06,
+        A.HAT_BAIK_KIN_06 AS HATBAIKKIN06,
+        A.MESAI_NO_07 AS MESAINO07,
+        A.SHN_CD_07 AS SHNCD07,
+        A.KIKAKU_SU_07 AS KIKAKUSU07,
+        A.KIKAKU_TANI_07 AS KIKAKUTANI07,
+        A.HATTYU_IRISU_07 AS HATTYUIRISU07,
+        A.HAT_CASE_SU_07 AS HATCASESU07,
+        A.HAT_BARA_SU_07 AS HATBARASU07,
+        A.HAT_GENK_07 AS HATGENK07,
+        A.HAT_GENK_KIN_07 AS HATGENKKIN07,
+        A.HAT_BAIK_07 AS HATBAIK07,
+        A.HAT_BAIK_KIN_07 AS HATBAIKKIN07,
+        A.MESAI_NO_08 AS MESAINO08,
+        A.SHN_CD_08 AS SHNCD08,
+        A.KIKAKU_SU_08 AS KIKAKUSU08,
+        A.KIKAKU_TANI_08 AS KIKAKUTANI08,
+        A.HATTYU_IRISU_08 AS HATTYUIRISU08,
+        A.HAT_CASE_SU_08 AS HATCASESU08,
+        A.HAT_BARA_SU_08 AS HATBARASU08,
+        A.HAT_GENK_08 AS HATGENK08,
+        A.HAT_GENK_KIN_08 AS HATGENKKIN08,
+        A.HAT_BAIK_08 AS HATBAIK08,
+        A.HAT_BAIK_KIN_08 AS HATBAIKKIN08,
+        A.MESAI_NO_09 AS MESAINO09,
+        A.SHN_CD_09 AS SHNCD09,
+        A.KIKAKU_SU_09 AS KIKAKUSU09,
+        A.KIKAKU_TANI_09 AS KIKAKUTANI09,
+        A.HATTYU_IRISU_09 AS HATTYUIRISU09,
+        A.HAT_CASE_SU_09 AS HATCASESU09,
+        A.HAT_BARA_SU_09 AS HATBARASU09,
+        A.HAT_GENK_09 AS HATGENK09,
+        A.HAT_GENK_KIN_09 AS HATGENKKIN09,
+        A.HAT_BAIK_09 AS HATBAIK09,
+        A.HAT_BAIK_KIN_09 AS HATBAIKKIN09,
+        A.MESAI_NO_10 AS MESAINO10,
+        A.SHN_CD_10 AS SHNCD10,
+        A.KIKAKU_SU_10 AS KIKAKUSU10,
+        A.KIKAKU_TANI_10 AS KIKAKUTANI10,
+        A.HATTYU_IRISU_10 AS HATTYUIRISU10,
+        A.HAT_CASE_SU_10 AS HATCASESU10,
+        A.HAT_BARA_SU_10 AS HATBARASU10,
+        A.HAT_GENK_10 AS HATGENK10,
+        A.HAT_GENK_KIN_10 AS HATGENKKIN10,
+        A.HAT_BAIK_10 AS HATBAIK10,
+        A.HAT_BAIK_KIN_10 AS HATBAIKKIN10,
+        A.S_HAT_GENK_KIN AS SHATGENKKIN,
+        A.S_HAT_BAIK_KIN AS SHATBAIKKIN,
+        A.MSAI_SU AS MSAISU,
+        A.KAISYA_CD AS KAISYACD,
+        A.JIGYOUBU_CD AS JIGYOUBUCD
+
+    <choose>
+        <when test="(hatShoriKbn ==70) or (hatShoriKbn ==78) or (hatShoriKbn ==79)">
+            FROM 
+                S033SEID A,
+                H160SINF B
+        </when>
+        <otherwise>
+            FROM
+                S001EOSD A,
+                H140DINF B
+        </otherwise>
+    </choose>
+    
+    WHERE 
+        A.KAISYA_CD = #{kaisyaCd}
+        
+        <if test="jigyoubuCd !=''">
+            AND A.JIGYOUBU_CD = #{jigyoubuCd}
+        </if>
+        
+        <if test="(tenCdSt !='') and (tenCdEd !='')">
+            AND A.TEN_CD BETWEEN #{tenCdSt} AND #{tenCdEd}
+        </if>
+        
+        <if test="(tenCdSt =='') or (tenCdEd =='')">
+            <if test="tenCdSt !=''">
+                AND A.TEN_CD = #{tenCdSt}
+            </if>
+            <if test="tenCdEd !=''">
+                AND A.TEN_CD = #{tenCdEd}
+            </if>
+        </if>
+        
+        <if test="hatYmdEd !=''">
+            AND A.HAT_YMD BETWEEN #{hatYmdSt} AND #{hatYmdEd}
+        </if>
+        <if test="hatYmdEd ==''">
+            AND A.HAT_YMD = #{hatYmdSt}
+        </if>
+        
+        <choose>
+            <when test="(torihikiCdSt !='') and (torihikiCdEd =='')">
+                    AND TORIHIKI_CD = #{torihikiCdSt}
+                </when>
+            <when test="(torihikiCdSt !='') and (torihikiCdEd !='')">
+                    AND TORIHIKI_CD BETWEEN #{torihikiCdSt} AND #{torihikiCdEd}
+                </when>
+        </choose>
+        
+        <if test="hatShoriKbn !=''">
+                AND B.HAT_SYORI_KBN = #{hatShoriKbn}
+            </if>
+        AND A.DPY_NO      = B.DPY_NO
+        AND A.DPY_KBN     = B.DPY_KBN
+        AND A.KAISYA_CD   = B.KAISYA_CD
+        AND A.JIGYOUBU_CD = B.JIGYOUBU_CD
+        
+        ORDER BY A.TORIHIKI_CD,B.HAT_SYORI_KBN,A.TEN_CD,A.BMN_CD,A.HAT_YMD,A.DPY_NO
+    </select>
+    <select id="selectHajp1040M011" parameterType="java.util.Map" 
+        resultType="jp.co.necsoft.web_md.core.app.dto.ha.M011CodeMaster" >
+        SELECT TRI_CD CODE,
+          TRI_NM      NAME,
+          TRI_NM_R    SHORTNAME,
+          ACT_KBN     KUBUN,
+          TEL_NO1     TELNO1,
+          FAX_NO1     FAXNO1
+        FROM M011TRIM
+        WHERE (TRI_CD, HAKKO_DAY) IN
+          (SELECT TRI_CD,
+              MAX(HAKKO_DAY)
+              FROM M011TRIM
+          WHERE ( TRI_CD = #{triCd}
+              AND HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay} )
+          GROUP BY TRI_CD
+        )
+    </select>
+    <select id="selectHajp1040M007" parameterType="java.util.Map" 
+            resultType="jp.co.necsoft.web_md.core.app.dto.ha.M007CodeMaster">
+        SELECT JAN_CD as shnCd, SHN_NM_A as shnNm, ACT_KBN as actKbn, HAKKO_DAY as hakkoDay
+        FROM M007KIJM
+            WHERE (JAN_CD,HAKKO_DAY) in 
+            (
+                select JAN_CD, MAX(HAKKO_DAY) from M007KIJM WHERE 
+                    HAKKO_DAY <![CDATA[ <= ]]> #{searchDate}
+                    and HAKKO_DAY_TO <![CDATA[ >= ]]> #{searchDate}
+                group by JAN_CD
+            )
+        <if test="shnCdList != null">
+            AND (1, JAN_CD) IN
+            <foreach item="shnCd" collection="shnCdList" open="(" close=")" separator=", ">
+                (1, #{shnCd})
+            </foreach>
+        </if>
+    </select>
+</mapper>

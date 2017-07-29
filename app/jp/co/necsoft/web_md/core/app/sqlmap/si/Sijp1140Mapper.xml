@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.si.sijp1140.dao.Sijp1140Mapper">
+
+ <select id="selectS001eosds033seidSijp1140data" parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp1140Dto" resultType="jp.co.necsoft.web_md.core.app.dto.si.S001eosds033seiDataResult">
+   				SELECT
+                        DPY_NO AS DPYNO
+                       , DPY_KBN AS DPYKBN
+                        , KAISYA_CD AS KAISYACD
+                        , JIGYOUBU_CD AS JIGYOUBUCD
+                        , TEN_CD AS TENCD
+                        , BMN_CD AS BMNCD
+                        , NHN_YMD AS NHNYMD
+                       , TORIHIKI_CD AS TORIHIKICD
+                        , HAT_YMD AS HATYMD
+                        , NHN_YOTEI_YMD AS NHNYOTEIYMD
+                        , S_KEN_GENK_KIN AS SKENGENKKIN
+                       , S_KEN_BAIK_KIN AS SKENBAIKKIN
+                       , KASAN_KBN AS KASANKBN
+                       FROM S001EOSD
+		     
+                
+             WHERE KAISYA_CD = #{kaisyaCd}
+            
+            <if test="jigyobuCd != null and jigyobuCd !=''">
+                    AND JIGYOUBU_CD = #{jigyobuCd}
+                    
+             </if>
+
+           <if test="denKbn != null and denKbn !=''">
+                    AND DPY_KBN = #{denKbn}
+                    
+            </if>
+              <if test="lsTenCds != null">
+               	AND TEN_CD IN 
+               	 <foreach item="tenCd" index="index" collection="lsTenCds" open="(" separator="," close=")">
+				        #{tenCd}
+				      </foreach>
+               
+			   </if> 
+			    <if test="lsBmnCds != null">
+               		AND BMN_CD IN 
+               		<foreach item="bmnCd" index="index" collection="lsBmnCds" open="(" separator="," close=")">
+				        #{bmnCd}
+				      </foreach>
+			   </if> 
+			      
+		     <if test="lsTorisakis != null">
+               		AND TORIHIKI_CD IN 
+               		<foreach item="torisakis" index="index" collection="lsTorisakis" open="(" separator="," close=")">
+				      #{torisakis}
+				      </foreach>
+			   </if> 
+		                   
+            AND (TORIHIKI_CD in 
+            (SELECT t.TRI_CD FROM M011TRIM t 
+           WHERE (t.HAKKO_DAY,t.TRI_CD) IN 
+            	(SELECT MAX(t.HAKKO_DAY),t.TRI_CD 
+            
+             FROM S001EOSD
+              , M011TRIM t 
+            
+          WHERE t.HAKKO_DAY <![CDATA[< ]]> #{ymd} 
+            AND t.HAT_TRI_KBN <![CDATA[<> ]]> '2' 
+            AND t.ACT_KBN <![CDATA[<> ]]> '9' 
+            AND t.TRI_CD = TORIHIKI_CD 
+            GROUP BY t.TRI_CD )) )
+     		<if test="nhnDateSt != null and nhnDateSt !=''">
+                	<choose>
+                		<when test="nhnDateEd ==null or nhnDateEd ==''">
+                			AND NHN_YOTEI_YMD >= #{nhnDateSt}
+						</when>
+						<otherwise>
+						 AND NHN_YOTEI_YMD >= #{nhnDateSt}
+                           AND NHN_YOTEI_YMD <![CDATA[<= ]]>  #{nhnDateEd}
+                           </otherwise>
+					</choose>
+             </if>
+              <if test="nhnDateSt == null or nhnDateSt ==''">
+             		<if test="nhnDateEd !=null and nhnDateEd !=''">
+                	  AND NHN_YOTEI_YMD <![CDATA[<= ]]>  #{nhnDateEd}
+                	 </if>
+             </if>
+           
+              <if test="hatDateSt != null and hatDateSt !=''">
+                	<choose>
+                		<when test="hatDateEd ==null or hatDateEd ==''">
+                			AND HAT_YMD >= #{hatDateSt}
+						</when>
+						<otherwise>
+						 AND HAT_YMD >= #{hatDateSt}
+                           AND HAT_YMD <![CDATA[<= ]]>  #{hatDateEd}
+                           </otherwise>
+					</choose>
+             </if>
+             <if test="hatDateSt == null or hatDateSt ==''">
+             	<if test="hatDateEd !=null and hatDateEd !=''">
+                	  AND HAT_YMD <![CDATA[<= ]]>  #{hatDateEd}
+                	 </if>
+             </if>  
+            		    
+
+            AND SYORI_STS_KBN = '1'
+                    
+             ORDER BY NHN_YOTEI_YMD
+                        , HAT_YMD
+                       , DPY_NO      
+ </select>
+ </mapper>
+ 
+

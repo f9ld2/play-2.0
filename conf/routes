@@ -1,0 +1,308 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /core                        jp.co.necsoft.web_md.core.common.controllers.MainCtrl.index()
+GET     /login                       jp.co.necsoft.web_md.core.app.controllers.cm.Xxjp0000Ctrl.login()
+POST    /login                       @jp.co.necsoft.web_md.core.app.controllers.cm.Xxjp0000Ctrl.authenticate()
+GET     /logout                       jp.co.necsoft.web_md.core.app.controllers.cm.Xxjp0000Ctrl.logout()
+
+GET     /core/menu                               @jp.co.necsoft.web_md.core.common.controllers.MenuCtrl.query()
+GET     /core/gamen                              @jp.co.necsoft.web_md.core.common.controllers.GamenCtrl.query()
+GET     /core/gamen/:gamenId                     @jp.co.necsoft.web_md.core.common.controllers.GamenCtrl.get(gamenId)
+GET     /core/message                            @jp.co.necsoft.web_md.core.common.controllers.MessageCtrl.query()
+GET     /core/message/:key                       @jp.co.necsoft.web_md.core.common.controllers.MessageCtrl.get(key)
+GET     /core/message/directive/:key             @jp.co.necsoft.web_md.core.common.controllers.MessageCtrl.search(key)
+
+GET     /core/codename/m000kaim                  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM000kaim()
+GET     /core/codemaster/m000kaim                @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM000kaim2()
+GET     /core/codemaster/getUnyoDate             @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.getUnyoDate()
+
+GET     /core/codename/m001jgym/:kaisyaCd        @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM001jgym(kaisyaCd)
+GET     /core/codemaster/m001jgym/:kaisyaCd      @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM001jgym2(kaisyaCd)
+GET     /core/codemaster/k008trhk/:kaisyaCd      @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryK008trhk2(kaisyaCd)
+GET     /core/codename/m002dbum                  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM002dbum()
+GET     /core/codename/m002dbum2                 @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM002dbum2()
+GET     /core/codename/m003bmnm/:jigyobuCd       @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM003bmnm(jigyobuCd)
+GET     /core/codename/m000depars                @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM003bmnm2s()
+GET     /core/codename/m000depar/:jigyobuCd      @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM003bmnm2(jigyobuCd)
+GET     /core/codename/m005bnrm/:bmnCd           @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm(bmnCd, chbnrCd=null)
+GET     /core/codename/m005bnrm/:bmnCd/:chBnrCd  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm(bmnCd, chBnrCd)
+GET     /core/codemaster/m005bnrm/:rejiCd/:jigyobuCd  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryBrnNmByRejiCd(rejiCd, jigyobuCd)
+GET     /core/codename/m017meim/:cdKbn/:cd       @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM017meim(cdKbn, cd)
+GET     /core/codemaster/m017meim/:cdKbn/:cd     @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM017meim2(cdKbn, cd)
+GET     /core/codename/m013makm/:mkrCd           @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM013makm(mkrCd)
+GET     /core/codemaster/m007kijm/:janCd         @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM007kijm(janCd)
+GET     /core/codename/m011trim/:triCd           @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM011trim(triCd)
+GET     /core/codename/m011trim3                 @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM011trim3()
+GET     /core/codemaster/x007kbnm/:cdKbn         @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryX007kbnm(cdKbn)
+GET     /core/codemaster/x007kbnm                @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryAllX007kbnm()
+
+
+GET     /core/codename/m006tenm2/:kaisyaCd/:jigyobuCd                     @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM006tenm2(kaisyaCd, jigyobuCd)
+GET     /core/codename/m006tenm/:tenCd/:kaisyaCd/:jigyobuCd               @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM006tenm(tenCd, kaisyaCd, jigyobuCd)
+GET     /core/codename/y001tntm/:tenantCd/:kaisyaCd/:jigyobuCd/:tenCd               @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryY001tntm(tenantCd, kaisyaCd, jigyobuCd, tenCd)
+GET     /core/codename/y001tntm2/:kaisyaCd/:jigyobuCd/:tenCd              @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryY001tntm2(kaisyaCd, jigyobuCd, tenCd)
+GET     /core/codename/m005bnrm2/:shobnrCd/:jigyobuCd/:bmnCd/:chubnrCd    @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm2(shobnrCd, jigyobuCd, bmnCd, chubnrCd)
+GET     /core/codename/m005bnrm3/:chubnrCd/:jigyobuCd/:bmnCd              @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm3(chubnrCd, jigyobuCd, bmnCd)
+GET     /core/codename/m005bnrm4/:igyobuCd/:bmnCd                        @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm4(igyobuCd, bmnCd)
+GET     /core/codename/m005bnrm5/:igyobuCd/:bmnCd/:chubnrCd              @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm5(igyobuCd, bmnCd, chubnrCd)
+GET     /core/codename/m005bnrm6/:jigyobuCd                               @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM005bnrm6(jigyobuCd)
+GET     /core/codename/m011trim2/:triCd                                   @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM011trim2(triCd)
+GET     /core/codename/m011trim4                                          @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM011trim4()
+GET     /core/codename/m016tanm/:tantoCd                                  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM016tanm(tantoCd)
+GET     /core/codename/m012tngm/:grpCd/:key/:jigyobuCd/:bmnCd             @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM012tngm(grpCd, key, jigyobuCd, bmnCd)
+GET     /core/codename/m012tngm/:key/:jigyobuCd/:bmnCd                    @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM012tngm2(key, jigyobuCd, bmnCd)
+GET     /core/codename/m012tngm/:key                                      @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM012tngm3(key)
+GET     /core/codename/k008trhk/:kakToriKmk/:kaisyaCd                     @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryK008trhk(kakToriKmk, kaisyaCd)
+GET     /core/codename/m708dpkm/:denKbns                                  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM708dpkm(denKbns)
+GET     /core/codename/m708dpkm1/:denKbn                                  @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM708dpkm1(denKbn)
+
+GET     /core/codename/t005okkm/:oyaKikakuCd/:kaisyaCd/:jigyobuCd/:nendo     @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryT005okkm(oyaKikakuCd,kaisyaCd,jigyobuCd,nendo)
+GET     /core/codename/m018bnkm/:bnkStnCd/:bknCd    @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryM018bnkm(bnkStnCd,bknCd)
+GET     /core/codename/t000kkkm/:kikakuCd/:kaisyaCd/:jigyobuCd/:nendo/:bmnCd     @jp.co.necsoft.web_md.core.common.controllers.CodeNameCtrl.queryT000kkkm(kikakuCd,kaisyaCd,jigyobuCd,nendo,bmnCd)
+
+GET       /core/TRISEARCH           @jp.co.necsoft.web_md.core.app.controllers.cm.TriSearchCtrl.query()
+
+GET       /core/KKKSEARCH           @jp.co.necsoft.web_md.core.app.controllers.cm.KkkSearchCtrl.query()
+
+GET       /core/JANSEARCH           @jp.co.necsoft.web_md.core.app.controllers.cm.JanSearchCtrl.query()
+
+GET       /core/SANTISEARCH           @jp.co.necsoft.web_md.core.app.controllers.cm.SantiSearchCtrl.query()
+
+GET       /core/BININFO/:triCd           @jp.co.necsoft.web_md.core.app.controllers.cm.BinInfoCtrl.query(triCd)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#NEUVE CONFIG BEGIN
+#HAJP0020
+GET     /core/HAJP0020/:kaisyaCd/:jigyobuCd/:tenCd/:hatSruiKbn                 @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0020Ctrl.query(kaisyaCd, jigyobuCd,tenCd,hatSruiKbn)
+PUT     /core/HAJP0020/:kaisyaCd/:jigyobuCd/:tenCd/:hatSruiKbn                 @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0020Ctrl.update(kaisyaCd, jigyobuCd,tenCd,hatSruiKbn)
+GET     /core/HAJP0020Info/:kaisyaCd/:jigyobuCd/:tenCd/:nhnDd/:hatSruiKbn/:janCd/:bin/:bmnCd                                                        @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0020Ctrl.queryDetail(kaisyaCd, jigyobuCd, tenCd, nhnDd, hatSruiKbn, janCd, bin, bmnCd)
+GET     /core/Hajp0020CheckInfo/:tenCd/:janCd/:bin/:hatDd/:nhnDd/:hatSruiKbn/:triCd                                                        @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0020Ctrl.checkDetailData(tenCd, janCd, bin, hatDd, nhnDd, hatSruiKbn, triCd)
+
+#HAJP1010
+GET     /core/HAJP1010/:hatDdSt/:hatDdEd                @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp1010Ctrl.query(hatDdSt,hatDdEd)
+
+#HAJP7000
+GET     /core/HAJP7000Init                                                  @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7000Ctrl.init()
+GET     /core/HAJP7000/:jigyobuCd/:tenCd/:sendDay/:outTaisyo                @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7000Ctrl.query(jigyobuCd,tenCd,sendDay,outTaisyo)
+
+#HAJP1020
+GET     /core/HAJP1020/:kaisyaCd/:hachuSt/:hachuEd      @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp1020Ctrl.query(kaisyaCd, hachuSt, hachuEd)
+
+#HAJP1040
+GET     /core/HAJP1040/:kaisyaCd/:hatYmdSt/:hatYmdEd        @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp1040Ctrl.query(kaisyaCd, hatYmdSt, hatYmdEd)
+
+#HAJP1170
+GET    /core/HAJP1170/:kaisyaCd                        @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp1170Ctrl.query(kaisyaCd)
+
+#HAJP0030
+GET     /core/HAJP0030/:yyyy/:mm/:triCd/:bin             @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0030Ctrl.query(yyyy, mm, triCd, bin)
+PUT     /core/HAJP0030/:yyyy/:mm/:triCd/:bin             @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0030Ctrl.update(yyyy, mm, triCd, bin)
+POST    /core/HAJP0030/:yyyy/:mm/:triCd/:bin             @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0030Ctrl.save(yyyy, mm, triCd, bin)
+PUT     /core/HAJP0030/EXT/:yyyy/:mm/:triCd/:bin         @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp0030Ctrl.delete(yyyy, mm, triCd, bin)
+
+#HAJP1090
+GET        /core/HAJP1090/:yyyy/:mm            @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp1090Ctrl.query(yyyy, mm)
+
+#KKJP0010
+GET     /core/KKJP0010                      @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0010Ctrl.query()
+POST    /core/KKJP0010                      @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0010Ctrl.save()
+PUT     /core/KKJP0010                      @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0010Ctrl.update()
+DELETE  /core/KKJP0010                      @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0010Ctrl.delete()
+PUT     /core/KKJP0010/EXT                      @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0010Ctrl.valid()
+
+#KKJP0080
+GET     /core/KKJP0080/:kaisyaCd/:kakToriKmk            @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0080Ctrl.query(kaisyaCd, kakToriKmk)
+POST    /core/KKJP0080/:kaisyaCd/:kakToriKmk            @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0080Ctrl.save(kaisyaCd, kakToriKmk)
+PUT     /core/KKJP0080/:kaisyaCd/:kakToriKmk            @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0080Ctrl.update(kaisyaCd, kakToriKmk)
+DELETE  /core/KKJP0080/:kaisyaCd/:kakToriKmk            @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp0080Ctrl.delete(kaisyaCd, kakToriKmk)
+
+#KKJP3000
+GET     /core/KKJP3000/:kaisyaCd/:taisyodateY/:taisyodateM           @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp3000Ctrl.query(kaisyaCd, taisyodateY, taisyodateM)
+
+#KKJP1110
+GET     /core/KKJP1110/:taisyoY/:taisyoM         @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp1110Ctrl.query(taisyoY, taisyoM)
+
+#KKJP1040
+GET    /core/KKJP1040/:taisyoYSt/:taisyoMSt             @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp1040Ctrl.query(taisyoYSt, taisyoMSt)
+
+#KKJP1180
+GET     /core/KKJP1180/:taisyodateY/:taisyodateM                @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp1180Ctrl.query(taisyodateY, taisyodateM)
+
+#KKJP1220
+GET     /core/KKJP1220/:taisyodateY/:taisyodateM                @jp.co.necsoft.web_md.core.app.controllers.kk.Kkjp1220Ctrl.query(taisyodateY, taisyodateM)
+
+#SIJP0170
+GET     /core/SIJP0170                                  @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0170Ctrl.init()
+GET     /core/SIJP0170/:ruteCd/:inpNohinDate            @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0170Ctrl.query(ruteCd,inpNohinDate)
+POST    /core/SIJP0170/:ruteCd/:inpNohinDate            @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0170Ctrl.save(ruteCd,inpNohinDate)
+GET    /core/SIJP0170/:value/:kaisyaCd/:jigyobuCd       @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0170Ctrl.getsKenGenKin(value,kaisyaCd,jigyobuCd)
+
+#SIJP0010
+GET     /core/SIJP0010/EXT             @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0010Ctrl.init()
+PUT     /core/SIJP0010DEL/:dpyNo             @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0010Ctrl.delete(dpyNo)
+GET     /core/SIJP0010/:dpyNo                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0010Ctrl.query(dpyNo)
+PUT     /core/SIJP0010/:dpyNo                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0010Ctrl.update(dpyNo)
+POST    /core/SIJP0010/:dpyNo                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0010Ctrl.save(dpyNo)
+
+#SIJP0110
+GET     /core/SIJP0110                                         @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0110Ctrl.init()
+GET     /core/SIJP0110/:dpyKbn/:kaisyaCd/:jigyobuCd            @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0110Ctrl.query(dpyKbn,kaisyaCd,jigyobuCd)
+
+#SIJP0130
+GET     /core/SIJP0130                                         @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0130Ctrl.init()
+GET     /core/SIJP0130/:dpyKbn/:kaisyaCd/:jigyobuCd            @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0130Ctrl.query(dpyKbn,kaisyaCd,jigyobuCd)
+
+#SIJP0190
+GET     /core/SIJP0190      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0190Ctrl.show()
+POST    /core/SIJP0190      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0190Ctrl.save()
+
+#SIJP1140
+GET        /core/SIJP1140/:kaisyaCd/:jigyoubuCd/:dpyKbn      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1140Ctrl.query(kaisyaCd,jigyoubuCd,dpyKbn)
+
+#SIJP1150
+GET       /core/SIJP1150/:kaisyaCd/:jigyoubuCd                  @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1150Ctrl.query(kaisyaCd,jigyoubuCd)
+
+#SIJP1180
+GET     /core/SIJP1180                                  @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1180Ctrl.query()
+
+#SIJP1230
+GET     /core/SIJP1230/initCond                                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1230Ctrl.initCond()
+GET     /core/SIJP1230/:tantoCd                                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1230Ctrl.query(tantoCd)
+
+#SIJP0040
+GET     /core/SIJP0040/initCond                       @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0040Ctrl.initCond()
+GET     /core/SIJP0040/:dpyKbn/:dpyNo/:outKaisyaCd/:outJigyobuCd/:outTenCd/:outBmnCd/:inKaisyaCd/:inJigyobuCd/:inTenCd/:inBmnCd                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0040Ctrl.query(dpyKbn, dpyNo, outKaisyaCd, outJigyobuCd, outTenCd, outBmnCd, inKaisyaCd, inJigyobuCd, inTenCd, inBmnCd)
+POST    /core/SIJP0040/:dpyKbn/:dpyNo/:outKaisyaCd/:outJigyobuCd/:outTenCd/:outBmnCd/:inKaisyaCd/:inJigyobuCd/:inTenCd/:inBmnCd                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0040Ctrl.save(dpyKbn, dpyNo, outKaisyaCd, outJigyobuCd, outTenCd, outBmnCd, inKaisyaCd, inJigyobuCd, inTenCd, inBmnCd)
+PUT     /core/SIJP0040/:dpyKbn/:dpyNo/:outKaisyaCd/:outJigyobuCd/:outTenCd/:outBmnCd/:inKaisyaCd/:inJigyobuCd/:inTenCd/:inBmnCd                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0040Ctrl.update(dpyKbn, dpyNo, outKaisyaCd, outJigyobuCd, outTenCd, outBmnCd, inKaisyaCd, inJigyobuCd, inTenCd, inBmnCd)
+DELETE  /core/SIJP0040/:dpyKbn/:dpyNo/:outKaisyaCd/:outJigyobuCd/:outTenCd/:outBmnCd/:inKaisyaCd/:inJigyobuCd/:inTenCd/:inBmnCd                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0040Ctrl.delete(dpyKbn, dpyNo, outKaisyaCd, outJigyobuCd, outTenCd, outBmnCd, inKaisyaCd, inJigyobuCd, inTenCd, inBmnCd)
+PUT     /core/SIJP0040/GETTANKA/:kaisyaCd/:jigyobuCd/:tenCd/:keijoYmd/:shnCd                 @jp.co.necsoft.web_md.core.app.controllers.si.Sijp0040Ctrl.getTanka(kaisyaCd, jigyobuCd, tenCd, keijoYmd, shnCd)
+
+#SIJP7100
+GET     /core/SIJP7100/:jigyoubuCd/:tenCd/:taisyoY/:taisyoM          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7100Ctrl.query(jigyoubuCd,tenCd,taisyoY,taisyoM)
+GET     /core/SIJP7100Init                                           @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7100Ctrl.init()
+GET     /core/SIJP7100Export/:jigyoubuCd/:tenCd/:taisyoY/:taisyoM    @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7100Ctrl.exportPDF(jigyoubuCd,tenCd,taisyoY,taisyoM)
+
+#SIJP1190
+GET     /core/SIJP1190                                  @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1190Ctrl.query()
+
+#SIJP1280
+GET     /core/SIJP1280/:syukaYmdSt/:syukaYmdEd          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp1280Ctrl.query(syukaYmdSt,syukaYmdEd)
+
+#SIJP7000
+GET     /core/SIJP7000/:nhnYoteiYmdFr/:nhnYoteiYmdTo             @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7000Ctrl.query(nhnYoteiYmdFr, nhnYoteiYmdTo)
+GET     /core/SIJP7000Init                                       @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7000Ctrl.init()
+
+#SIJP7060
+GET     /core/SIJP7060Init                                      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7060Ctrl.init()
+GET     /core/SIJP7060/:outJigyobuCd/:tenCd/:outTaisyo          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7060Ctrl.query(outJigyobuCd, tenCd, outTaisyo)
+
+#SIJP7040
+GET     /core/SIJP7040Init                                      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7040Ctrl.init()
+GET     /core/SIJP7040/:jigyobuCd/:tenCd/:outTaisyo          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7040Ctrl.query(jigyobuCd, tenCd, outTaisyo)
+
+#SIJP7050
+GET     /core/SIJP7050Init                                   @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7050Ctrl.init()
+GET     /core/SIJP7050/:jigyobuCd/:tenCd/:outTaisyo          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7050Ctrl.query(jigyobuCd, tenCd, outTaisyo)
+
+
+#SIJP7090
+GET     /core/SIJP7090Init                                               @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7090Ctrl.init()
+GET     /core/SIJP7090/:hatDdSt/:hatDdEd/:jigyobuCd/:shoriKekka          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7090Ctrl.query(hatDdSt, hatDdEd, jigyobuCd, shoriKekka)
+
+#SIJP7020
+GET     /core/SIJP7020/:nhnDayFr/:nhnDayTo/:outTaisyo          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7020Ctrl.query(nhnDayFr, nhnDayTo, outTaisyo)
+GET     /core/SIJP7020Init                                       @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7020Ctrl.init()
+
+#SIJP7080
+GET     /core/SIJP7080/:hatDayFr/:hatDayTo/:shouninKbn/:jigyobuCd          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7080Ctrl.query(hatDayFr,hatDayTo,shouninKbn,jigyobuCd)
+PUT     /core/SIJP7080/:hatDayFr/:hatDayTo/:shouninKbn/:jigyobuCd          @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7080Ctrl.update(hatDayFr,hatDayTo,shouninKbn,jigyobuCd)
+GET     /core/SIJP7080Init                                                @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7080Ctrl.init()
+
+#TKJP1060
+GET     /core/TKJP1060/:sId                                               @jp.co.necsoft.web_md.core.app.controllers.tk.Tkjp1060Ctrl.initCond(sId)
+GET     /core/TKJP1060/:kaisyaCd/:jigyobuCd                               @jp.co.necsoft.web_md.core.app.controllers.tk.Tkjp1060Ctrl.query(kaisyaCd, jigyobuCd)
+
+#URJP0010
+GET     /core/URJP0010/initCond                                              @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0010Ctrl.initCond()
+GET     /core/URJP0010/:yyyy/:mm/:kaisyaCd/:jigyobuCd/:tenCd                 @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0010Ctrl.query(yyyy, mm, kaisyaCd,jigyobuCd,tenCd)
+PUT     /core/URJP0010/:yyyy/:mm/:kaisyaCd/:jigyobuCd/:tenCd                 @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0010Ctrl.update(yyyy, mm, kaisyaCd,jigyobuCd,tenCd)
+DELETE    /core/URJP0010/:yyyy/:mm/:kaisyaCd/:jigyobuCd/:tenCd                @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0010Ctrl.delete(yyyy, mm, kaisyaCd,jigyobuCd,tenCd)
+POST     /core/URJP0010CALCOPY/:yyyy/:mm/:kaisyaCd/:jigyobuCd/:tenCd                 @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0010Ctrl.calAndCopyBtnHandler(yyyy, mm, kaisyaCd,jigyobuCd,tenCd)
+
+#URJP0040
+GET     /core/URJP0040/:kaisyaCd/:jigyobuCd/:tenCd/:uriDate                                       @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0040Ctrl.query(kaisyaCd, jigyobuCd, tenCd, uriDate)
+POST    /core/URJP0040/:kaisyaCd/:jigyobuCd/:tenCd/:uriDate                                       @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0040Ctrl.save(kaisyaCd, jigyobuCd, tenCd, uriDate)
+PUT     /core/URJP0040/:kaisyaCd/:jigyobuCd/:tenCd/:uriDate                                       @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0040Ctrl.update(kaisyaCd, jigyobuCd, tenCd, uriDate)
+PUT     /core/URJP0040/del/:kaisyaCd/:jigyobuCd/:tenCd/:uriDate                                  @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp0040Ctrl.delete(kaisyaCd, jigyobuCd, tenCd, uriDate)
+
+#URJP1140
+GET         /core/URJP1140/:kaisyaCd/:jigyobuCd/:tenCd/:taisyodateY/:taisyodateM            @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp1140Ctrl.query(kaisyaCd,jigyobuCd,tenCd,taisyodateY,taisyodateM)
+GET         /core/URJP1140init            @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp1140Ctrl.init()
+
+#URJP1180
+GET     /core/URJP1180/:kaisyaCd/:jigyobuCd/:taisyodateY/:taisyodateM                        @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp1180Ctrl.query(kaisyaCd, jigyobuCd, taisyodateY, taisyodateM)
+
+#URJP7030
+GET     /core/URJP7030/:jigyobuCd/:tenCd/:calDateSt/:calDateEd                        @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp7030Ctrl.query(jigyobuCd, tenCd, calDateSt, calDateEd)
+GET     /core/URJP7030/initCond                       @jp.co.necsoft.web_md.core.app.controllers.ur.Urjp7030Ctrl.init()
+
+#ZIJP0030
+GET     /core/ZIJP0030/:kaisyaCd/:jigyobuCd                @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp0030Ctrl.query(kaisyaCd,jigyobuCd)
+POST    /core/ZIJP0030/:kaisyaCd/:jigyobuCd                @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp0030Ctrl.save(kaisyaCd,jigyobuCd)
+
+#ZIJP1080
+GET     /core/ZIJP1080/:kaisyaCd/:jigyobuCd/:outputKbn/:tenCd/:bmnCd     @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp1080Ctrl.query( kaisyaCd, jigyobuCd, outputKbn, tenCd, bmnCd)
+
+#ZIJP1020
+GET         /core/ZIJP1020/:kbn/:kaisyaCd/:jigyobuCd                @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp1020Ctrl.query(kbn, kaisyaCd, jigyobuCd)
+
+#ZIJP7000
+GET         /core/ZIJP7000Init                                 @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7000Ctrl.init()
+GET         /core/ZIJP7000/:tnaUnyDd/:jigyobuCd                @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7000Ctrl.query(tnaUnyDd, jigyobuCd)
+
+#ZIJP7010
+GET         /core/ZIJP7010Init                                 @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7010Ctrl.init()
+GET         /core/ZIJP7010/:jigyobuCd/:tnaUnyDd                @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7010Ctrl.query(jigyobuCd, tnaUnyDd)
+
+#ZIJP7040
+GET         /core/ZIJP7040Init                                 @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7040Ctrl.init()
+GET         /core/ZIJP7040/:jigyobuCd/:tnaUnyDd                @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7040Ctrl.query(jigyobuCd, tnaUnyDd)
+
+#ZIJP7070
+GET         /core/ZIJP7070Init                                 @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7070Ctrl.init()
+GET         /core/ZIJP7070/:jigyobuCd/:tenCd/:outTaisyo        @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7070Ctrl.query(jigyobuCd, tenCd, outTaisyo)
+
+#ZIJP7060
+GET         /core/ZIJP7060Init                                           @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7060Ctrl.init()
+GET         /core/ZIJP7060Info/:jigyobuCd/:shnCd                     	 @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7060Ctrl.queryDetail(jigyobuCd, shnCd)
+GET         /core/ZIJP7060/:jigyobuCd/:tenCd/:tnaUnyDd/:tnaKbn           @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7060Ctrl.query(jigyobuCd, tenCd, tnaUnyDd, tnaKbn)
+PUT         /core/ZIJP7060/:jigyobuCd/:tenCd/:tnaUnyDd/:tnaKbn           @jp.co.necsoft.web_md.core.app.controllers.zi.Zijp7060Ctrl.update(jigyobuCd, tenCd, tnaUnyDd, tnaKbn)
+
+#HAJP7020
+GET         /core/HAJP7020Init                                           @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7020Ctrl.init()
+GET         /core/HAJP7020/:jigyobuCd/:hyojiKbn                          @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7020Ctrl.query(jigyobuCd, hyojiKbn)
+#HAJP7030
+GET         /core/HAJP7030Init                                           @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7030Ctrl.init()
+GET         /core/HAJP7030/:jigyobuCd/:tenCd                          @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7030Ctrl.query(jigyobuCd, tenCd)
+GET         /core/HAJP7030/:triCd                          @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7030Ctrl.getHatp(triCd)
+#HAJP7040
+GET         /core/HAJP7040/:jigyobuCd/:tenCd/:sendDay/:outTaisho      @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7040Ctrl.query(jigyobuCd, tenCd, sendDay, outTaisho)
+GET         /core/HAJP7040Init      @jp.co.necsoft.web_md.core.app.controllers.ha.Hajp7040Ctrl.initCond()
+
+#SIJP7110
+GET         /core/SIJP7110/:jigyobuCd/:tenCd/:outTaisho      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7110Ctrl.query(jigyobuCd, tenCd, outTaisho)
+GET         /core/SIJP7110Init      @jp.co.necsoft.web_md.core.app.controllers.si.Sijp7110Ctrl.initCond()
+
+#GNJP7000
+GET     /core/GNJP7000/:hatYmd/:jigyobuCd                       @jp.co.necsoft.web_md.core.app.controllers.gn.Gnjp7000Ctrl.query(hatYmd,jigyobuCd)
+GET     /core/GNJP7000/initCond                       @jp.co.necsoft.web_md.core.app.controllers.gn.Gnjp7000Ctrl.init()
+#GNJP7030
+GET     /core/GNJP7030/:hatYmd                       @jp.co.necsoft.web_md.core.app.controllers.gn.Gnjp7030Ctrl.query(hatYmd)
+
+#NEUVE CONFIG END

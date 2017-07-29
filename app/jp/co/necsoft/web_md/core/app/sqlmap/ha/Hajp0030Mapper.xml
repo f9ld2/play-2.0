@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ha.hajp0030.dao.Hajp0030Mapper">
+  <select id="selectM011trim" parameterType="jp.co.necsoft.web_md.core.app.dto.ha.M011trimExecuteTriName" resultType="jp.co.necsoft.web_md.core.app.dto.ha.M011trimExecuteTriNameResult">
+    <!--
+      This element is generated from HABN0030#ExecuteTriName.
+    -->
+    SELECT
+        TRI_NM AS TRINM
+        ,HATP_MON_1 AS HATPMON1
+        ,HATP_TUE_1 AS HATPTUE1
+        ,HATP_WED_1 AS HATPWED1
+        ,HATP_THU_1 AS HATPTHU1
+        ,HATP_FRI_1 AS HATPFRI1
+        ,HATP_SAT_1 AS HATPSAT1
+        ,HATP_SUN_1 AS HATPSUN1
+        ,HATP_MON_2 AS HATPMON2
+        ,HATP_TUE_2 AS HATPTUE2
+        ,HATP_WED_2 AS HATPWED2
+        ,HATP_THU_2 AS HATPTHU2
+        ,HATP_FRI_2 AS HATPFRI2
+        ,HATP_SAT_2 AS HATPSAT2
+        ,HATP_SUN_2 AS HATPSUN2
+        ,HATP_MON_3 AS HATPMON3
+        ,HATP_TUE_3 AS HATPTUE3
+        ,HATP_WED_3 AS HATPWED3
+        ,HATP_THU_3 AS HATPTHU3
+        ,HATP_FRI_3 AS HATPFRI3
+        ,HATP_SAT_3 AS HATPSAT3
+        ,HATP_SUN_3 AS HATPSUN3
+        ,T_HATP_MON_1 AS THATPMON1
+        ,T_HATP_TUE_1 AS THATPTUE1
+        ,T_HATP_WED_1 AS THATPWED1
+        ,T_HATP_THU_1 AS THATPTHU1
+        ,T_HATP_FRI_1 AS THATPFRI1
+        ,T_HATP_SAT_1 AS THATPSAT1
+        ,T_HATP_SUN_1 AS THATPSUN1
+        ,T_HATP_MON_2 AS THATPMON2
+        ,T_HATP_TUE_2 AS THATPTUE2
+        ,T_HATP_WED_2 AS THATPWED2
+        ,T_HATP_THU_2 AS THATPTHU2
+        ,T_HATP_FRI_2 AS THATPFRI2
+        ,T_HATP_SAT_2 AS THATPSAT2
+        ,T_HATP_SUN_2 AS THATPSUN2
+        ,T_HATP_MON_3 AS THATPMON3
+        ,T_HATP_TUE_3 AS THATPTUE3
+        ,T_HATP_WED_3 AS THATPWED3
+        ,T_HATP_THU_3 AS THATPTHU3
+        ,T_HATP_FRI_3 AS THATPFRI3
+        ,T_HATP_SAT_3 AS THATPSAT3
+        ,T_HATP_SUN_3 AS THATPSUN3
+        ,HAKKO_DAY AS HAKKODAY
+      FROM
+        M011TRIM
+      WHERE
+     ((TRI_CD, HAKKO_DAY) IN 
+     (SELECT TRI_CD, MAX(HAKKO_DAY)
+            FROM M011TRIM
+            WHERE TRI_CD     = #{triCd}
+            AND HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay} || '00'
+            GROUP BY TRI_CD)
+            AND ACT_KBN <![CDATA[ <> ]]>'9')
+        OR (TRI_CD = #{triCd}
+        AND HAKKO_DAY LIKE  #{hakkoDay} || '%'
+        AND ACT_KBN <![CDATA[ <> ]]> '9') 
+        Order by TRI_CD,HAKKODAY 
+  </select>
+  
+  <select id="selectM011trim02" parameterType="jp.co.necsoft.web_md.core.app.dto.ha.M011trimExecuteTriName" resultType="jp.co.necsoft.web_md.core.app.dto.ha.M011trimExecuteTriNameResult">
+    <!--
+      This element is generated from HABN0030#ExecuteTriName.
+    -->
+    SELECT
+        HATP_MON_1 AS HATPMON1
+        ,HATP_TUE_1 AS HATPTUE1
+        ,HATP_WED_1 AS HATPWED1
+        ,HATP_THU_1 AS HATPTHU1
+        ,HATP_FRI_1 AS HATPFRI1
+        ,HATP_SAT_1 AS HATPSAT1
+        ,HATP_SUN_1 AS HATPSUN1
+        ,HATP_MON_2 AS HATPMON2
+        ,HATP_TUE_2 AS HATPTUE2
+        ,HATP_WED_2 AS HATPWED2
+        ,HATP_THU_2 AS HATPTHU2
+        ,HATP_FRI_2 AS HATPFRI2
+        ,HATP_SAT_2 AS HATPSAT2
+        ,HATP_SUN_2 AS HATPSUN2
+        ,HATP_MON_3 AS HATPMON3
+        ,HATP_TUE_3 AS HATPTUE3
+        ,HATP_WED_3 AS HATPWED3
+        ,HATP_THU_3 AS HATPTHU3
+        ,HATP_FRI_3 AS HATPFRI3
+        ,HATP_SAT_3 AS HATPSAT3
+        ,HATP_SUN_3 AS HATPSUN3
+        ,T_HATP_MON_1 AS THATPMON1
+        ,T_HATP_TUE_1 AS THATPTUE1
+        ,T_HATP_WED_1 AS THATPWED1
+        ,T_HATP_THU_1 AS THATPTHU1
+        ,T_HATP_FRI_1 AS THATPFRI1
+        ,T_HATP_SAT_1 AS THATPSAT1
+        ,T_HATP_SUN_1 AS THATPSUN1
+        ,T_HATP_MON_2 AS THATPMON2
+        ,T_HATP_TUE_2 AS THATPTUE2
+        ,T_HATP_WED_2 AS THATPWED2
+        ,T_HATP_THU_2 AS THATPTHU2
+        ,T_HATP_FRI_2 AS THATPFRI2
+        ,T_HATP_SAT_2 AS THATPSAT2
+        ,T_HATP_SUN_2 AS THATPSUN2
+        ,T_HATP_MON_3 AS THATPMON3
+        ,T_HATP_TUE_3 AS THATPTUE3
+        ,T_HATP_WED_3 AS THATPWED3
+        ,T_HATP_THU_3 AS THATPTHU3
+        ,T_HATP_FRI_3 AS THATPFRI3
+        ,T_HATP_SAT_3 AS THATPSAT3
+        ,T_HATP_SUN_3 AS THATPSUN3
+      FROM
+        M011TRIM
+      WHERE
+     ((TRI_CD, HAKKO_DAY) IN 
+     	(SELECT TRI_CD, MAX(HAKKO_DAY)
+            FROM M011TRIM
+            WHERE TRI_CD     = #{triCd}
+            AND HAKKO_DAY <![CDATA[ <= ]]> #{hakkoDay}
+            GROUP BY TRI_CD)
+      AND ACT_KBN <![CDATA[ <> ]]>'9')
+  </select>
+</mapper>

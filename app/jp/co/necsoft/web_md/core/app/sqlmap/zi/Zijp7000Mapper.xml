@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.zi.Zijp7000Mapper">
+    <resultMap id="BaseResultMap"
+        type="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7000Dto">
+        <result column="JIGYOBU_CD" property="jigyobuCd"
+            jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TNA_UNY_DD" property="tnaUnyDd" jdbcType="VARCHAR" />
+        <result column="TANA_NO" property="tanaNo" jdbcType="VARCHAR" />
+        <result column="TANTO_NM" property="tantoNm" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="GENK" property="genk" jdbcType="VARCHAR" />
+        <result column="GENK_KIN" property="genkKin" jdbcType="VARCHAR" />
+        <result column="BAIK" property="baik" jdbcType="VARCHAR" />
+        <result column="BAIK_KIN" property="baikKin" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectZijp7000ReportData" resultMap="BaseResultMap"
+        parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7000Param">
+        SELECT
+        z000.JIGYOBU_CD,
+        m001.JGY_NM,
+        z000.TEN_CD,
+        m006.TEN_NM,
+        z000.TNA_UNY_DD,
+        z000.TANA_NO,
+        m016.TANTO_NM,
+        z000.SHN_CD,
+        m007.SHN_NM,
+        (z000.URI_ZAI_SU + z000.SOKO_ZAI_SU + z000.EOS_ZAI_SU + z000.GAI_ZAI_SU) AS SURYO,
+        m009.GENK,
+        (m009.GENK * (z000.URI_ZAI_SU + z000.SOKO_ZAI_SU + z000.EOS_ZAI_SU +
+        z000.GAI_ZAI_SU)) AS GENK_KIN,
+        m009.BAIK,
+        (m009.BAIK * (z000.URI_ZAI_SU + z000.SOKO_ZAI_SU + z000.EOS_ZAI_SU +
+        z000.GAI_ZAI_SU)) AS BAIK_KIN
+        FROM
+        Z000SHNT z000
+        LEFT JOIN (
+        <include
+            refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" />
+        ) m001 ON(z000.JIGYOBU_CD=m001.JIGYOBU_CD)
+        LEFT JOIN (
+        <include
+            refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" />
+        ) m006 ON(z000.TEN_CD=m006.TEN_CD)
+        LEFT JOIN (
+        <include
+            refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M016" />
+        ) m016 ON(z000.CMN_TANTO_CD=m016.TANTO_CD)
+        LEFT JOIN (
+        <include
+            refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" />
+        ) m007 ON(z000.SHN_CD=m007.JAN_CD)
+        INNER JOIN (
+        <include
+            refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M009" />
+        ) m009 ON(z000.SHN_CD=m009.JAN_CD AND z000.TEN_CD=m009.TEN_CD)
+        WHERE
+        z000.DELETE_FLG = '0' AND
+        z000.KAISYA_CD = #{kaisyaCd} AND
+        z000.TNA_UNY_DD = #{tnaUnyDd} AND
+        z000.JIGYOBU_CD = #{jigyobuCd}
+        <choose>
+            <when test="tenCd != null and tenCd != ''">
+                AND z000.TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+            </when>
+            <otherwise>
+                AND z000.TEN_CD LIKE #{kaisyaCd} || #{jigyobuCd} || '%'
+            </otherwise>
+        </choose>
+        <if test="bmnCd != null and bmnCd != ''">
+            AND z000.BMN_CD = #{jigyobuCd} || #{bmnCd}
+        </if>
+        <if test="tantoCd != null and tantoCd != ''">
+            AND z000.CMN_TANTO_CD = #{tantoCd}
+        </if>
+        <if test="tanaNoFr != null and tanaNoFr != ''">
+            AND z000.TANA_NO <![CDATA[>=]]> #{tanaNoFr}
+        </if>
+        <if test="tanaNoTo != null and tanaNoTo != ''">
+            AND z000.TANA_NO <![CDATA[<=]]> #{tanaNoTo}
+        </if>
+        ORDER BY
+            z000.TANA_NO ASC
+    </select>
+    
+    <select id="selectZijp7000Z703Tana" parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7000Param" resultType="int">
+        SELECT 
+            COUNT(*)
+        FROM 
+            Z703TANA z703
+        WHERE
+            z703.JIGYOBU_CD = #{jigyobuCd} AND
+            z703.TANTO_CD = #{tantoCd}
+            <if test="tenCd != null and tenCd != ''">
+                AND z703.TEN_CD = #{tenCd}
+            </if>
+    </select>
+</mapper>

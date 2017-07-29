@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.kk.kkjp0010.dao.Kkjp0010Mapper">
+  <select id="selectK003rshrK008trhk01" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.kk.K003rshrExecuteResult">
+    <!--
+      This element is generated from KKBN0010#execute.
+    -->
+    SELECT
+        s.KAISYA_CD             AS KAISYACD
+        ,s.SHR_SYORI_NO         AS SHRSYORINO
+        ,s.MAIN_TORI_CD         AS MAINTORICD
+        ,s.KAK_TORI_KMK         AS KAKTORIKMK
+        ,s.SHR_DATE             AS SHRDATE
+        ,s.SIME_DATE            AS SIMEDATE
+        ,s.SOTO_GENK_ALL        AS SOTOGENKALL
+        ,s.UCHI_GENK_ALL        AS UCHIGENKALL
+        ,s.NO_GENK_ALL          AS NOGENKALL
+        ,s.SHR_KIN              AS SHRKIN
+        ,s.SOTO_TAX_KIN         AS SOTOTAXKIN
+        ,s.SHR_KIN_ALL          AS SHRKINALL
+        ,s.JOTAI_KBN            AS JOTAIKBN
+        ,s.TEKIYO               AS TEKIYO
+        ,t.TORI_NM              AS TORINM
+        ,t.TAX_KBN              AS TAXKBN
+        ,t.KANJO_KBN            AS KANJOKBN
+      FROM
+        K003RSHR s
+        ,K008TRHK t
+      WHERE
+        s.KAK_TORI_KMK = t.KAK_TORI_KMK
+        AND s.KAISYA_CD = t.KAISYA_CD
+        AND s.SHR_SYORI_NO = #{shrSyoriNo}
+        AND s.KAISYA_CD = #{kaisyaCd}
+        <![CDATA[
+        AND s.JOTAI_KBN <> '4'
+        ]]>
+        AND s.INPUT_TYPE = '1'
+      ORDER BY
+        s.MAIN_TORI_CD
+  </select>
+  <select id="selectK003rshrK008trhk02" parameterType="java.util.Map" resultType="java.lang.Integer">
+    <!--
+      This element is generated from KKBN0010#execute.
+    -->
+    SELECT
+        COUNT(*)
+      FROM
+        K003RSHR s
+        ,K008TRHK t
+      WHERE
+        s.KAK_TORI_KMK = t.KAK_TORI_KMK
+        AND s.KAISYA_CD = t.KAISYA_CD
+        AND s.SHR_SYORI_NO = #{shrSyoriNo}
+        AND s.KAISYA_CD = #{kaisyaCd}
+        <![CDATA[
+        AND s.JOTAI_KBN <> '4'
+        ]]>
+        AND s.INPUT_TYPE = '1'
+      ORDER BY
+        s.MAIN_TORI_CD
+  </select>
+  <select id="kkjp0010_selectK008trhk01" parameterType="java.util.HashMap" resultType="String">
+    SELECT
+        TAX_KBN AS TAXKBN
+      FROM
+        K008TRHK
+      WHERE
+        KAK_TORI_KMK = #{kakToriKmk}
+        AND KAISYA_CD = #{kaisyaCd}
+  </select>
+  <!-- 
+  <insert id="batchInsertK003rshr" parameterType="java.util.List" >
+     insert all 
+    <foreach item="k003rshr" collection="list" open="" close="" separator="" index="index">
+        into K003RSHR (KAISYA_CD, SHR_SYORI_NO, MAIN_TORI_CD, KAK_TORI_KMK, SHR_DATE, SIME_DATE, 
+         FRI_END_DATE, SHR_DEN_KBN, SOTO_GENK_ALL, UCHI_GENK_ALL, NO_GENK_ALL, SHR_KIN, 
+         SOTO_TAX_KIN, UCHI_TAX_KIN, SHR_KIN_ALL, JOTAI_KBN, GETUJ_YM, TEKIYO, 
+         INPUT_TYPE, CMN_TANTO_CD, CMN_TERM_ID, CMN_INSDD, CMN_UPDDD, CMN_UPDTIME) 
+         values (
+        #{k003rshr.kaisyaCd,jdbcType=VARCHAR},
+        #{k003rshr.shrSyoriNo,jdbcType=VARCHAR},
+        #{k003rshr.mainToriCd,jdbcType=VARCHAR},
+        #{k003rshr.kakToriKmk,jdbcType=VARCHAR},
+        #{k003rshr.shrDate,jdbcType=VARCHAR},
+        #{k003rshr.simeDate,jdbcType=VARCHAR},
+        #{k003rshr.friEndDate,jdbcType=VARCHAR},
+        #{k003rshr.shrDenKbn,jdbcType=VARCHAR},
+        #{k003rshr.sotoGenkAll,jdbcType=DECIMAL},
+        #{k003rshr.uchiGenkAll,jdbcType=DECIMAL},
+        #{k003rshr.noGenkAll,jdbcType=DECIMAL},
+        #{k003rshr.shrKin,jdbcType=DECIMAL},
+        #{k003rshr.sotoTaxKin,jdbcType=DECIMAL},
+        #{k003rshr.uchiTaxKin,jdbcType=DECIMAL},
+        #{k003rshr.shrKinAll,jdbcType=DECIMAL},
+        #{k003rshr.jotaiKbn,jdbcType=VARCHAR},
+        #{k003rshr.getujYm,jdbcType=VARCHAR},
+        #{k003rshr.tekiyo,jdbcType=VARCHAR},
+        #{k003rshr.inputType,jdbcType=VARCHAR},
+        #{k003rshr.cmnTantoCd,jdbcType=VARCHAR},
+        #{k003rshr.cmnTermId,jdbcType=VARCHAR},
+        #{k003rshr.cmnInsdd,jdbcType=VARCHAR},
+        #{k003rshr.cmnUpddd,jdbcType=VARCHAR},
+        #{k003rshr.cmnUpdtime,jdbcType=VARCHAR} ) 
+    </foreach>
+    SELECT * FROM dual
+  </insert>
+   -->
+</mapper>

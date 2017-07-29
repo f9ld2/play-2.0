@@ -1,0 +1,341 @@
+@()
+@import helper._
+<!DOCTYPE html>
+<html ng-app="chasecore" ng-controller="RootCtrl" w-mousetrap="{'backspace': handleKeyBackSpace, 'f2': handleKeyF2, 'alt+m': handleKeyAltM, 'esc': handleKeyESC, 'f5': handleKeyDoNothing, 'ctrl+f5': handleKeyDoNothing}">
+  <head>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>{{comInfo.title}}</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/angular-ui.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/ng-grid.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-theme.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/select2.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/member.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery.fileupload.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/vn/main.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/vn/grid.css")">
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("i18n/datepicker-ja.js")"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/select2.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/select2_locale_ja.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/mousetrap.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/mousetrap-global-bind.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/wMousetrap.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.ui.widget.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.iframe-transport.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.fileupload.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/nanobar.js")"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-resource.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-ui-select2/src/select2.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-route.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-cookies.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-storage-cookie.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-storage-local.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-loader-static-files.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-translate-handler-log.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/angular-ui.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/ng-grid-2.0.13.js")"></script>    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/spin.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/ui-bootstrap-tpls.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/app/member/controllers.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/app/member/services.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/app/member/directives.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/filter/filters.js")"></script>
+
+    <!-- directive -->
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/directiveCommon.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/directive-conf.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/commonFunctions.js")"></script>
+    <!-- all import directive javascript files 2014/01/27 start  -->
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-date-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tricd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-mkrcd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-string-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-string-textarea.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-fromto-time-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-fromto-date-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-code-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-fromto-number-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-bmn-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-bmn-mltcombobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-kaisya-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-jigyobu-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-oyakkkcd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-bnkstncd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-kikakucd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-rejicd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-kbn-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-eob-kbn-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-hat-stop-kbn-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-kbn2-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-jancd-input.js")"></script>
+  
+  <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tencd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-shobnrcd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-chubnrcd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-mtoricd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tantocd-input.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tengrpcd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-trikmkcd-input.js")"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-mei-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-mei-mltcombobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tri-mltcombobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-mtori-mltcombobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-number-input.js")"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-ten-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-chubnr-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-shobnr-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-dbu-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-reji-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-ten-mltcombobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tengrp-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-file-uploader.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tenantcd-input.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-tenant-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-trikmk-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-dpykbn-combobox.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/common/directives/cc-subdpykbn-combobox.js")"></script>
+
+    <!-- all import directive javascript files 2014/01/27 end  -->
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/controller/XXJP0000Controller.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/controller/XXJP0000Service.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/controller/GNMN0000Controller.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/controller/GNMN0000Service.js")"></script>
+
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/TRISEARCHController.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/TRISEARCHService.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKKSEARCHController.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKKSEARCHService.js")"></script>    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/JANSEARCHController.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/JANSEARCHService.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SANTISEARCHController.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SANTISEARCHService.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/BININFOController.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/BININFOService.js")"></script>
+
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP0020Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP0020Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1010Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1010Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1020Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1020Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1040Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1170Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1170Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP0030Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP0030Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1090Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP1090Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7000Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7000Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7020Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7020Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7030Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7030Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/HAJP7040Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP0010Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP0010Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP0080Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP0080Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP3000Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP3000Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1110Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1110Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1040Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1180Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1180Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1220Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/KKJP1220Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0170Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0170Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0010Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0010Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0110Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0110Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0130Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0130Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0190Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0190Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7000Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7000Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7020Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7020Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7080Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7080Service.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7060Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7060Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7040Service.js")"></script>    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7050Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7050Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7090Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7090Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7100Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP7100Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1140Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1140Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1150Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1150Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1180Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1180Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1230Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1230Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP0040Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1190Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1190Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1280Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/SIJP1280Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/Tkjp1060Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/Tkjp1060Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP0010Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP0010Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP0040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP0040Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/Urjp1140Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/Urjp1140Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP1180Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP1180Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP7030Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/URJP7030Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP0030Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP0030Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP1080Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP1080Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP1020Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP1020Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7000Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7000Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7010Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7010Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7040Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7040Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7070Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7070Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7060Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/ZIJP7060Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/Sijp7110Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/Sijp7110Service.js")"></script>
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/GNJP7000Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/GNJP7000Service.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/GNJP7030Controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/GNJP7030Service.js")"></script>
+
+  </head>
+
+  <body>
+    <div id="container">
+
+      <!-- Start Menu -->
+      <div id="menu">
+        <div id="menu-content" ><!-- ng-show="isOpen" -->
+          <ul>
+            <li ng-repeat="group in menu" ng-class="{'cs-has-sub': hasItem(group), 'cs-active': $index == activeIndex}" class="cs-subact"><a href="" ng-click="clickGroup($index)"><span>{{group.name}}</span></a>
+              <ul ng-show="$index == activeIndex">
+                <li ng-repeat="item in group.items" ng-class="{'cs-activepage' : item.sid==activePageId}"><a href="" ng-click="doTransit(item.sid)">{{item.title}}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-open" > <!-- ng-hide="isOpen" ng-click="isOpen = true ; showMenu(isOpen)" -->
+          <div class="cs-mm-container">
+            <div class="cs-mm-title"><img src="@routes.Assets.at("images/main_menu.png")" alt="メインメニュー" width="18" height="114" /></div>
+            <div class="cs-mm-hotkey">Alt<br />
+              +<br />
+              M</div>
+          </div>
+        </div>
+        <div id="menu-close" > <!-- ng-show="isOpen" ng-click="isOpen = false ; showMenu(isOpen)" -->
+          <div class="cs-mm-container">
+            <div class="cs-mm-title"><img src="@routes.Assets.at("images/main_menu.png")" alt="メインメニュー" width="18" height="114" /></div>
+            <div class="cs-mm-hotkey">Esc</div>
+          </div>
+        </div>
+      </div>
+      <!-- End Menu -->
+
+      <!-- Start Header -->
+      <div id="header">
+        <div id="cs-logo">
+          <img src="@routes.Assets.at("images/logo.jpg")" alt="WebMD ChaseCore" width="147" height="33" />
+        </div>
+        <h1>{{comInfo.title}}</h1>
+        <div id="cs-page-id">{{comInfo.sid}}<br />
+          VER1.00
+        </div>
+        <div id="cs-header-date">
+          <!--span id="currentDate"></span> - <span id="currentTime"></span-->
+          <span class="cs-header-username">{{tantoCd | truncate : 9}}</span>
+          <br />
+          <span class="cs-header-username">{{tantoNm | truncate : 13}}</span>
+        </div>
+      </div>
+      <!-- End Header -->
+
+      <!-- Start Message -->
+      <div id="message">
+        <div ng-class="{'cs-message-error':comInfo.level=='E',
+                        'cs-message-warning':comInfo.level=='W',
+                        'cs-message-success':comInfo.level=='S',
+                        'cs-message-info':comInfo.level=='I'}">{{comInfo.message}}</div>
+        <button type="button" class="cs-btn-close" ng-click="closeWindow()" tabindex="-1">
+          <div>閉じる<span>(F2)</span></div>
+        </button>
+      </div>
+    <!-- Start Dialog -->
+    <script type="text/ng-template" id="confirmDialog.html">
+        <div class="modal-body cs-clearfix">
+            <span class="cs-message-confirm cs-left cs-dialog-content">{{dialogInfo.content}}</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()" cc-focus="true">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">キャンセル</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="alertDialog.html">
+        <div class="modal-body cs-clearfix">
+            <span class="cs-message-info cs-left cs-dialog-content">{{dialogInfo.content}}</span>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()" cc-focus="true">OK</button>
+        </div>
+    </script>
+    <!-- End Dialog -->
+      <!-- Start Biz -->
+      <div id="biz" ng-view>
+      </div>
+      <!-- End Biz -->
+
+    </div>
+    <!-- End Container -->
+
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper">
+  <resultMap id="CodeNameResultMap" type="jp.co.necsoft.web_md.core.common.mybatis.dto.CodeMaster" >
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SHORT_NAME" property="shortName" jdbcType="VARCHAR" />
+    <result column="KUBUN" property="kubun" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="M001" >
+        SELECT *
+        FROM M001JGYM
+        WHERE (KAISYA_CD, JIGYOBU_CD, HAKKO_DAY) in 
+                            (SELECT KAISYA_CD, JIGYOBU_CD, MAX(HAKKO_DAY) 
+                                    FROM M001JGYM
+                                    <![CDATA[
+                                             WHERE HAKKO_DAY <= #{unyoDate}
+                                     ]]>
+                                     AND KAISYA_CD = #{kaisyaCd}
+                            GROUP BY KAISYA_CD, JIGYOBU_CD)
+        AND M001JGYM.DELETE_FLG = '0'
+        AND M001JGYM.ACT_KBN <![CDATA[<>]]> 9
+  </sql>
+  <sql id="M005" >
+        SELECT *
+        FROM M005BNRM
+        WHERE (BMN_CD, REJI_CD, CHU_BNR_CD, YOTO_KBN, SHO_BNR_CD, HAKKO_DAY) in 
+                            (SELECT BMN_CD, REJI_CD, CHU_BNR_CD, YOTO_KBN, SHO_BNR_CD, MAX(HAKKO_DAY) 
+                                    FROM M005BNRM
+                                    <![CDATA[
+                                             WHERE HAKKO_DAY <= #{unyoDate}
+                                     ]]>
+                                     AND M005BNRM.YOTO_KBN = '0000'
+                                     AND M005BNRM.SHO_BNR_CD = '0000'
+                            GROUP BY BMN_CD, REJI_CD, CHU_BNR_CD, YOTO_KBN, SHO_BNR_CD)
+        AND DELETE_FLG = '0'
+        AND ACT_KBN <![CDATA[<>]]> 9
+  </sql>
+  <sql id="M006" >
+        SELECT *
+           FROM M006TENM
+           WHERE (TEN_CD, HAKKO_DAY) in 
+                    (SELECT 
+                         TEN_CD, MAX(HAKKO_DAY) 
+                     FROM M006TENM
+                     WHERE TEN_CD LIKE #{kaisyaCd} || #{jigyobuCd} || '%'
+                       <![CDATA[
+                        AND HAKKO_DAY <= #{unyoDate}
+                       ]]>
+                       GROUP BY TEN_CD
+                     )
+              AND DELETE_FLG = '0'
+              AND ACT_KBN <![CDATA[<>]]> 9
+              AND OPEN_DD  <![CDATA[<=]]> #{unyoDate}
+              AND CLOSE_DD  <![CDATA[>=]]> #{unyoDate}
+              AND (CLOSE_ST  <![CDATA[>]]> #{unyoDate}
+              OR CLOSE_ED  <![CDATA[<]]> #{unyoDate})
+    </sql>
+    <select id="M006CheckTenCd" resultMap="CodeNameResultMap" parameterType="java.util.HashMap">
+        SELECT TEN_CD CODE, TEN_NM NAME, TEN_NM_A SHORT_NAME, ACT_KBN KUBUN
+           FROM M006TENM
+           WHERE (TEN_CD, HAKKO_DAY) in 
+                    (SELECT 
+                         TEN_CD, MAX(HAKKO_DAY) 
+                     FROM M006TENM
+                     WHERE TEN_CD = #{tenCd}
+                       <![CDATA[
+                           AND HAKKO_DAY <= #{unyoDate}
+                       ]]>
+                       GROUP BY TEN_CD
+                     )
+              AND DELETE_FLG = '0'
+              AND ACT_KBN <![CDATA[<>]]> 9
+              AND OPEN_DD  <![CDATA[<=]]> #{unyoDate}
+              AND CLOSE_DD  <![CDATA[>=]]> #{unyoDate}
+              AND (CLOSE_ST  <![CDATA[>]]> #{unyoDate}
+              OR CLOSE_ED  <![CDATA[<]]> #{unyoDate})
+    </select>
+    <sql id="M007">
+        SELECT *
+        FROM M007KIJM
+        WHERE (JAN_CD,HAKKO_DAY) in 
+                            (SELECT JAN_CD, MAX(HAKKO_DAY) 
+                                    FROM M007KIJM
+                                    WHERE   HAKKO_DAY <![CDATA[<=]]>  #{unyoDate} AND 
+                                            HAKKO_DAY_TO <![CDATA[>=]]> #{unyoDate} AND
+                                            JIGYOBU_CD = #{jigyobuCd}
+                            GROUP BY JAN_CD)
+        AND DELETE_FLG = '0'
+        AND M007KIJM.ACT_KBN <![CDATA[<>]]> 9
+    </sql>
+    <sql id="M009" >
+    SELECT * FROM M009MSYM
+        WHERE (JAN_CD,TEN_CD,HAKKO_DAY) IN (
+            SELECT JAN_CD,TEN_CD,MAX(HAKKO_DAY) FROM M009MSYM
+            <![CDATA[
+            WHERE HAKKO_DAY    <= #{unyoDate}
+                AND HAKKO_DAY_TO >= #{unyoDate}
+            ]]>
+            GROUP BY JAN_CD,TEN_CD
+        )
+        AND DELETE_FLG = '0'
+        AND ACT_KBN <![CDATA[<> ]]> '9'
+    </sql>
+    <sql id="M011" >
+        SELECT * FROM M011TRIM
+        WHERE (TRI_CD, HAKKO_DAY) in
+                (SELECT TRI_CD, MAX(HAKKO_DAY) FROM M011TRIM
+                    <![CDATA[
+                            WHERE HAKKO_DAY <= #{unyoDate}
+                            AND M011TRIM.TORI_STOP_KBN = '9'
+                    ]]>
+                GROUP BY TRI_CD)
+                AND M011TRIM.DELETE_FLG = '0'
+                AND M011TRIM.ACT_KBN <![CDATA[<>]]> 9
+    </sql>
+    <sql id="M016" >
+        SELECT *
+        FROM M016TANM
+        WHERE (TANTO_CD,HAKKO_DAY) in 
+                            (SELECT TANTO_CD, MAX(HAKKO_DAY) 
+                                    FROM M016TANM
+                                    <![CDATA[
+                                             WHERE HAKKO_DAY <= #{unyoDate}
+                                     ]]>
+                                     AND KAISYA_CD = #{kaisyaCd}
+                            GROUP BY TANTO_CD)
+        AND M016TANM.DELETE_FLG = '0'
+        AND M016TANM.ACT_KBN <![CDATA[<>]]> 9
+    </sql>    
+    <sql id="M016V2">
+    SELECT * FROM M016TANM
+    WHERE (TANTO_CD,HAKKO_DAY) IN (
+            SELECT TANTO_CD,MAX(HAKKO_DAY) FROM M016TANM
+            <![CDATA[
+            WHERE HAKKO_DAY <= #{unyoDate}
+            ]]>
+            GROUP BY TANTO_CD
+        )
+        AND DELETE_FLG = '0'
+        AND TANTO_CD = #{cmnTantoCd}
+        AND ACT_KBN <![CDATA[<> ]]> '9'
+    </sql>
+    <!-- Get lastest code in master -->
+    <select id="selectM003Lastest" resultMap="CodeNameResultMap" parameterType="java.util.HashMap">
+        SELECT SUBSTR(CODE, 3, 5) CODE, NAME, SHORT_NAME, KUBUN 
+        FROM (
+            SELECT BMN_CD CODE, BMN_NM NAME, BMN_NM_R SHORT_NAME, ACT_KBN KUBUN FROM M003BMNM
+            WHERE (BMN_CD, HAKKO_DAY) in
+                    (SELECT BMN_CD, MAX(HAKKO_DAY) FROM M003BMNM
+                        <![CDATA[
+                                WHERE  HAKKO_DAY <= #{searchDate}
+                                AND BMN_CD LIKE #{jigyobuCd} || '%'
+                        ]]>
+                GROUP BY BMN_CD)
+            AND DELETE_FLG = '0'
+            AND ACT_KBN <![CDATA[<>]]> 9
+            ORDER BY HAKKO_DAY DESC
+        )
+        WHERE ROWNUM <![CDATA[<=]]> 1
+    </select>
+
+    <select id="selectM006Lastest" resultMap="CodeNameResultMap" parameterType="java.util.HashMap">
+        SELECT 
+            SUBSTRB(TEN_CD, 5, 3) CODE,
+            TEN_NM NAME, 
+            TEN_NM_R1 SHORT_NAME, 
+            ACT_KBN KUBUN
+        FROM (
+            SELECT *
+               FROM M006TENM
+               WHERE (TEN_CD, HAKKO_DAY) in 
+                        (SELECT TEN_CD, MAX(HAKKO_DAY) 
+                         FROM M006TENM
+                         WHERE 
+                           <![CDATA[
+                               HAKKO_DAY <= #{searchDate}
+                           ]]>
+                           GROUP BY TEN_CD)
+                  AND DELETE_FLG = '0'
+                  AND TEN_CD LIKE #{kaisyaCd} || #{jigyobuCd} || '%'
+                  AND M006TENM.ACT_KBN <![CDATA[<>]]> 9
+                  AND OPEN_DD  <![CDATA[<=]]> #{searchDate}
+                  AND CLOSE_DD  <![CDATA[>=]]> #{searchDate}
+                  AND (CLOSE_ST  <![CDATA[>]]> #{searchDate}
+                  OR CLOSE_ED  <![CDATA[<]]> #{searchDate})
+                  ORDER BY HAKKO_DAY DESC
+        )
+        WHERE ROWNUM <![CDATA[<=]]> 1
+    </select> 
+    <select id="selectM011Lastest" resultMap="CodeNameResultMap" parameterType="String">
+        SELECT CODE, NAME, SHORT_NAME, KUBUN
+        FROM
+          (SELECT TRI_CD CODE, TRI_NM NAME, TRI_NM_R SHORT_NAME, ACT_KBN KUBUN 
+          FROM M011TRIM
+          WHERE (TRI_CD, HAKKO_DAY) in
+                  (SELECT TRI_CD, MAX(HAKKO_DAY) FROM M011TRIM
+                      <![CDATA[
+                              WHERE HAKKO_DAY <= #{value}
+                              AND M011TRIM.TORI_STOP_KBN = '9'
+                      ]]>
+                  GROUP BY TRI_CD)
+                  AND M011TRIM.DELETE_FLG = '0'
+                  AND M011TRIM.ACT_KBN <![CDATA[<>]]> 9
+                  
+                  ORDER BY HAKKO_DAY DESC) 
+         WHERE ROWNUM <![CDATA[<=]]> 1
+                
+    </select>   
+</mapper>

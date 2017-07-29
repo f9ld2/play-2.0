@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7060Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7060Dto" >
+        <result column="OUT_JIGYOBU_CD" property="outJigyobuCd" jdbcType="VARCHAR" />
+        <result column="OUT_JIGYOBU_NM" property="outJigyobuNm" jdbcType="VARCHAR" />
+        <result column="OUT_TENPO_CD" property="outTenpoCd" jdbcType="VARCHAR" />
+        <result column="OUT_TENPO_NM" property="outTenpoNm" jdbcType="VARCHAR" />
+        <result column="TERM_ID" property="termId" jdbcType="VARCHAR" />
+        <result column="TANTO_CD" property="tantoCd" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="IN_TENPO_CD" property="inTenpoCd" jdbcType="VARCHAR" />
+        <result column="IN_TENPO_NM" property="inTenpoNm" jdbcType="VARCHAR" />
+        <result column="HIN_SU" property="hinSu" jdbcType="VARCHAR" />
+        <result column="SOSIN_NICHIJI" property="sosinNichiji" jdbcType="VARCHAR" />
+        <result column="MAKER_HIN_CD" property="makerHinCd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="MSG" property="msg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectSijp7060ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7060Param">
+        SELECT
+            s702.OUT_JIGYOBU_CD AS outJigyobuCd,
+            s702.OUT_JIGYOBU_NM AS outJigyobuNm,
+            s702.OUT_TENPO_CD AS outTenpoCd,
+            s702.OUT_TENPO_NM AS outTenpoNm,
+            s702.TERM_ID AS termId,
+            s702.TANTO_CD AS tantoCd,
+            s702.SHN_CD AS shnCd,
+            s702.IN_TENPO_CD AS inTenpoCd,
+            s702.IN_TENPO_NM AS inTenpoNm,
+            s702.HIN_SU AS hinSu,
+            s702.SOSIN_NICHIJI AS sosinNichiji,
+            s702.MAKER_HIN_CD AS makerHinCd,
+            s702.SHN_NM AS shnNm,
+            s702.MSG AS msg
+        FROM
+            S702HNBR s702
+        WHERE   
+            s702.OUT_JIGYOBU_CD = #{outJigyobuCd} AND
+            s702.OUT_TENPO_CD = #{kaisyaCd} || #{outJigyobuCd} || #{tenCd}
+            <if test="sosinNichiji != null and sosinNichiji != ''">
+                AND SUBSTR(s702.SOSIN_NICHIJI,1,8) = #{sosinNichiji}
+            </if>
+            <if test="tantoCd != null and tantoCd != ''">
+                AND s702.TANTO_CD = #{tantoCd}
+            </if>
+            <if test="outTaisyo == 0">
+                AND s702.IMP_ERR_FLG = 1
+            </if>
+        ORDER BY
+            s702.SHN_CD, s702.IN_TENPO_CD
+    </select>
+</mapper>

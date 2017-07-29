@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ur.urjp1140.dao.Urjp1140Mapper">
+  <select id="selectM004tbumUrjp1140" parameterType="java.util.HashMap" 
+    resultType="String">
+    <!--
+      This element is generated from URBN1140#execute.
+    -->
+    SELECT BMN_CD
+      FROM M004TBUM
+      WHERE (TEN_CD, BMN_CD, HAKKO_DAY) in
+        (SELECT TEN_CD, BMN_CD, MAX(HAKKO_DAY)
+          FROM M004TBUM
+          WHERE TEN_CD = #{tenCd}
+          AND BMN_CD <![CDATA[>=]]> '00000'
+          AND HAKKO_DAY <![CDATA[<=]]> #{dateTo}
+        GROUP BY TEN_CD, BMN_CD)
+      AND ACT_KBN <![CDATA[<>]]> '9'
+  </select>
+
+  <select id="selectU001ybmnUrjp1140" parameterType="java.util.HashMap" 
+    resultType="jp.co.necsoft.web_md.core.app.dto.ur.Urjp1140Dto01">
+    <!--
+      This element is generated from URBN1140#execute.
+    -->
+    SELECT #{iPage} AS IROW
+      ,Mst.CAL_DATE AS CALDATE
+      ,TRANSLATE(Mst.WEEK_DAY , '1234567' , '月火水木金土日') AS WEEKDAY
+      , Mst.BMN_CD AS BMNCD
+      , COALESCE(u001.YSN_URI_KIN,0) AS YSNURIKIN
+       FROM 
+          (SELECT m019.CAL_DATE as CAL_DATE
+              , m019.WEEK_DAY as WEEK_DAY
+              , m004.TEN_CD as TEN_CD
+              , m004.BMN_CD as BMN_CD
+            FROM M019YMDM m019
+            ,(SELECT TEN_CD,BMN_CD
+              FROM M004TBUM
+              WHERE (TEN_CD,BMN_CD,HAKKO_DAY) in
+                (SELECT TEN_CD,BMN_CD,MAX(HAKKO_DAY)
+                  FROM M004TBUM
+                  WHERE TEN_CD = #{tenCd}
+                    AND BMN_CD <![CDATA[>=]]> #{bmnCd01}
+                    AND BMN_CD <![CDATA[<=]]> #{bmnCd02}
+                    AND HAKKO_DAY <![CDATA[<=]]> #{dateTo}
+                  GROUP BY TEN_CD,BMN_CD)
+                AND ACT_KBN <![CDATA[<>]]> '9'
+            ) m004
+          WHERE m019.CAL_DATE <![CDATA[>=]]> #{dateFrom}
+          AND   m019.CAL_DATE <![CDATA[<=]]> #{dateTo}
+          AND   m019.TEN_CD    = #{tenCd}
+          ) Mst 
+        LEFT OUTER JOIN U001YBMN u001 ON    
+         Mst.CAL_DATE = u001.YSN_DATE
+         AND Mst.TEN_CD = u001.TEN_CD
+         AND Mst.BMN_CD = u001.BMN_CD
+    ORDER BY Mst.TEN_CD, Mst.CAL_DATE, Mst.BMN_CD 
+
+  </select>
+  <select id="selectM019ymdmUrjp1140" parameterType="java.util.HashMap" 
+    resultType="jp.co.necsoft.web_md.core.app.dto.ur.Urjp1140Dto02">
+    <!--
+      This element is generated from URBN1140#execute2.
+    -->
+    SELECT 
+      m019.CAL_DATE AS CALDATE
+      ,COALESCE(U1.YSN_URI_KIN,0) AS YSNURIKIN
+      ,COALESCE(U2.YSN_KYAKSU,0) AS YSNKYAKSU
+    FROM M019YMDM m019 
+      LEFT OUTER JOIN 
+      (SELECT u001.YSN_DATE as YSN_DATE 
+          , SUM(COALESCE(u001.YSN_URI_KIN,0)) as YSN_URI_KIN 
+        FROM U001YBMN u001 
+          ,(SELECT TEN_CD,BMN_CD 
+              FROM M004TBUM 
+              WHERE (TEN_CD,BMN_CD,HAKKO_DAY) in 
+                (SELECT TEN_CD,BMN_CD,MAX(HAKKO_DAY) 
+                  FROM M004TBUM 
+                  WHERE TEN_CD = #{tenCd} 
+                    AND BMN_CD <![CDATA[<>]]> '00000' 
+                    AND HAKKO_DAY <![CDATA[<=]]> #{dateTo} 
+                    GROUP BY TEN_CD,BMN_CD) 
+                AND ACT_KBN <![CDATA[<>]]> '9' 
+            ) m004 
+        WHERE u001.TEN_CD = m004.TEN_CD 
+          AND u001.BMN_CD = m004.BMN_CD 
+          AND u001.YSN_DATE <![CDATA[>=]]> #{dateFrom} 
+          AND u001.YSN_DATE <![CDATA[<=]]> #{dateTo} 
+    GROUP BY u001.TEN_CD,u001.YSN_DATE) U1 ON
+      m019.CAL_DATE = U1.YSN_DATE
+
+    LEFT OUTER JOIN 
+    (SELECT YSN_DATE as YSN_DATE 
+        , COALESCE(YSN_KYAKSU,0) as YSN_KYAKSU 
+      FROM U001YBMN 
+      WHERE TEN_CD = #{tenCd}
+        AND BMN_CD = '00000' 
+        AND YSN_DATE <![CDATA[>=]]> #{dateFrom} 
+        AND YSN_DATE <![CDATA[<=]]> #{dateTo}) U2 ON
+      m019.CAL_DATE = U2.YSN_DATE
+    WHERE m019.CAL_DATE <![CDATA[>=]]> #{dateFrom} 
+      AND m019.CAL_DATE <![CDATA[<=]]> #{dateTo} 
+      AND m019.TEN_CD    = #{tenCd} 
+    ORDER BY m019.CAL_DATE 
+  </select>
+  <select id="selectM006tenmUrjp1140" parameterType="java.util.HashMap" 
+    resultType="String">
+    <!--
+      This element is generated from URBN1140#setTantoTenCode.
+    -->
+     SELECT 
+        TEN_KBN 
+     FROM M006TENM 
+     WHERE (TEN_CD , HAKKO_DAY) IN 
+      (SELECT TEN_CD , MAX(HAKKO_DAY)
+      FROM M006TENM
+      WHERE TEN_CD = #{loginTen}
+      AND HAKKO_DAY <![CDATA[<=]]> #{unyoDate}
+      GROUP BY TEN_CD
+      )
+     AND ACT_KBN <![CDATA[<>]]> '9'
+  </select>
+</mapper>

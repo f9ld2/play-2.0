@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.gn.Gnjp7030Mapper">
+
+    <select id="selectGnjp7030" resultType="jp.co.necsoft.web_md.core.app.dto.gn.Gnjp7030Result"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.gn.Gnjp7030Param">
+
+        SELECT
+			Z702DMTM.DEMO_TANA_NO AS DEMOTANANO,						
+			Z702DMTM.DEMO_TANA_DAN AS DEMOTANADAN,						
+			Z702DMTM.DEMO_TANA_SEQ AS DEMOTANASEQ,					
+			Z702DMTM.JAN_CD AS JANCD,						
+			M007KIJM.SHN_NM AS SHNNM,						
+			M007KIJM.KIKAKU_NM AS KIKAKUNM,						
+			M011TRIM.TRI_NM AS TRINM,						
+			Z009SHND.RRN_SU AS RRNSU,						
+			Z702DMTM.DEMO_SIJI_SU AS DEMOSIJISU,						
+			M009MSYM.BAIK AS BAIK,						
+			M009MSYM.GENK AS GENK
+			FROM  Z702DMTM
+			INNER JOIN M007KIJM
+			    ON Z702DMTM.JAN_CD = M007KIJM.JAN_CD
+			    AND M007KIJM.DELETE_FLG = '0'
+			INNER JOIN M009MSYM
+			    ON Z702DMTM.JAN_CD = M009MSYM.JAN_CD
+			    AND M009MSYM.DELETE_FLG =  '0'
+			LEFT JOIN M011TRIM
+			    ON M009MSYM.TRI_CD = M011TRIM.TRI_CD
+			    AND M011TRIM.DELETE_FLG =  '0'
+			INNER JOIN Z009SHND
+			    ON Z702DMTM.JAN_CD = Z009SHND.SHN_CD
+			    AND Z009SHND.DELETE_FLG =  '0'
+			WHERE
+			    Z702DMTM.DELETE_FLG = '0'
+			    AND Z702DMTM.DEMO_TANA_NO = #{demoTanaCd}
+    </select>
+   
+</mapper>

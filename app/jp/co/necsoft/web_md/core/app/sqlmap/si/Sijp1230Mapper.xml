@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.si.sijp1230.dao.Sijp1230Mapper">
+	<resultMap id="Sijp1230ResultMap" 
+		type="jp.co.necsoft.web_md.core.app.dto.si.Sijp1230Result">
+	  	<result column="KAISYA_CD" property="kaisyaCd" jdbcType="VARCHAR" />
+		<result column="JIGYOUBU_CD" property="jigyoubuCd" jdbcType="VARCHAR" />
+		<result column="DPY_KBN" property="dpyKbn" jdbcType="VARCHAR" />
+		<result column="LAST_TANTO_CD" property="lastTantoCd" jdbcType="VARCHAR" />
+		<result column="INSDD" property="insdd" jdbcType="VARCHAR" />
+		<result column="INSTIME" property="instime" jdbcType="VARCHAR" />
+		<result column="NHN_YMD" property="nhnYmd" jdbcType="VARCHAR" />
+		<result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+		<result column="BMN_CD" property="bmnCd" jdbcType="VARCHAR" />
+		<result column="DPY_NO" property="dpyNo" jdbcType="VARCHAR" />
+		<result column="TORIHIKI_CD" property="torihikiCd" jdbcType="VARCHAR" />
+		<result column="HAT_YMD" property="hatYmd" jdbcType="VARCHAR" />
+		<result column="S_KEN_GENK_KIN" property="sKenGenkKin" jdbcType="VARCHAR" />
+		<result column="S_KEN_BAIK_KIN" property="sKenBaikKin" jdbcType="VARCHAR" />
+		<result column="UPDATE_KBN" property="updateKbn" jdbcType="VARCHAR" />
+		<result column="SEQNO" property="seqno" jdbcType="VARCHAR" />
+		<result column="SYORI_STS_KBN" property="syoriStsKbn" jdbcType="VARCHAR" />
+		<result column="DCTC_KBN" property="dctcKbn" jdbcType="VARCHAR" />
+		<result column="OUTBMN" property="outBmn" jdbcType="VARCHAR" />
+		<result column="SEQ_NO" property="seqNo" jdbcType="VARCHAR" />
+  	</resultMap>
+	
+	<select id="selectSijp1230" parameterType="java.util.HashMap" resultMap="Sijp1230ResultMap">
+		<!--
+		This element is generated from SIBN1230#execute.
+		-->
+		<!--
+			EOS
+		-->
+		SELECT
+			KAISYA_CD ,
+			JIGYOUBU_CD ,
+			DPY_KBN ,
+			LAST_TANTO_CD ,
+			INSDD ,
+			INSTIME ,
+			NHN_YMD ,
+			TEN_CD ,
+			BMN_CD ,
+			DPY_NO ,
+			TORIHIKI_CD ,
+			HAT_YMD ,
+			S_KEN_GENK_KIN ,
+			S_KEN_BAIK_KIN ,
+			UPDATE_KBN ,
+			SEQNO ,
+			SYORI_STS_KBN ,
+			DCTC_KBN ,
+			'*' AS OUTBMN,
+			SEQ_NO
+		FROM 
+			S027EOSP
+		WHERE
+			SEQNO <![CDATA[ <> ]]> '0'
+			AND UPDATE_KBN <![CDATA[ <> ]]> 'D'
+			<if test="cmnUpddd != ''">
+				AND CMN_UPDDD = #{cmnUpddd}
+			</if>
+			<if test="tantoCd != ''">
+				AND LAST_TANTO_CD = #{tantoCd}
+			</if>
+			<if test="insTimeSt != ''">
+				AND INSTIME <![CDATA[ >= ]]> #{insTimeSt}
+			</if>
+			<if test="insTimeEd != ''">
+				AND INSTIME <![CDATA[ <= ]]> #{insTimeEd}
+			</if>
+			<if test="dpyKbn != ''">
+				AND DPY_KBN = #{dpyKbn}
+			</if>
+			 
+			<if test="nhmYmd != ''">
+				AND NHN_YMD = #{nhmYmd}
+			</if>
+			AND ( (INSDD  || INSTIME ,DPY_NO) IN
+			      ( 
+			        SELECT MAX(INSDD|| INSTIME), DPY_NO 
+			        FROM S027EOSP GROUP BY DPY_NO
+			      ) 
+			    )
+		
+		UNION
+		<!--
+			手書
+		-->
+		SELECT 
+			KAISYA_CD ,
+			JIGYOUBU_CD ,
+			DPY_KBN ,
+			LAST_TANTO_CD ,
+			INSDD ,
+			INSTIME ,
+			NHN_YMD ,
+			TEN_CD ,
+			BMN_CD ,
+			DPY_NO ,
+			TORIHIKI_CD ,
+			HAT_YMD ,
+			S_KEN_GENK_KIN ,
+			S_KEN_BAIK_KIN ,
+			UPDATE_KBN ,
+			SEQNO ,
+			SYORI_STS_KBN ,
+			DCTC_KBN ,
+			'*' ,
+			SEQ_NO
+		FROM
+			S028TGKP
+		WHERE
+			SEQNO <![CDATA[ <> ]]> '0'
+			AND UPDATE_KBN <![CDATA[ <> ]]> 'D'
+			<if test="cmnUpddd != ''">
+				AND CMN_UPDDD = #{cmnUpddd}
+			</if>
+			<if test="tantoCd != ''">
+				AND LAST_TANTO_CD = #{tantoCd}
+			</if>
+			<if test="insTimeSt != ''">
+				AND INSTIME <![CDATA[ >= ]]> #{insTimeSt}
+			</if>
+			<if test="insTimeEd != ''">
+				AND INSTIME <![CDATA[ <= ]]> #{insTimeEd}
+			</if>
+			<if test="dpyKbn != ''">
+				AND DPY_KBN = #{dpyKbn}
+			</if>
+			
+			<if test="nhmYmd != ''">
+				AND NHN_YMD = #{nhmYmd}
+			</if>
+			AND ( (INSDD || INSTIME, DPY_NO, DPY_KBN, KAISYA_CD, JIGYOUBU_CD,TEN_CD) IN
+			      (SELECT MAX(INSDD
+			        || INSTIME) ,
+			        DPY_NO ,
+			        DPY_KBN ,
+			        KAISYA_CD ,
+			        JIGYOUBU_CD ,
+			        TEN_CD
+			      FROM S028TGKP
+			      GROUP BY DPY_NO ,
+			        DPY_KBN ,
+			        KAISYA_CD ,
+			        JIGYOUBU_CD ,
+			        TEN_CD
+			      ) )
+			      
+		UNION
+		<!--
+			移動
+		-->
+		SELECT
+			SUBSTR(IN_TENPO_CD,1,2) AS KAISYA_CD ,
+			SUBSTR(IN_TENPO_CD,3,2) AS JIGYOUBU_CD ,
+			DPY_KBN ,
+			LAST_TANTO_CD ,
+			INSDD ,
+			INSTIME ,
+			SYUKA_YMD AS NHN_YMD ,
+			SUBSTR(IN_TENPO_CD,5,3) AS TEN_CD ,
+			IN_BMN_CD AS BMN_CD ,
+			DPY_NO ,
+			SUBSTR(OUT_TENPO_CD,3,5) AS TORIHIKI_CD ,
+			HAT_YMD ,
+			S_KEN_GENK_KIN ,
+			S_KEN_BAIK_KIN ,
+			UPDATE_KBN ,
+			SEQNO ,
+			SYORI_STS_KBN ,
+			DCTC_KBN ,
+			SUBSTR(OUT_BMN_CD,3,5) ,
+			SEQ_NO
+		FROM
+			S029FRIP
+		WHERE
+			SEQNO <![CDATA[ <> ]]> '0'
+			AND UPDATE_KBN <![CDATA[ <> ]]> 'D'
+			<if test="cmnUpddd != ''">
+				AND CMN_UPDDD = #{cmnUpddd}
+			</if>
+			<if test="tantoCd != ''">
+				AND LAST_TANTO_CD = #{tantoCd}
+			</if>
+			<if test="insTimeSt != ''">
+				AND INSTIME <![CDATA[ >= ]]> #{insTimeSt}
+			</if>
+			<if test="insTimeEd != ''">
+				AND INSTIME <![CDATA[ <= ]]> #{insTimeEd}
+			</if>
+			<if test="dpyKbn != ''">
+				AND DPY_KBN = #{dpyKbn}
+			</if>
+			
+			<if test="nhmYmd != ''">
+				AND SYUKA_YMD = #{nhmYmd}
+			</if>
+			AND ( (INSDD || INSTIME, DPY_NO, DPY_KBN, IN_TENPO_CD, IN_BMN_CD,OUT_TENPO_CD,OUT_BMN_CD) IN
+					  (SELECT MAX(INSDD
+					    || INSTIME) ,
+					    DPY_NO ,
+					    DPY_KBN ,
+					    IN_TENPO_CD ,
+					    IN_BMN_CD ,
+					    OUT_TENPO_CD ,
+					    OUT_BMN_CD
+					  FROM S029FRIP
+					  GROUP BY DPY_NO ,
+					    DPY_KBN ,
+					    IN_TENPO_CD ,
+					    IN_BMN_CD ,
+					    OUT_TENPO_CD ,
+					    OUT_BMN_CD
+  				) )
+  		
+  		UNION
+  		<!--
+			売変廃棄
+		-->
+  		SELECT
+  			KAISYA_CD ,
+			JIGYOUBU_CD ,
+			DPY_KBN ,
+			LAST_TANTO_CD ,
+			INSDD ,
+			INSTIME ,
+			KEIJO_YMD AS NHN_YMD ,
+			TEN_CD ,
+			BMN_CD ,
+			DPY_NO ,
+			NULL ,
+			NULL ,
+			S_KEN_GENK_KIN ,
+			S_KEN_BAIK_KIN ,
+			UPDATE_KBN ,
+			SEQNO ,
+			SYORI_STS_KBN ,
+			DCTC_KBN ,
+			'*' ,
+			SEQ_NO
+		FROM
+			S030BHKP
+		WHERE
+			SEQNO <![CDATA[ <> ]]> '0'
+			AND UPDATE_KBN <![CDATA[ <> ]]> 'D'
+			<if test="cmnUpddd != ''">
+				AND CMN_UPDDD = #{cmnUpddd}
+			</if>
+			<if test="tantoCd != ''">
+				AND LAST_TANTO_CD = #{tantoCd}
+			</if>
+			<if test="insTimeSt != ''">
+				AND INSTIME <![CDATA[ >= ]]> #{insTimeSt}
+			</if>
+			<if test="insTimeEd != ''">
+				AND INSTIME <![CDATA[ <= ]]> #{insTimeEd}
+			</if>
+			<if test="dpyKbn != ''">
+				AND DPY_KBN = #{dpyKbn}
+			</if>
+			
+			<if test="nhmYmd != ''">
+				AND KEIJO_YMD = #{nhmYmd}
+			</if>
+			AND ( (INSDD || INSTIME, DPY_NO, DPY_KBN, KAISYA_CD, JIGYOUBU_CD,TEN_CD) IN
+				  (SELECT MAX(INSDD
+				    || INSTIME) ,
+				    DPY_NO ,
+				    DPY_KBN ,
+				    KAISYA_CD ,
+				    JIGYOUBU_CD ,
+				    TEN_CD
+				  FROM S030BHKP
+				  GROUP BY KAISYA_CD ,
+				    JIGYOUBU_CD ,
+				    DPY_KBN ,
+				    DPY_NO ,
+				    TEN_CD
+				  ) )
+		
+		UNION
+		<!--
+			生鮮
+		-->
+		SELECT
+			KAISYA_CD ,
+			JIGYOUBU_CD ,
+			DPY_KBN ,
+			LAST_TANTO_CD ,
+			INSDD ,
+			INSTIME ,
+			NHN_YMD ,
+			TEN_CD ,
+			BMN_CD ,
+			DPY_NO ,
+			TORIHIKI_CD ,
+			HAT_YMD ,
+			S_KEN_GENK_KIN ,
+			S_KEN_BAIK_KIN ,
+			UPDATE_KBN ,
+			SEQNO ,
+			SYORI_STS_KBN ,
+			DCTC_KBN ,
+			'*' ,
+			SEQ_NO
+		FROM
+			S039SEIP
+		WHERE
+			SEQNO <![CDATA[ <> ]]> '0'
+			AND UPDATE_KBN <![CDATA[ <> ]]> 'D'
+			<if test="cmnUpddd != ''">
+				AND CMN_UPDDD = #{cmnUpddd}
+			</if>
+			<if test="tantoCd != ''">
+				AND LAST_TANTO_CD = #{tantoCd}
+			</if>
+			<if test="insTimeSt != ''">
+				AND INSTIME <![CDATA[ >= ]]> #{insTimeSt}
+			</if>
+			<if test="insTimeEd != ''">
+				AND INSTIME <![CDATA[ <= ]]> #{insTimeEd}
+			</if>
+			<if test="dpyKbn != ''">
+				AND DPY_KBN = #{dpyKbn}
+			</if>
+			
+			<if test="nhmYmd != ''">
+				AND NHN_YMD = #{nhmYmd}
+			</if>
+			AND ( (INSDD || INSTIME,DPY_NO) IN
+				  ( SELECT MAX(INSDD || INSTIME) ,DPY_NO 
+				  	FROM S039SEIP
+				  	GROUP BY DPY_NO
+				  ) )
+		<!--
+			ソート順
+		-->
+		ORDER BY
+			INSTIME ,
+			INSDD ,
+			SEQ_NO ,
+			NHN_YMD ,
+			KAISYA_CD ,
+			JIGYOUBU_CD ,
+			TEN_CD ,
+			BMN_CD ,
+			DPY_NO
+	</select>
+</mapper>

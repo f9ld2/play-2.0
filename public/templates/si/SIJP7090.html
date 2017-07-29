@@ -1,0 +1,77 @@
+<div id=SIJP7090 ng-Controller='SIJP7090Ctrl' ng-init="initCond()">
+    <!-- Start Condition -->
+    <cc-mousetrap is-screen="false" />
+    <form name="form" novalidate>
+        <div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+            <div class="cs-sb-bgbottom cs-clearfix">
+                <div class="cs-sb-bg cs-clearfix">
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-fromto-date-input cc-label="発注日" cc-partition="3" id="hatDayFr" name="hatDayFr"
+                                ng-model="cond.hatDayFr" cc-required="true" id2="hatDayTo" name2="hatDayTo"
+                                ng-model2="cond.hatDayTo" cc-required2="true" cc-error="error" cc-focus="reFreshCond()" />
+                        </div>
+                        <div class="cs-col-2"></div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd"
+                                ng-model="cond.jigyobuCd" cc-required="true" cc-delexist=false cc-shortname=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-error="error" />
+                        </div>
+                        <div class="cs-col-2">
+                            <cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd"
+                                ng-model="cond.tenCd" cc-required="false" cc-shortname=false cc-delexist=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03=""
+                                cc-readonly="false" cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-kbn-combobox cc-error="error" cc-label="処理結果" cc-partition="3" id="hinKkKbn"
+                                name="hinKkKbn" ng-model="cond.hinKkKbn" cc-required="true" ng-maxlength="4"
+                                cc-key1="N0063">
+                            </cc-kbn2-combobox>
+                        </div>
+                        <div class="cs-col-2"></div>
+                    </div>
+                    <div class="cs-clearfix cs-search-bar">
+                        <button type="button"
+                            ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+                            ng-click="doExecute()" ng-disabled="!canExecute()">
+                            <div>
+                                実行<span>(F12)</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- End Condition -->
+    <!-- Start Result -->
+    <div id="result" ng-hide="hiddenBar">
+        <div class="cs-result-bg cs-clearfix"></div>
+        <div class="cs-hajp1010-scroll">
+            <div class="cs-result_box cs-clearfix">
+                <div class="cs-row cs-clearfix" id="loadingBarContainer">
+
+                    <cc-progress-bar></cc-progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Result -->
+    <!-- Start Footer -->
+    <div id="footer">
+        <div class="cs-footer-button">
+            <button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+                <div>
+                    クリア<span>(F3)</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- End Footer -->
+</div>

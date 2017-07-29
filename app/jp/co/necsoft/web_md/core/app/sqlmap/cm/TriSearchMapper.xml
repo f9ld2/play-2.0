@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.cm.TriSearchMapper">
+  <select id="triSearch" parameterType="java.util.HashMap" resultType="jp.co.necsoft.web_md.core.app.dto.cm.TriSearchResult">
+    SELECT
+      TRI_CD AS TRICD 
+      , TRI_NM AS TRINM 
+      , HAKKO_DAY AS HAKKODAY 
+    FROM
+      M011TRIM
+    <where>
+      <if test="triCd != null">
+        AND TRI_CD LIKE '%' || #{triCd} || '%'
+      </if>
+      <if test="triNm != null">
+        AND TRI_NM LIKE '%' || #{triNm} || '%'
+      </if>
+      <if test="hakkoDay != null">
+        AND HAKKO_DAY = #{hakkoDay}
+      </if>
+      AND DELETE_FLG = '0'
+    </where>
+  </select>
+
+</mapper>

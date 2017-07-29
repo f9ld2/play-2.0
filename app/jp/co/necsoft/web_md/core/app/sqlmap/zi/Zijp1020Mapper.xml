@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.zi.zijp1020.dao.Zijp1020Mapper">
+  <select id="selectZ004M003M006Result" parameterType="java.util.HashMap" 
+    resultType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp1020MsaiDto">
+    <!--
+      This element is generated from ZIBN1020#execute.
+    -->
+    SELECT
+	 Z.TEN_CD AS TENCD
+	 , Z.BMN_CD AS BMNCD
+	 , CASE WHEN Z.APRIL = 0 THEN '×' ELSE TO_CHAR(Z.APRIL) END APRIL
+	 , CASE WHEN Z.MAY = 0 THEN '×' ELSE TO_CHAR(Z.MAY) END MAY
+	 , CASE WHEN Z.JUNE = 0 THEN '×' ELSE TO_CHAR(Z.JUNE) END JUNE
+	 , CASE WHEN Z.JULY = 0 THEN '×' ELSE TO_CHAR(Z.JULY) END JULY
+	 , CASE WHEN Z.AUGUST = 0 THEN '×' ELSE TO_CHAR(Z.AUGUST) END AUGUST
+	 , CASE WHEN Z.SEPTEMBER = 0 THEN '×' ELSE TO_CHAR(Z.SEPTEMBER) END SEPTEMBER
+	 , CASE WHEN Z.OCTOBER = 0 THEN '×' ELSE TO_CHAR(Z.OCTOBER) END OCTOBER
+	 , CASE WHEN Z.NOVEMBER = 0 THEN '×' ELSE TO_CHAR(Z.NOVEMBER) END NOVEMBER
+	 , CASE WHEN Z.DECEMBER = 0 THEN '×' ELSE TO_CHAR(Z.DECEMBER) END DECEMBER
+	 , CASE WHEN Z.JANUARY = 0 THEN '×' ELSE TO_CHAR(Z.JANUARY) END JANUARY
+	 , CASE WHEN Z.FEBRUARY = 0 THEN '×' ELSE TO_CHAR(Z.FEBRUARY) END FEBRUARY
+	 , CASE WHEN Z.MARCH = 0 THEN '×' ELSE TO_CHAR(Z.MARCH) END MARCH
+	 , Z.CMN_UPDDD AS CMNUPDDD
+	 , T.TEN_NM AS TENNM
+	 , B.BMN_NM AS BMNNM
+	 FROM Z004TBMN Z
+	 , M003BMNM B
+	 , M006TENM T 
+	 WHERE 
+	 (T.TEN_CD,T.HAKKO_DAY) in 
+	 (SELECT TEN_CD,MAX(HAKKO_DAY) FROM M006TENM 
+	    WHERE 
+	    <if test=" kbn == 1 ">
+	        <if test=" tenCd != 999 ">
+	             TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd} 
+	        </if>
+	        <if test=" tenCd == 999 ">
+	             TEN_CD <![CDATA[>=]]> #{kaisyaCd} || #{jigyobuCd} || '000'
+	            <if test=" dammyTenpo != '' ">
+	                AND TEN_CD <![CDATA[<]]> #{kaisyaCd} || #{jigyobuCd} || #{dammyTenpo} 
+	            </if>
+	            <if test=" dammyTenpo == '' ">
+	                AND TEN_CD <![CDATA[<=]]> #{kaisyaCd} || #{jigyobuCd}  || '999'
+	            </if>
+	        </if>
+	    </if>
+	
+	    <if test=" kbn != 1 ">
+	        TEN_CD <![CDATA[>=]]> #{kaisyaCd} || #{jigyobuCd}  || '000'
+	        <if test=" dammyTenpo != '' ">
+	            AND TEN_CD <![CDATA[<]]> #{kaisyaCd} || #{jigyobuCd}  || #{dammyTenpo} 
+	        </if>
+	        <if test=" dammyTenpo == '' ">
+	            AND TEN_CD <![CDATA[<=]]> #{kaisyaCd} || #{jigyobuCd}  || '999'
+	        </if>
+	    </if>
+	
+	    AND HAKKO_DAY <![CDATA[<=]]> #{sDate}  
+	    GROUP BY TEN_CD ) 
+	    AND T.ACT_KBN <![CDATA[<>]]> '9' 
+	    AND (B.BMN_CD,B.HAKKO_DAY) in 
+	       (SELECT BMN_CD,MAX(HAKKO_DAY) FROM M003BMNM 
+	            WHERE 
+	        <if test=" kbn == 1 ">
+	            BMN_CD <![CDATA[>=]]> #{jigyobuCd} || '000'
+	            AND BMN_CD <![CDATA[<=]]> #{jigyobuCd} || '999' 
+	        </if>
+	        <if test=" kbn != 1 ">
+	            <if test=" bmnCd != 999 ">
+	                BMN_CD = #{jigyobuCd} || #{bmnCd} 
+	            </if>
+	            <if test=" bmnCd == 999 ">
+	                BMN_CD <![CDATA[>=]]> #{jigyobuCd} || '000' 
+	                AND BMN_CD <![CDATA[<=]]> #{jigyobuCd} || '999' 
+	            </if>
+	        </if>
+	    AND HAKKO_DAY <![CDATA[<=]]> #{sDate}  
+	    GROUP BY BMN_CD ) 
+	    AND B.ACT_KBN <![CDATA[<>]]> '9' 
+	    AND Z.TEN_CD = T.TEN_CD AND Z.BMN_CD = B.BMN_CD 
+	    <if test=" kbn == 1 ">
+	         ORDER BY Z.TEN_CD,Z.BMN_CD
+	    </if>
+	    <if test=" kbn != 1 ">
+	         ORDER BY Z.BMN_CD,Z.TEN_CD
+	    </if>
+  </select>
+</mapper>

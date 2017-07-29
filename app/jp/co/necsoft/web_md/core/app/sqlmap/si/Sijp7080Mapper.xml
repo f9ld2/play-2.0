@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7080Mapper">
+    <resultMap id="BaseResultMap"
+        type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7080DetailDto">
+        <result column="JANCD" property="janCd" jdbcType="VARCHAR" />
+        <result column="MKDCD" property="mkdCd" jdbcType="VARCHAR" />
+        <result column="SHNNM" property="shnNm" jdbcType="VARCHAR" />
+        
+        <result column="HATDD" property="hatDD" jdbcType="VARCHAR" />
+        <result column="TENCD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TENNM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="HATSU" property="hatSu" jdbcType="DECIMAL" />
+        <result column="APPHINSU" property="appHinSu" jdbcType="DECIMAL" />
+        <result column="SASU" property="saSu" jdbcType="DECIMAL" />
+        <result column="ZIKSU" property="zikSu" jdbcType="DECIMAL" />
+        
+        <result column="GENK" property="genk" jdbcType="DECIMAL" />
+        <result column="BAIK" property="baik" jdbcType="INTEGER" />
+        <result column="KAICD" property="kaiCd" jdbcType="VARCHAR" />
+        <result column="NHNDD" property="nhnDd" jdbcType="VARCHAR" />
+        <result column="HATSRUIKBN" property="hatSruiKbn" jdbcType="VARCHAR" />
+        <result column="BIN" property="bin" jdbcType="VARCHAR" />
+        <result column="HINAPPFLG" property="hinAppFlg" jdbcType="VARCHAR" />
+        <result column="HATCHUFLG" property="hatChuFlg" jdbcType="VARCHAR" />
+        <result column="HATSIMEFLG" property="hatSimeFlg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectSijp7080Data" resultMap="BaseResultMap"
+        parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7080Param">
+        SELECT 
+             JANCD,
+             MKDCD,
+             SHNNM,
+             HATDD,
+             TENCD,
+             TENNM,
+             HATSU,
+             APPHINSU,
+             (HATSU - APPHINSU) AS SASU,
+             ZIKSU,
+             GENK,
+             BAIK,
+             KAICD,
+             NHNDD,
+             HATSRUIKBN,
+             BIN,
+             HINAPPFLG,
+             HATCHUFLG,
+             HATSIMEFLG
+          FROM (
+                SELECT
+                    H701OHAT.JAN_CD AS JANCD,
+                    M007.MKR_CD AS MKDCD,
+                    M007.SHN_NM AS SHNNM,
+                    H701OHAT.HAT_DD AS HATDD,
+                    SUBSTR(H701OHAT.TEN_CD,5,3) AS TENCD,
+                    M006.TEN_NM AS TENNM,
+                    H701OHAT.HAT_SU AS hatSu,
+                    H701OHAT.HAT_SU AS appHinSu,
+                    Z009.ZIK_SU AS ZIKSU,
+                    H701OHAT.GENK AS GENK,
+                    H701OHAT.BAIK AS BAIK,
+                    H701OHAT.KAI_CD AS KAICD,
+                    H701OHAT.NHN_DD AS NHNDD,
+                    H701OHAT.HAT_SRUI_KBN AS HATSRUIKBN,
+                    H701OHAT.BIN AS BIN,
+                    H701OHAT.HIN_APP_FLG AS HINAPPFLG,
+                    H701OHAT.HAT_CHU_FLG AS HATCHUFLG,
+                    H701OHAT.HAT_SIME_FLG AS HATSIMEFLG
+                FROM
+                    H701OHAT left join ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M007" /> ) M007
+                                    ON H701OHAT.JAN_CD =  M007.JAN_CD
+                            left join ( <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" /> ) M006
+                                    ON H701OHAT.TEN_CD =  M006.TEN_CD
+                            inner join (
+                                        SELECT *
+                                        FROM Z009SHND
+                                        WHERE
+                                            UNY_DD = #{unyoDate}
+                                            AND DELETE_FLG = '0'
+                                    ) Z009
+                                ON H701OHAT.TEN_CD =  Z009.TEN_CD
+                                AND H701OHAT.JAN_CD =  Z009.SHN_CD
+                WHERE
+                    H701OHAT.DELETE_FLG = '0'
+                    AND H701OHAT.JIGYOBU_CD = #{jigyobuCd}
+                    AND H701OHAT.HAT_DD <![CDATA[>=]]> #{hatDayFr}
+                    AND H701OHAT.HAT_DD <![CDATA[<=]]> #{hatDayTo}
+                    AND H701OHAT.HIN_APP_FLG = #{shouninKbn}
+                    AND H701OHAT.KAI_CD = #{kaisyaCd}
+                    AND H701OHAT.TEN_CD LIKE #{kaisyaCd} || #{jigyobuCd} || '%'
+                ORDER BY H701OHAT.HAT_DD,H701OHAT.TEN_CD
+            )
+        WHERE
+            ROWNUM <![CDATA[<=]]> #{maxRecordNumber}
+    </select>
+</mapper>

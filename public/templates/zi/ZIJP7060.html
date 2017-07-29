@@ -1,0 +1,111 @@
+<div id=ZIJP7060 ng-Controller='ZIJP7060Ctrl' ng-init="initCond()">
+    <!-- Start Condition -->
+    <cc-mousetrap is-screen="false"/>
+    <form name="form" novalidate>
+        <div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+            <div class="cs-sb-bgbottom cs-clearfix">
+                <div class="cs-sb-bg cs-clearfix">
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-jigyobu-combobox cc-label="事業部" cc-error="error" cc-readonly="disableCond()"
+                                cc-partition="3" id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd" 
+                                cc-required="true" cc-delexist=false cc-shortname=false 
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-combobox-focus="getFocusCond()"/>
+                        </div>
+                        <div class="cs-col-2">
+                            <cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd"
+                                name="tenCd" ng-model="cond.tenCd" cc-required="true"
+                                cc-shortname=false cc-delexist=false  cc-readonly="disableCond()"
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+                                cc-parameter03="" cc-readonly="false" cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-date-input cc-label="棚卸実施日" cc-partition="3" id="tnaUnyDd" 
+                                name="tnaUnyDd" ng-model="cond.tnaUnyDd"  cc-readonly="disableCond()"
+                                cc-required="false"  cc-readonly="false"  cc-error="error" />
+                        </div>
+                        <div class="cs-col-2">
+                            <cc-fromto-number-input cc-label="棚№" cc-partition="3" id="tanaNoFr" 
+                                cc-readonly="disableCond()" name="tanaNoFr" ng-model="cond.tanaNoFr" 
+                                cc-required="false" cc-min="000000" cc-max="999999" id2="tanaNoTo" name2="tanaNoTo" 
+                                ng-model2="cond.tanaNoTo" cc-required2="false" cc-min2="000000" cc-max2="999999"
+                                cc-error="error" cc-readonly2="disableCond()"/>
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<div class="cs-label-large-required cs-label">
+								棚卸区分<span class="cs-txt-required"> *</span>
+							</div>
+							<div class="common-radio-control select2-container cs-char-15 cs-left">
+								<input type="radio" ng-model="cond.tnaKbn" id="error_only" ng-disabled="disableCond()"
+									name="tnaKbn" value="2"> <label for="error_only">牽制棚卸</label>
+								<input type="radio" ng-model="cond.tnaKbn" name="tnaKbn" ng-disabled="disableCond()"
+									id="all" value="0"> <label for="all">実棚卸</label>
+							</div>
+						</div>
+					</div>
+                    <div class="cs-clearfix cs-search-bar">
+                        <button type="button" ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}" 
+                            ng-click="doSearch()" ng-disabled="!canSearch()">
+                        <div>検索<span>(F10)</span></div>
+                        </button>
+                        <button type="button" ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}" 
+                            ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+                        <div>検索してから編集<span>(F9)</span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Condition -->
+        <!-- Start Result -->
+        <div id="result" ng-if="mode != initMode">
+            <div class="cs-zijp7060-scroll">
+                <div class="cs-row cs-clearfix grid-header-row header-row-zijp7060" ng-form="resultForm">
+                    <div class="align-bottom margin-left-74">
+                        <cc-string-input cc-label="" cc-partition="3" id="tanaNo" name="tanaNo" ng-model="result.tanaNo" 
+                            cc-required="true" cc-readonly="disableResult()" ng-minlength="6" ng-maxlength="6"
+                             cc-width="62" cc-shortname=false cc-focus="getFocusResult()"/>
+                    </div>
+                    <div class="align-bottom" ng-form="janCdForm">
+                        <cc-jancd-input cc-jan-search cc-label="" cc-partition="3" id="shnCd" name="shnCd" 
+                            ng-model="result.shnCd" cc-required="true" cc-notexist=false cc-delexist=false 
+                            cc-shortname=false cc-parameter01=""  cc-readonly="disableResult()" 
+                            cc-error="error" cc-width1="155"/>
+                    </div>
+                    <div class="align-bottom margin-left-473">
+                        <cc-number-input cc-label="" cc-partition="3" id="uriZaiSu" name="uriZaiSu" 
+                            ng-model="result.uriZaiSu" cc-required="false" cc-min="0" cc-max="999999.99" 
+                            cc-readonly="disableResult()" cc-error="error" cc-width="140"/>
+                    </div>
+                    <div class="align-bottom cs-button-hajp0020 margin-left-20">
+                        <button type="button" ng-class="{'cs-btn-reflect': !disableResult()&&canGridSave(), 'cs-btn-reflect-dis':disableResult()||!canGridSave()}" 
+                            ng-click="gridSave()" ng-disabled="disableResult()||!canGridSave()">
+                        <div><span class="margin-left-5">反映</span></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="cs-row cs-clearfix">
+                    <div class="cs-col-6">
+                        <div class="gridStyleZIJP7060Area" ng-grid="gridOptionsZIJP7060Area"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Result -->
+    </form>
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}" ng-click="doSave()" ng-disabled="!canSave()">
+			<div>保存<span>(F12)</span></div>
+			<button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+			<div>クリア<span>(F3)</span></div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

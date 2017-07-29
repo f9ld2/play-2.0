@@ -1,0 +1,80 @@
+<div id=SIJP7000 ng-Controller='SIJP7000Ctrl' ng-init="initCond()">
+    <!-- Start Condition -->
+    <cc-mousetrap is-screen="false" />
+    <form name="form" novalidate>
+        <div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+            <div class="cs-sb-bgbottom cs-clearfix">
+                <div class="cs-sb-bg cs-clearfix">
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-jigyobu-combobox cc-label="事業部" cc-partition="3"
+                                id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd"
+                                cc-required="false" cc-delexist=false cc-shortname=false
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02=""
+                                cc-error="error" cc-combobox-focus="reFreshCond()"/>
+                        </div>
+                        <div class="cs-col-2">
+                            <cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd"
+                                name="tenCd" ng-model="cond.tenCd" cc-required="false"
+                                cc-shortname=false cc-delexist=true
+                                cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+                                cc-parameter03="" cc-readonly="false" cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-row cs-clearfix">
+                        <div class="cs-col-2">
+                            <cc-fromto-date-input cc-label="納品予定日" cc-partition="3"
+                                id="nhnYoteiYmdFr" name="nhnYoteiYmdFr" ng-model="cond.nhnYoteiYmdFr"
+                                cc-required="true" id2="nhnYoteiYmdTo" name2="nhnYoteiYmdTo"
+                                ng-model2="cond.nhnYoteiYmdTo" cc-required2="true" cc-error="error" />
+                        </div>
+                        <div class="cs-f-left">
+                            <cc-tricd-input cc-tri-search cc-label="取引先" cc-partition="3" id="torihikiCd"
+                                name="torihikiCd" ng-model="cond.torihikiCd" cc-required="false"
+                                cc-readonly="false" cc-notexist=false cc-delexist=false
+                                cc-shortname=false cc-parameter01="" id2="triNm" name2="triNm"
+                                ng-model2="cond.triNm" cc-triger-blur cc-error="error" />
+                        </div>
+                    </div>
+                    <div class="cs-clearfix cs-search-bar">
+                        <button type="button"
+                            ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+                            ng-click="doExecute()" ng-disabled="!canExecute()">
+                            <div>
+                                実行<span>(F12)</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Condition -->
+    </form>
+    <!-- Start Result -->
+    <div id="result" ng-hide="hiddenBar">
+        <div class="cs-result-bg cs-clearfix"></div>
+        <div class="cs-sijp7000-scroll">
+            <div class="cs-result_box cs-clearfix">
+                <div class="cs-row cs-clearfix" id="loadingBarContainer">
+
+                    <cc-progress-bar></cc-progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Result -->
+    <!-- Start Footer -->
+    <div id="footer">
+        <div class="cs-footer-button">
+            <button type="button" class="cs-btn-reset" tabindex="-1"
+                ng-click="doClear()">
+                <div>
+                    クリア<span>(F3)</span>
+                </div>
+            </button>
+        </div>
+    </div>
+    <!-- End Footer -->
+</div>
+
+

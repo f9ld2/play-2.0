@@ -1,0 +1,105 @@
+<div id=SIJP0010 ng-Controller='SIJP0010Ctrl' ng-init="initCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="伝区" cc-partition="3" id="dpyKbn" name="dpyKbn" ng-model="cond.dpyKbn" cc-required="false" ng-maxlength="2" cc-delexist=false cc-shortname=false cc-key1="SIR" cc-key2="DPY_KBN_" cc-parameter01="" cc-readonly="true" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd" cc-required="false" cc-delexist=true cc-shortname=false cc-parameter01="cond.kaisyaCd" cc-parameter02="" cc-readonly="true" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-code-input cc-label="伝票NO" cc-partition="3" id="dpyNo" name="dpyNo" ng-model="cond.dpyNo" cc-required="true" ng-minlength="9" ng-maxlength="9" cc-chartype="C1" cc-readonly="changeDisable()" cc-error="error" cc-focus="getFocusCond()"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd" ng-model="cond.tenCd" cc-required="false" cc-shortname=false cc-delexist=true cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03="" cc-readonly="true" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-bmn-combobox cc-label="部門" cc-partition="3" id="bmnCd" name="bmnCd" ng-model="cond.bmnCd" cc-required="false" cc-delexist=true cc-shortname=false cc-parameter01="cond.jigyobuCd" cc-parameter02="" cc-readonly="true" cc-error="error" cc-init="initBmnCd"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-date-input cc-label="納品日" cc-partition="3" id="nhnYmd" name="nhnYmd" ng-model="cond.nhnYmd" cc-required="false" cc-readonly="isEditable" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-mei-combobox cc-label="納品ルート" cc-partition="3" id="dctcKbn" name="dctcKbn" ng-model="cond.dctcKbn" cc-required="false" ng-maxlength="1" cc-delexist=false cc-shortname=false cc-key1="SIR" cc-key2="NHN_RUTE_" cc-readonly="isEditable" cc-parameter01="cond.nhnYmd" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-date-input cc-label="納品予定日" cc-partition="3" id="nhnYoteiYmd" name="nhnYoteiYmd" ng-model="cond.nhnYoteiYmd" cc-required="false" cc-readonly="true" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-date-input cc-label="発注日" cc-partition="3" id="hatYmd" name="hatYmd" ng-model="cond.hatYmd" cc-required="false" cc-readonly="true" cc-error="error"/>
+						</div>
+						<div class="cs-col-4">
+							<cc-tricd-input cc-label="取引先" cc-partition="3" id="triCd" name="triCd" ng-model="cond.triCd" cc-required="false" cc-notexist=true cc-delexist=true cc-shortname=false cc-parameter01="" id2="triNm" name2="triNm" ng-model2="cond.triNm" cc-readonly="true" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+							<button type="button" ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}" ng-click="doSearch()" ng-disabled="!canSearch()"> 
+           					<div>検索<span>(F10)</span></div>
+						</button>
+							<button type="button" ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}" ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+           					<div>検索してから編集<span>(F9)</span></div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- End Condition -->
+<!-- Start Result -->
+		<div id="result" >
+			<div class="cs-result-bg cs-clearfix" ng-show="hasResult || isNewData">
+				<div class="cs-info-status">処理状態: <span>{{result.syoriStsKbnNm}}</span></div>
+			</div>
+			<div class="cs-sijp0010-scroll" ng-show="hasResult || isNewData">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<div class="gridStyleSIJP0010DenpyouInfArea" ng-grid="gridOptionsSIJP0010DenpyouInfArea"></div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">&nbsp;</div>	
+						<div class="cs-col-2">
+							<cc-number-input cc-label="原価金額合計" cc-partition="3" id="sumKenGenkKin" name="sumKenGenkKin" ng-model="result.sumKenGenkKin" cc-required="false" cc-min="-9999999999" cc-max="9999999999" cc-readonly="true" cc-width="145" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-number-input cc-label="売価金額合計" cc-partition="3" id="sumKenBaikKin" name="sumKenBaikKin" ng-model="result.sumKenBaikKin" cc-required="false" cc-min="-9999999999" cc-max="9999999999" cc-readonly="true" cc-width="145" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">&nbsp;</div>	
+						<div class="cs-col-2">
+							<cc-number-input cc-label="(入力)原価金額合計" cc-partition="3" id="inpGenInp" name="inpGenInp" ng-model="result.inpGenInp" cc-required="true" cc-min="-9999999999" cc-max="9999999999" cc-readonly="!changeDisable()" cc-width="145" cc-error="error"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+		<!-- End Result -->
+		<!-- Start Footer -->
+		<div id="footer">
+			<div class="cs-footer-button">
+				<button type="button" ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}" ng-click="doInsertUpdate()" ng-disabled="!canSave()">
+					<div>保存<span>(F12)</span></div>
+				</button>
+				<button type="button" ng-class="{'cs-btn-mikakutei-dis': !canDelete(), 'cs-btn-mikakutei': canDelete()}" tabindex="-1" ng-click="doDelete()" ng-disabled="!canDelete()">
+					 <div>未確定に戻す<span>(Alt+Del)</span></div>
+			     </button>
+			     <button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+   					<div>クリア<span>(F3)</span></div>
+			    </button>
+			</div>
+		</div>
+		<!-- End Footer -->
+</div>

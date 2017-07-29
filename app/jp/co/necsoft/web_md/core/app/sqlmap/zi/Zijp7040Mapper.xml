@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.zi.Zijp7040Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7040Dto" >
+        <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TNA_UNY_DD" property="tnaUnyDd" jdbcType="VARCHAR" />
+        <result column="CHU_BNR_CD" property="chuBnrCd" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="GENK_KIN" property="genkKin" jdbcType="VARCHAR" />
+        <result column="BAIK_KIN" property="baikKin" jdbcType="VARCHAR" />
+        <result column="BMN_CD" property="bmnCd" jdbcType="VARCHAR" />
+        <result column="CHU_BNR_CD" property="chuBnrCd" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectZijp7040ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.zi.Zijp7040Param">
+        SELECT 
+            z001.JIGYOBU_CD,
+            m001.JGY_NM,
+            z001.TEN_CD,
+            m006.TEN_NM,
+            z001.TNA_UNY_DD,
+            z001.CHU_BNR_CD,
+            (z001.URI_ZAI_SU + z001.SOKO_ZAI_SU + z001.EOS_ZAI_SU + z001.GAI_ZAI_SU) AS SURYO,
+            z001.BMN_CD,
+            z001.CHU_BNR_CD
+        FROM 
+            Z001CHUT z001
+            LEFT JOIN ( 
+               <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M001" />
+            ) m001 ON(z001.JIGYOBU_CD=m001.JIGYOBU_CD)
+            LEFT JOIN (
+                <include refid="jp.co.necsoft.web_md.core.app.sqlmap.cm.CommonMapper.M006" />
+            ) m006 ON(z001.TEN_CD=m006.TEN_CD)
+         WHERE
+            z001.DELETE_FLG = '0' AND
+            z001.KAISYA_CD  = #{kaisyaCd} AND
+            z001.JIGYOBU_CD = #{jigyobuCd} AND
+            z001.TNA_UNY_DD = #{tnaUnyDd}
+            <if test="tenCd != null and tenCd != ''">
+                AND z001.TEN_CD = #{kaisyaCd} || #{jigyobuCd} || #{tenCd}
+            </if>
+    </select>
+</mapper>

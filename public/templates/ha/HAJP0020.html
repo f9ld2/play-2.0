@@ -1,0 +1,134 @@
+﻿<div id=HAJP0020 ng-Controller='HAJP0020Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-date-input cc-label="納品日" cc-partition="3" id="nhnDd" name="nhnDd" ng-model="cond.nhnDd" cc-required="true"  cc-readonly="disableCond()"  cc-error="error" cc-focus="getFocusCond()"/>
+						</div>
+						<div class="cs-col-2">
+                            <cc-kbn-combobox cc-label="発注種類区分" cc-partition="3" id="hatSruiKbn" name="hatSruiKbn" ng-model="cond.hatSruiKbn" cc-key1="H0008" cc-readonly="disableCond()" cc-required=true cc-shortname=false cc-error="error" ></cc-kbn-combobox>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-label="事業部" cc-partition="3" id="jigyobuCd" name="jigyobuCd" ng-model="cond.jigyobuCd" cc-required="true" cc-readonly="disableCond()" cc-delexist=false cc-shortname=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.hatDd" cc-error="error"/>
+						</div>
+						<div class="cs-col-2">
+							<cc-ten-combobox cc-label="店舗" cc-partition="3" id="tenCd" name="tenCd" ng-model="cond.tenCd" cc-required="true" cc-readonly="disableCond()" cc-shortname=false cc-delexist=false cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd" cc-parameter03="cond.hatDd" cc-error="error"  />
+						</div>
+						<div class="cs-col-2">
+							<cc-bmn-combobox cc-label="部門" cc-partition="3" id="bmnCd" name="bmnCd" ng-model="cond.bmnCd" cc-required="false"  cc-readonly="disableCond()" cc-delexist=false cc-shortname=false cc-parameter01="cond.jigyobuCd" cc-parameter02="cond.hatDd" cc-error="error" />
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button" ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}" ng-click="doSearch()" ng-disabled="!canSearch()">
+						<div>検索<span>(F10)</span></div>
+						</button>
+						<button type="button" ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}" ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+						<div>検索してから編集<span>(F9)</span></div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result" ng-if="mode != initMode">
+		<!-- <div id="result"> -->
+			<div class="cs-hajp0020-scroll">
+				<div class="cs-result_box cs-clearfix">
+					<div class="cs-row cs-clearfix cs-f-right-hajp0020">
+					<!-- [2015/06/16 WebMD_SS_V000.001対応 UPD START]  -->
+						<div class="cs-col-4">
+					<!-- [2015/06/16 WebMD_SS_V000.001対応 UPD END]  -->
+							<div class="cs-f-left " ng-form='noForm'>
+								<cc-number-input cc-label="行" cc-partition="3" id="rowNo" name="rowNo" ng-model="result.rowNo" cc-required="false"   cc-min="1" cc-max="500"  cc-error="error" cc-readonly="disableResult()" />
+							</div>
+							<div class="cs-f-left cs-hajp0020-row" ng-form='shnCdForm'>
+								<cc-jancd-input cc-jan-search cc-label="商品[GTIN]" cc-partition="3" id="shnCd2" name="shnCd2" ng-model="result.shnCd2" cc-required="false" cc-parameter01="cond.nhnDd" cc-readonly="disableResult()" cc-error="error" />
+							</div>
+							<div class="cs-f-left  cs-hajp0020-row-button">
+								<button ng-class="{'cs-btn-search': !disableResult(), 'cs-btn-search-dis': disableResult()}" id="gridSearch" name="gridSearch" ng-click="gridSearch()" ng-disabled="disableResult()"><div>検索<span></span></div></button>
+							</div>
+						</div>
+						<!-- [2015/06/16 WebMD_SS_V000.001対応 INS START]  -->
+						<div class="cs-col-2" ng-form="remarksForm">
+							<cc-string-input cc-label="備考" cc-partition="3" id="remarks" name="remarks" ng-model="result.remarks" cc-required="false"  cc-readonly="disableResult() || disableByHatSruiKbn()" ng-minlength="1" ng-maxlength="40" cc-chartype="S1" cc-width="250" />
+						</div>
+						<!-- [2015/06/16 WebMD_SS_V000.001対応 INS END]  -->
+					</div>
+				</div>
+				<div>
+					<div class="cs-row cs-clearfix grid-header-row header-row-hajp0020" ng-form="resultForm">
+						<div class="align-bottom margin-left-35" ng-form="janCdForm">
+							<cc-jancd-input cc-jan-search cc-label="" cc-partition="3" id="shnCd" name="shnCd" ng-model="result.shnCd" cc-required="true"  cc-notexist=false cc-delexist=false cc-shortname=false cc-parameter01="cond.nhnDd"  cc-readonly="disableResult()" cc-error="error" cc-width1="105" cc-focus="getFocusResult()" />
+						</div>
+						<div class="align-bottom">
+							<!-- [2015/06/16 WebMD_SS_V000.001対応 UPD START]  -->
+							<cc-string-input cc-label="" cc-partition="" id="mkrNmR" name="mkrNmR" ng-model="result.mkrNmR" cc-required="false"  cc-readonly="true" ng-minlength="2" ng-maxlength="20" cc-width="62" cc-shortname=true />
+							<!-- [2015/06/16 WebMD_SS_V000.001対応 UPD END]  -->
+						</div>
+						<div class="align-bottom">
+							<cc-string-input cc-label="" cc-partition="" id="shnNm" name="shnNm" ng-model="result.shnNm" cc-required="false"  cc-readonly="true" ng-minlength="2" ng-maxlength="20" cc-width="59" />
+						</div>
+						<div class="align-bottom">
+							<cc-string-input cc-label="" cc-partition="" id="kikakuNmA" name="kikakuNmA" ng-model="result.kikakuNmA" cc-required="false"  cc-readonly="true" ng-minlength="2" ng-maxlength="20" cc-width="54" />
+						</div>
+						
+						<div class="align-bottom">
+							<cc-kbn2-combobox cc-label="" cc-partition="3" id="bin" name="bin" ng-model="result.bin" cc-required="true" ng-maxlength="1" cc-key1="H0005" cc-readonly="disableResult()" cc-error="error" cc-width="45"/>
+						</div>
+						<div class="align-bottom">
+							<cc-number-input cc-label="" cc-partition="3" id="hatSu" name="hatSu" ng-model="result.hatSu" cc-required="true" cc-min="0" cc-max="9999" cc-readonly="disableResult()" cc-error="error" cc-width="45"/>
+						</div>
+						<div class="align-bottom">
+							<cc-date-input cc-label="" cc-partition="3" id="hatDd" name="hatDd" ng-model="result.hatDd" cc-required="true" cc-readonly="disableResult() || disableByHatSruiKbn()" cc-error="error"/>
+						</div>
+						<div class="align-bottom">
+							<cc-tricd-input cc-tri-search cc-label="" cc-partition="" id="triCd" name="triCd" ng-model="result.triCd" cc-required="false" cc-notexist=false cc-delexist=false cc-parameter01="cond.hatDd" cc-readonly="disableResult() || disableByHatSruiKbn()" cc-error="error" cc-width="75" />
+						</div>
+						<div class="align-bottom">
+							<cc-number-input cc-label="" cc-partition="" id="hattyuIrisu" name="hattyuIrisu" ng-model="result.hattyuIrisu" cc-required="false" cc-min="0" cc-max="999" cc-readonly="disableResult() || disableByHatSruiKbn()" cc-error="error" cc-width="30"/>
+						</div>
+						<div class="align-bottom">
+							<cc-number-input cc-label="" cc-partition="" id="genk" name="genk" ng-model="result.genk" cc-required="false" cc-min="0.00" cc-max="9999999.99" cc-readonly="disableResult() || disableByHatSruiKbn()"cc-error="error" cc-width="88"/>
+						</div>
+						<div class="align-bottom">
+							<cc-number-input cc-label="" cc-partition="" id="baik" name="baik" ng-model="result.baik" cc-required="false" cc-min="0" cc-max="9999999" cc-readonly="disableResult() || disableByHatSruiKbn()" cc-error="error" cc-width="70"/>
+						</div>
+						<div class="align-bottom">
+							<cc-kbn2-combobox cc-label="" cc-partition="3" id="teiseiKbn" name="teiseiKbn" ng-model="result.teiseiKbn" cc-key1="T0005" cc-readonly="disableResult()" cc-required=true cc-error="error" cc-width="45"></cc-kbn2-combobox>
+						</div>
+						<div class="align-bottom cs-button-hajp0020">
+							<button type="button" ng-class="{'cs-btn-reflect': !disableResult()&&canGridSave(), 'cs-btn-reflect-dis':disableResult()||!canGridSave()}" ng-click="gridSave()" ng-disabled="disableResult()||!canGridSave()" >
+							<div><span></span></div>
+							</button>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<div class="gridStyleHAJP0020HachuArea" ng-grid="gridOptionsHAJP0020HachuArea"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			
+			<button type="button" ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}" ng-click="doSave()" ng-disabled="!canSave()">
+			<div>保存<span>(F12)</span></div>
+			<button type="button" class="cs-btn-reset" tabindex="-1" ng-click="doClear()">
+			<div>クリア<span>(F3)</span></div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

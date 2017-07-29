@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp0010Mapper">
+  <select id="selectS001eosd01" parameterType="java.util.Map" resultType="jp.co.necsoft.web_md.core.common.mybatis.dto.S001eosd">
+    <!--
+      This element is generated from SIBN0010#execute.
+    -->
+    SELECT
+        SYORI_STS_KBN			AS syoriStsKbn
+        , DPY_KBN				AS dpyKbn
+        , KAISYA_CD				AS kaisyaCd
+        , JIGYOUBU_CD			AS jigyoubuCd
+        , TEN_CD				AS tenCd
+        , BMN_CD				AS bmnCd
+        , TORIHIKI_CD			AS torihikiCd
+        , DCTC_KBN				AS dctcKbn
+        , NHN_YOTEI_YMD			AS nhnYoteiYmd
+        , NHN_YMD				AS nhnYmd
+        , HAT_YMD				AS hatYmd
+		<if test="sStsKbn == 1" >
+            , S_HAT_GENK_KIN	AS sHatGenkKin
+			, S_HAT_BAIK_KIN	AS sHatBaikKin
+        </if>
+		<if test="sStsKbn != 1" >
+			, S_KEN_GENK_KIN	AS sKenGenkKin
+			, S_KEN_BAIK_KIN	AS sKenBaikKin
+		</if>	
+        , S_KEN_GENK_ZEI		AS sKenGenkZei
+        , S_KEN_BAIK_ZEI		AS sKenBaikZei
+        , IKATU_FLG				AS ikatuFlg
+        , TAX_KBN				AS taxKbn
+        , TAX_RITU				AS taxRitu
+        , FIRST_KAKUTEI_YMD		AS firstKakuteiYmd
+        , FIRST_TANTO_CD		AS firstTantoCd
+        , FIRST_TERM_ID			AS firstTermId
+        , KASAN_KBN				AS kasanKbn
+        , CENTER_CD				AS centerCd
+
+		,SHN_CD_01				AS shnCd01
+		,SHN_CD_02				AS shnCd02
+		,SHN_CD_03				AS shnCd03
+		,SHN_CD_04				AS shnCd04
+		,SHN_CD_05				AS shnCd05
+		,SHN_CD_06				AS shnCd06
+		,SHN_CD_07				AS shnCd07
+		,SHN_CD_08				AS shnCd08
+		,SHN_CD_09				AS shnCd09
+		,SHN_CD_10				AS shnCd10
+		,HATTYU_IRISU_01		AS hattyuIrisu01
+		,HATTYU_IRISU_02		AS hattyuIrisu02
+		,HATTYU_IRISU_03		AS hattyuIrisu03
+		,HATTYU_IRISU_04		AS hattyuIrisu04
+		,HATTYU_IRISU_05		AS hattyuIrisu05
+		,HATTYU_IRISU_06		AS hattyuIrisu06
+		,HATTYU_IRISU_07		AS hattyuIrisu07
+		,HATTYU_IRISU_08		AS hattyuIrisu08
+		,HATTYU_IRISU_09		AS hattyuIrisu09
+		,HATTYU_IRISU_10		AS hattyuIrisu10
+		,TANI_01				AS tani01
+		,TANI_02				AS tani02
+		,TANI_03				AS tani03
+		,TANI_04				AS tani04
+		,TANI_05				AS tani05
+		,TANI_06				AS tani06
+		,TANI_07				AS tani07
+		,TANI_08				AS tani08
+		,TANI_09				AS tani09
+		,TANI_10				AS tani10
+		,HAT_BARA_SU_01			AS hatBaraSu01
+		,HAT_BARA_SU_02			AS hatBaraSu02
+		,HAT_BARA_SU_03			AS hatBaraSu03
+		,HAT_BARA_SU_04			AS hatBaraSu04
+		,HAT_BARA_SU_05			AS hatBaraSu05
+		,HAT_BARA_SU_06			AS hatBaraSu06
+		,HAT_BARA_SU_07			AS hatBaraSu07
+		,HAT_BARA_SU_08			AS hatBaraSu08
+		,HAT_BARA_SU_09			AS hatBaraSu09
+		,HAT_BARA_SU_10			AS hatBaraSu10
+		,KEN_BARA_SU_01			AS kenBaraSu01
+		,KEN_BARA_SU_02			AS kenBaraSu02
+		,KEN_BARA_SU_03			AS kenBaraSu03
+		,KEN_BARA_SU_04			AS kenBaraSu04
+		,KEN_BARA_SU_05			AS kenBaraSu05
+		,KEN_BARA_SU_06			AS kenBaraSu06
+		,KEN_BARA_SU_07			AS kenBaraSu07
+		,KEN_BARA_SU_08			AS kenBaraSu08
+		,KEN_BARA_SU_09			AS kenBaraSu09
+		,KEN_BARA_SU_10			AS kenBaraSu10
+
+		<if test="sStsKbn == 1" >
+            , HAT_GENK_01		AS hatGenk01
+			, HAT_GENK_02		AS hatGenk02
+			, HAT_GENK_03		AS hatGenk03
+			, HAT_GENK_04		AS hatGenk04
+			, HAT_GENK_05		AS hatGenk05
+			, HAT_GENK_06		AS hatGenk06
+			, HAT_GENK_07		AS hatGenk07
+			, HAT_GENK_08		AS hatGenk08
+			, HAT_GENK_09		AS hatGenk09
+			, HAT_GENK_10		AS hatGenk10
+			, HAT_GENK_KIN_01	AS hatGenkKin01
+			, HAT_GENK_KIN_02	AS hatGenkKin02
+			, HAT_GENK_KIN_03	AS hatGenkKin03
+			, HAT_GENK_KIN_04	AS hatGenkKin04
+			, HAT_GENK_KIN_05	AS hatGenkKin05
+			, HAT_GENK_KIN_06	AS hatGenkKin06
+			, HAT_GENK_KIN_07	AS hatGenkKin07
+			, HAT_GENK_KIN_08	AS hatGenkKin08
+			, HAT_GENK_KIN_09	AS hatGenkKin09
+			, HAT_GENK_KIN_10	AS hatGenkKin10
+			, HAT_BAIK_01		AS hatBaik01
+			, HAT_BAIK_02		AS hatBaik02
+			, HAT_BAIK_03		AS hatBaik03
+			, HAT_BAIK_04		AS hatBaik04
+			, HAT_BAIK_05		AS hatBaik05
+			, HAT_BAIK_06		AS hatBaik06
+			, HAT_BAIK_07		AS hatBaik07
+			, HAT_BAIK_08		AS hatBaik08
+			, HAT_BAIK_09		AS hatBaik09
+			, HAT_BAIK_10		AS hatBaik10
+			, HAT_BAIK_KIN_01	AS hatBaikKin01
+			, HAT_BAIK_KIN_02	AS hatBaikKin02
+			, HAT_BAIK_KIN_03	AS hatBaikKin03
+			, HAT_BAIK_KIN_04	AS hatBaikKin04
+			, HAT_BAIK_KIN_05	AS hatBaikKin05
+			, HAT_BAIK_KIN_06	AS hatBaikKin06
+			, HAT_BAIK_KIN_07	AS hatBaikKin07
+			, HAT_BAIK_KIN_08	AS hatBaikKin08
+			, HAT_BAIK_KIN_09	AS hatBaikKin09
+			, HAT_BAIK_KIN_10 	AS hatBaikKin10
+        </if>
+		<if test="sStsKbn != 1" >
+            , KEN_GENK_01		AS kenGenk01
+			, KEN_GENK_02		AS kenGenk02
+			, KEN_GENK_03		AS kenGenk03
+			, KEN_GENK_04		AS kenGenk04
+			, KEN_GENK_05		AS kenGenk05
+			, KEN_GENK_06		AS kenGenk06
+			, KEN_GENK_07		AS kenGenk07
+			, KEN_GENK_08		AS kenGenk08
+			, KEN_GENK_09		AS kenGenk09
+			, KEN_GENK_10		AS kenGenk10
+			, KEN_GENK_KIN_01	AS kenGenkKin01
+			, KEN_GENK_KIN_02	AS kenGenkKin02
+			, KEN_GENK_KIN_03	AS kenGenkKin03
+			, KEN_GENK_KIN_04	AS kenGenkKin04
+			, KEN_GENK_KIN_05	AS kenGenkKin05
+			, KEN_GENK_KIN_06	AS kenGenkKin06
+			, KEN_GENK_KIN_07	AS kenGenkKin07
+			, KEN_GENK_KIN_08	AS kenGenkKin08
+			, KEN_GENK_KIN_09	AS kenGenkKin09
+			, KEN_GENK_KIN_10	AS kenGenkKin10
+			, KEN_BAIK_01		AS kenBaik01
+			, KEN_BAIK_02		AS kenBaik02
+			, KEN_BAIK_03		AS kenBaik03
+			, KEN_BAIK_04		AS kenBaik04
+			, KEN_BAIK_05		AS kenBaik05
+			, KEN_BAIK_06		AS kenBaik06
+			, KEN_BAIK_07		AS kenBaik07
+			, KEN_BAIK_08		AS kenBaik08
+			, KEN_BAIK_09		AS kenBaik09
+			, KEN_BAIK_10		AS kenBaik10
+			, KEN_BAIK_KIN_01	AS kenBaikKin01
+			, KEN_BAIK_KIN_02	AS kenBaikKin02
+			, KEN_BAIK_KIN_03	AS kenBaikKin03
+			, KEN_BAIK_KIN_04	AS kenBaikKin04
+			, KEN_BAIK_KIN_05	AS kenBaikKin05
+			, KEN_BAIK_KIN_06	AS kenBaikKin06
+			, KEN_BAIK_KIN_07	AS kenBaikKin07
+			, KEN_BAIK_KIN_08	AS kenBaikKin08
+			, KEN_BAIK_KIN_09	AS kenBaikKin09
+			, KEN_BAIK_KIN_10 	AS kenBaikKin10
+		</if>	
+    FROM
+        S001EOSD
+	WHERE
+		DPY_NO = #{sDenno}
+  </select>
+  <select id="sijp0010SelectS001eosd02" parameterType="java.lang.String" resultType="java.lang.String">
+    <!--
+      This element is generated from SIBN0010#getSyoriStatus.
+    -->
+    SELECT
+        SYORI_STS_KBN
+      FROM
+        S001EOSD
+      WHERE
+		DPY_NO = #{sDenno}
+  </select>
+  <select id="sijp0010SelectS014eomr01" parameterType="java.lang.String" resultType="java.lang.String">
+    <!--
+      This element is generated from SIBN0010#getRirekiCnt.
+    -->
+    SELECT
+        DPY_NO
+      FROM
+        S014EOMR
+      WHERE
+		DPY_NO = #{sDenno}
+  </select>
+
+  <select id="sijp0010SelectS005eost01" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <!--
+      This element is generated from SIBN0010#getZenData.
+    -->
+    SELECT
+     MAX(SEQNO)
+      FROM
+        S005EOST
+      WHERE
+		DPY_NO = #{sDenno}
+  </select>
+  
+  <select id="sijp0010SelectS007frit01" parameterType="jp.co.necsoft.web_md.core.common.mybatis.dto.S007frit" resultType="java.lang.Integer">
+    <!--
+      This element is generated from SIBN0010#getIdoTrnSQL.
+    -->
+    SELECT
+     MAX(SEQNO)
+      FROM
+        S007FRIT
+      WHERE
+		DPY_NO = #{dpyNo}
+        AND DPY_KBN = #{dpyKbn}
+        AND IN_TENPO_CD = #{inTenpoCd}
+        AND IN_BMN_CD = #{inBmnCd}
+        AND OUT_TENPO_CD = #{outTenpoCd}
+        AND OUT_BMN_CD = #{outBmnCd}
+        AND SYUKA_YMD = #{syukaYmd}
+  </select>
+  
+</mapper>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.ur.urjp1180.dao.Urjp1180Mapper">
+
+	<resultMap id="Urjp1180ResultMap" type="jp.co.necsoft.web_md.core.app.dto.ur.Urjp1180Dto" >
+	
+    <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+    <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+    <result column="YSN_URI_KIN_D" property="ysnUriKinD" jdbcType="VARCHAR" />
+    <result column="YSN_URI_KIN_M" property="ysnUriKinM" jdbcType="VARCHAR" />
+    <result column="YSN_URI_KIN_D_R" property="ysnUriKinDR" jdbcType="VARCHAR" />
+    <result column="YSN_URI_KIN_M_R" property="ysnUriKinMR" jdbcType="VARCHAR" />
+    <result column="YSN_KYAKSU_D" property="ysnKyaksuD" jdbcType="VARCHAR" />
+    <result column="YSN_KYAKSU_M" property="ysnKyaksuM" jdbcType="VARCHAR" />
+    
+    </resultMap>
+
+    <select id="selectUrjp1180" resultMap="Urjp1180ResultMap" parameterType="jp.co.necsoft.web_md.core.app.dto.ur.Urjp1180SQLParameter" >
+    <!--
+      This element is generated from URBN1180#execute.
+    -->
+    SELECT
+        M006.TEN_CD AS "TEN_CD"
+        ,M006.TEN_NM_R1 AS "TEN_NM"
+        ,COALESCE(DAY.YSN_URI_KIN,0) AS "YSN_URI_KIN_D"
+        ,COALESCE(MON.YSN_URI_KIN,0) AS "YSN_URI_KIN_M"
+        ,COALESCE(DAY_R.YSN_URI_KIN,0) AS "YSN_URI_KIN_D_R"
+        ,COALESCE(MON_R.YSN_URI_KIN,0) AS "YSN_URI_KIN_M_R"
+        ,COALESCE(DAY_KYK.YSN_KYAKSU,0) AS "YSN_KYAKSU_D"
+        ,COALESCE(MON_KYK.YSN_KYAKSU,0) AS "YSN_KYAKSU_M"
+      FROM
+      (SELECT
+	        TEN_CD, TEN_NM_R1
+		  FROM
+		    M006TENM
+		  WHERE
+		    (TEN_CD, HAKKO_DAY) IN
+		     (SELECT TEN_CD , MAX(HAKKO_DAY)
+		       FROM
+		         M006TENM
+		       WHERE
+		         HAKKO_DAY  <![CDATA[<=]]> #{dayDateTo}
+		         AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		         AND TEN_CD <![CDATA[<=]]> #{tenpoTo}
+		       GROUP BY
+		         TEN_CD
+		     )
+		    AND ACT_KBN <![CDATA[<>]]> '9'
+		    AND OPEN_DD <![CDATA[<=]]> #{dayDateTo}
+		    AND CLOSE_DD <![CDATA[>=]]> #{dayDateTo}
+		    AND (CLOSE_ST <![CDATA[>]]> #{dayDateTo}
+		    OR CLOSE_ED <![CDATA[<]]> #{dayDateTo})
+	   )M006 LEFT OUTER JOIN
+       (SELECT
+            TEN_CD, SUM(YSN_URI_KIN) YSN_URI_KIN
+          FROM
+            U001YBMN
+          WHERE
+            BMN_CD <![CDATA[<>]]> '00000'
+		    AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		    AND TEN_CD <![CDATA[<=]]> #{tenpoTo} 
+		    AND YSN_DATE <![CDATA[>=]]> #{dayDateFrom}
+		    AND YSN_DATE  <![CDATA[<=]]> #{dayDateTo}
+		  GROUP BY
+		    TEN_CD
+	   )DAY ON M006.TEN_CD = DAY.TEN_CD LEFT OUTER JOIN
+       (SELECT 
+            TEN_CD, SUM(YSN_KYAKSU) YSN_KYAKSU
+		  FROM
+		    U001YBMN
+		  WHERE
+		    BMN_CD = '00000'
+		    AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		    AND TEN_CD <![CDATA[<=]]> #{tenpoTo}
+		    AND YSN_DATE <![CDATA[>=]]> #{dayDateFrom}
+		    AND YSN_DATE <![CDATA[<=]]> #{dayDateTo}
+		  GROUP BY
+		    TEN_CD
+	   )DAY_KYK ON M006.TEN_CD = DAY_KYK.TEN_CD LEFT OUTER JOIN
+	   (SELECT
+	        TEN_CD, SUM(YSN_URI_KIN) YSN_URI_KIN
+		  FROM
+		    U002YBMN
+		  WHERE
+		    BMN_CD <![CDATA[<>]]> '00000'
+		    AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		    AND TEN_CD <![CDATA[<=]]> #{tenpoTo}
+		    AND YSN_YYYYMM = #{taisyodateY} || #{taisyodateM}
+		  GROUP BY
+		    TEN_CD
+	   )MON ON M006.TEN_CD = MON.TEN_CD LEFT OUTER JOIN
+	   (SELECT
+	        TEN_CD, SUM(YSN_KYAKSU) YSN_KYAKSU
+		  FROM
+		    U002YBMN
+		  WHERE
+		    BMN_CD = '00000'
+		    AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		    AND TEN_CD <![CDATA[<=]]> #{tenpoTo}
+		    AND YSN_YYYYMM = #{taisyodateY} || #{taisyodateM}
+		  GROUP BY
+		    TEN_CD
+	   )MON_KYK ON M006.TEN_CD = MON_KYK.TEN_CD LEFT OUTER JOIN
+	   (SELECT
+	        TEN_CD, SUM(YSN_URI_KIN) YSN_URI_KIN
+		  FROM
+		    U001YBMN
+		  WHERE
+		    BMN_CD <![CDATA[<>]]> '00000'
+		    AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		    AND TEN_CD <![CDATA[<=]]> #{tenpoTo}
+		    AND YSN_DATE <![CDATA[>=]]> #{ruiDateFrom}
+		    AND YSN_DATE <![CDATA[<=]]> #{ruiDateTo}
+		  GROUP BY
+		    TEN_CD
+	   )DAY_R ON M006.TEN_CD = DAY_R.TEN_CD LEFT OUTER JOIN
+	   (SELECT
+	        TEN_CD, SUM(YSN_URI_KIN) YSN_URI_KIN
+		  FROM
+		    U002YBMN
+		  WHERE
+		    BMN_CD <![CDATA[<>]]> '00000'
+		    AND TEN_CD <![CDATA[>=]]> #{tenpoFrom}
+		    AND TEN_CD <![CDATA[<=]]> #{tenpoTo}
+		    AND YSN_YYYYMM <![CDATA[>=]]> #{ruiMonFrom}
+		    AND YSN_YYYYMM <![CDATA[<=]]> #{taisyodateY} || #{taisyodateM}
+		  GROUP BY
+		    TEN_CD
+	   )MON_R ON M006.TEN_CD = MON_R.TEN_CD
+      ORDER BY
+        M006.TEN_CD
+  </select>
+</mapper>

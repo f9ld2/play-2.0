@@ -1,0 +1,41 @@
+<div id=SIJP1190 ng-Controller='SIJP1190Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="false"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+							ng-click="doExecute()" ng-disabled="!canExecute()" cc-focus="reFreshCond()">
+							<div>
+								実行<span>(F12)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Condition -->
+	<!-- Start Result -->
+	<div id="result" ng-hide="hiddenBar">
+		<div class="cs-result-bg cs-clearfix"></div>
+		<div class="cs-report-scroll">
+			<div class="cs-result_box cs-clearfix">
+				<div class="cs-row cs-clearfix" id="loadingBarContainer">
+					
+					<cc-progress-bar></cc-progress-bar>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button"></div>
+	</div>
+	<!-- End Footer -->
+</div>

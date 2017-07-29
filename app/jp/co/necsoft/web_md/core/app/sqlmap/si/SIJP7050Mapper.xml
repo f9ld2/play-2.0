@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.app.sqlmap.si.Sijp7050Mapper">
+    <resultMap id="BaseResultMap" type="jp.co.necsoft.web_md.core.app.dto.si.Sijp7050Dto" >
+        <result column="JIGYOBU_CD" property="jigyobuCd" jdbcType="VARCHAR" />
+        <result column="JGY_NM" property="jgyNm" jdbcType="VARCHAR" />
+        <result column="TEN_CD" property="tenCd" jdbcType="VARCHAR" />
+        <result column="TEN_NM" property="tenNm" jdbcType="VARCHAR" />
+        <result column="TERM_ID" property="termId" jdbcType="VARCHAR" />
+        <result column="HEN_DATE" property="henDate" jdbcType="VARCHAR" />
+        <result column="TANTO_CD" property="tantoCd" jdbcType="VARCHAR" />
+        <result column="SHN_CD" property="shnCd" jdbcType="VARCHAR" />
+        <result column="SURYO" property="suryo" jdbcType="VARCHAR" />
+        <result column="SOSIN_NICHIJI" property="sosinNichiji" jdbcType="VARCHAR" />
+        <result column="MKR_CD" property="mkrCd" jdbcType="VARCHAR" />
+        <result column="SHN_NM" property="shnNm" jdbcType="VARCHAR" />
+        <result column="TORIHIKI_CD" property="torihikiCd" jdbcType="VARCHAR" />
+        <result column="TRI_NM" property="triNm" jdbcType="VARCHAR" />
+        <result column="MSG" property="msg" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectSijp7050ReportData" resultMap="BaseResultMap"
+            parameterType="jp.co.necsoft.web_md.core.app.dto.si.Sijp7050Param">
+        SELECT 
+            JIGYOBU_CD AS jigyobuCd,
+            JGY_NM AS jgyNm,
+            TEN_CD AS tenCd,
+            TEN_NM AS tenNm,
+            TERM_ID AS termId,
+            HEN_DATE AS henDate,
+            TANTO_CD AS tantoCd,
+            SHN_CD AS shnCd,
+            SURYO AS suryo,
+            SOSIN_NICHIJI AS sosinNichiji,
+            MKR_CD AS mkrCd,
+            SHN_NM AS shnNm,
+            TORIHIKI_CD AS torihikiCd,
+            TRI_NM AS triNm,
+            MSG AS msg
+        FROM 
+            S701SIHP 
+        WHERE 
+            JIGYOBU_CD = #{jigyobuCd} AND
+            TEN_CD =  #{tenCd}
+            <if test="sosinNichiji != null and sosinNichiji != ''">
+                AND SUBSTR(SOSIN_NICHIJI,1,8) = #{sosinNichiji}
+            </if>
+            <if test="tantoCd != null and tantoCd != ''">
+                AND TANTO_CD = #{tantoCd}
+            </if>
+            <if test="outTaisyo == 0">
+                AND IMP_ERR_FLG = 1
+            </if>
+    </select>
+</mapper>

@@ -1,0 +1,135 @@
+<div id=HAJP0030 ng-Controller='HAJP0030Ctrl'>
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="true"/>
+	<form name="form" novalidate>
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-3">
+							<div class="cs-f-left">
+								<cc-kbn2-combobox cc-label="納品年月" cc-partition="3" id="yyyy"
+									name="yyyy" ng-model="cond.yyyy" cc-required="true"
+									ng-maxlength="4" cc-key1="X0001" cc-combobox-focus="getFocusCond()" cc-readonly="changeDisable()" cc-error="error"/>
+							</div>
+							<div class="cs-hachu-year-date-small cs-f-left">
+								<cc-kbn2-combobox cc-label="" cc-partition="" id="mm"
+									name="mm" ng-model="cond.mm" cc-required="true"
+									ng-maxlength="2" cc-key1="X0002" cc-readonly="changeDisable()" cc-error="error"/>
+							</div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-4">
+							<cc-tricd-input cc-tri-search cc-label="取引先" cc-partition="3" id="triCd"
+								name="triCd" ng-model="cond.triCd" cc-required="true"
+								cc-notexist=false cc-delexist=false cc-shortname=false
+								cc-parameter01="sysdate" id2="triNm" name2="triNm"
+								ng-model2="cond.triNm" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-kbn2-combobox cc-label="便NO" cc-partition="3" id="bin"
+								name="bin" ng-model="cond.bin" cc-required="true"
+								ng-maxlength="1" cc-key1="H0005" cc-readonly="changeDisable()" cc-error="error"/>
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-search': canSearch(), 'cs-btn-search-dis': !canSearch()}"
+							ng-click="doSearch()" ng-disabled="!canSearch()">
+							<div>
+								検索<span>(F10)</span>
+							</div>
+						</button>
+						<button type="button"
+							ng-class="{'cs-btn-search-edit': canSearchEdit(), 'cs-btn-search-edit-dis': !canSearchEdit()}"
+							ng-click="doSearchEdit()" ng-disabled="!canSearchEdit()">
+							<div>
+								検索してから編集<span>(F9)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Condition -->
+		<!-- Start Result -->
+		<div id="result" ng-if="hasResult || isNewData">
+			<div class="tab-content">
+				<div id="tabs" class="cs-clearfix" cc-tabs>
+					<ul class="cs-tab-list01">
+						<li ng-repeat="tab in tabs"><a href="#box0{{$index + 1}}"><span ng-class="{'cs-error' : hasError($index)}">{{tab}}</span></a>
+						</li>
+					</ul>
+					<div class="cs-clearfix cs-clear" ng-init='initTab()'>
+						<div id="box01" class="cs-clearfix cs-padt">
+							<div class="">
+								<div class="cs-result_box cs-clearfix">
+									<div class="cs-row cs-clearfix">
+										<div class="cs-col-6">
+											<div class="gridStyleHAJP0030TeiNhnDdArea"
+												ng-grid="gridOptionsHAJP0030TeiNhnDdArea"></div>
+										</div>
+									</div>
+									<div class="cs-row cs-clearfix">
+										<div class="cs-col-4">
+											<div class="gridStyleHAJP0030TeiLeadTimeArea"
+												ng-grid="gridOptionsHAJP0030TeiLeadTimeArea"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="box02" class="cs-clear cs-padt"  ng-init='initGrid()'>
+							<div class="">
+								<div class="cs-result_box cs-clearfix">
+									<div class="cs-row cs-clearfix">
+										<div class="cs-col-6">
+											<div class="gridStyleHAJP0030TokNhnDdArea"
+												ng-grid="gridOptionsHAJP0030TokNhnDdArea"></div>
+										</div>
+									</div>
+									<div class="cs-row cs-clearfix">
+										<div class="cs-col-4">
+											<div class="gridStyleHAJP0030TokLeadTimeArea"
+												ng-grid="gridOptionsHAJP0030TokLeadTimeArea"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button"
+				ng-class="{'cs-btn-save-dis': !canSave(), 'cs-btn-save': canSave()}"
+				ng-click="doInsertUpdate()" ng-disabled="!canSave()">
+				<div>
+					保存<span>(F12)</span>
+				</div>
+			</button>
+			<button type="button"
+				ng-class="{'cs-btn-delete-dis': !canDelete(), 'cs-btn-delete': canDelete()}"
+				tabindex="-1" ng-click="doDelete()" ng-disabled="!canDelete()">
+				<div>
+					削除<span>(Alt+Del)</span>
+				</div>
+			</button>
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+	<!-- End Footer -->
+</div>

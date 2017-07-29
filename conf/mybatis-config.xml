@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeHandlers>
+    <typeHandler handler="jp.co.necsoft.web_md.common.mybatis.type.TrimStringTypeHandler" jdbcType="VARCHAR"/>
+  </typeHandlers>
+
+  <environments default="default">
+    <environment id="default">
+      <transactionManager type="JDBC"/>
+<!--
+      <dataSource type="com.jolbox.bonecp.BoneCPDataSource">
+      <dataSource type="org.mybatis.guice.datasource.bonecp.BoneCPProvider">
+-->
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/cm/JSIKikakuInfMapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/cm/TriSearchMapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/cm/KkkSearchMapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/cm/JanSearchMapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/cm/CommonMapper.xml"/>
+    <!-- NEUVE CONFIG BEGIN -->
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp0020Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp0030Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp1010Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp1020Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp1040Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp1090Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp7000Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp7020Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp7030Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ha/Hajp7040Mapper.xml"/>
+    
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp0170Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp0010Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp0110Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp0130Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp1140Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp1150Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp1230Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp1280Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7000Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7020Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7060Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7040Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7050Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7080Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7090Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7100Mapper.xml"/>
+    
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/tk/tkjp1060Mapper.xml"/>
+    
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ur/Urjp0010Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ur/Urjp0040Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ur/Urjp1140Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ur/Urjp1180Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/ur/Urjp7030Mapper.xml"/>
+    
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp0030Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp1020Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp1080Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp7000Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp7010Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp7040Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp7070Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/zi/Zijp7060Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/si/Sijp7110Mapper.xml"/>
+    
+     <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/gn/Gnjp7000Mapper.xml"/>
+    <mapper resource="jp/co/necsoft/web_md/core/app/sqlmap/gn/Gnjp7030Mapper.xml"/>
+    
+    <!-- NEUVE CONFIG END -->
+    <package name="jp.co.necsoft.web_md.core.common.mybatis.dao"/>
+    
+<!--
+    <package name="jp.co.necsoft.web_md.core.ma.majp2110.sqlmap"/>
+-->
+    
+
+  </mappers>
+</configuration>

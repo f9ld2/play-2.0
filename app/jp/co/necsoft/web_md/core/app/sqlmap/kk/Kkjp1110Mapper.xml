@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.necsoft.web_md.core.kk.kkjp1110.dao.Kkjp1110Mapper">
+  <select id="selectK002krui" parameterType="jp.co.necsoft.web_md.core.cm.mybatis.dto.K002krui" resultType="java.lang.Integer">
+    <!--
+      This element is generated from KKBN1110#isK002KRUI.
+    -->
+    SELECT
+        COUNT(MAIN_TORI_CD)
+      FROM
+        K002KRUI
+      WHERE
+        KAISYA_CD = #{kaisyaCd}
+        AND GETUJ_YM = #{getujYm}
+  </select>
+</mapper>

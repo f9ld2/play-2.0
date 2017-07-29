@@ -1,0 +1,119 @@
+<div id=TKJP1060 ng-Controller='TKJP1060Ctrl' ng-init="initCond()">
+	<!-- Start Condition -->
+	<cc-mousetrap is-screen="false"/>
+	<form name="form">
+		<div id="condition" ng-form="condForm" class="cs-sb-bgtop cs-clearfix">
+			<div class="cs-sb-bgbottom cs-clearfix">
+				<div class="cs-sb-bg cs-clearfix">
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-jigyobu-combobox cc-error="error" cc-label="事業部"
+								cc-partition="3" id="jigyobuCd" name="jigyobuCd"
+								ng-model="cond.jigyobuCd" cc-required="true" cc-delexist=false
+								cc-shortname=false cc-parameter01="cond.kaisyaCd"
+								cc-parameter02="" cc-combobox-focus="reFreshCond()"/>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<div class="cs-f-left">
+								<cc-kbn2-combobox cc-error="error" cc-label="年度(FR)"
+									cc-partition="3" id="nendoSt" name="nendoSt"
+									ng-model="cond.nendoSt" cc-required="false" cc-key1="X0001"
+									ng-maxlength="4" />
+							</div>
+							<div class="cs-f-left">
+								<cc-kikakucd-input cc-kkk-search cc-error="error" cc-label="企画(FR)"
+									cc-partition="3" id="kikakuCdSt" name="kikakuCdSt"
+									ng-model="cond.kikakuCdSt" cc-required="false"
+									cc-notexist=true cc-delexist=false
+									cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+									cc-parameter03="cond.nendoSt" cc-parameter04="cond.bmnSt"
+									id2="kitakuNmSt" name2="kikakuNmSt" ng-model2="cond.kikakuNmSt" />
+							</div>
+							<div class="cs-f-left">
+								<cc-bmn-combobox cc-error="error" cc-label="部門(FR)"
+									cc-partition="3" id="bmnCdSt" name="bmnCdSt"
+									ng-model="cond.bmnCdSt" cc-required="false" cc-delexist=false
+									cc-shortname=false cc-parameter01="cond.jigyobuCd"
+									cc-parameter02="" />
+							</div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-6">
+							<div class="cs-f-left">
+								<cc-kbn2-combobox cc-error="error" cc-label="年度(TO)"
+									cc-partition="3" id="nendoEd" name="nendoEd"
+									ng-model="cond.nendoEd" cc-required="false" cc-key1="X0001"
+									ng-maxlength="4" cc-init="copyNendoEd"/>
+							</div>
+							<div class="cs-f-left">
+								<cc-kikakucd-input cc-kkk-search cc-error="error" cc-label="企画(TO)"
+									cc-partition="3" id="kikakuCdEd" name="kikakuCdEd"
+									ng-model="cond.kikakuCdEd" cc-required="false"
+									cc-notexist=true cc-delexist=false
+									cc-parameter01="cond.kaisyaCd" cc-parameter02="cond.jigyobuCd"
+									cc-parameter03="cond.nendoEd" cc-parameter04="cond.bmnCdEd"
+									id2="kikakuNmEd" name2="kikakuNmEd" ng-model2="cond.kikakuNmEd" 
+									cc-init="copyKikakuEd"/>
+							</div>
+							<div class="cs-f-left">
+								<cc-bmn-combobox cc-error="error" cc-label="部門(TO)"
+									cc-partition="3" id="bmnCdEd" name="bmnCdEd"
+									ng-model="cond.bmnCdEd" cc-required="false" cc-delexist=false
+									cc-shortname=false cc-parameter01="cond.jigyobuCd"
+									cc-parameter02="" cc-init="copyBmnCdEd"/>
+							</div>
+						</div>
+					</div>
+					<div class="cs-row cs-clearfix">
+						<div class="cs-col-2">
+							<cc-fromto-date-input cc-error="error" cc-label="発注日"
+								cc-partition="3" id="kakuteDaySt" name="kakuteDaySt"
+								ng-model="cond.kakuteDaySt" cc-required="false"
+								id2="kakuteDayEd" name2="kakuteDayEd"
+								ng-model2="cond.kakuteDayEd" cc-required2="false" />
+						</div>
+					</div>
+					<div class="cs-clearfix cs-search-bar">
+						<button type="button"
+							ng-class="{'cs-btn-submit': canExecute(), 'cs-btn-submit-dis': !canExecute()}"
+							ng-click="doExecute()" ng-disabled="!canExecute()">
+							<div>
+								実行<span>(F12)</span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- End Condition -->
+	<!-- Start Result -->
+	<div id="result" ng-hide="hiddenBar">
+		<div class="cs-result-bg cs-clearfix"></div>
+		<div class="cs-report-scroll">
+			<div class="cs-result_box cs-clearfix">
+				<div class="cs-row cs-clearfix" id="loadingBarContainer">
+					
+					<cc-progress-bar></cc-progress-bar>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Result -->
+	<!-- Start Footer -->
+	<div id="footer">
+		<div class="cs-footer-button">
+			<button type="button" class="cs-btn-reset" tabindex="-1"
+				ng-click="doClear()">
+				<div>
+					クリア<span>(F3)</span>
+				</div>
+			</button>
+		</div>
+	</div>
+</div>
+<!-- End Footer -->
+</div>
